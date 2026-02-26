@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import HeroSecondary from '../../components/HeroSecondary.astro';
+import Container from '../../components/Container.astro';
+import Button from '../../components/Button.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const events = await getCollection('arrangementer');
+  return events.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const dateStr = new Date(entry.data.date).toLocaleDateString('nb-NO', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+
+const isPast = new Date(entry.data.date) < new Date();
+---
+
+<Layout title={entry.data.title} description={entry.data.description}>
+  <HeroSecondary title={entry.data.title} description={entry.data.description} />
+
+  <section class="py-12">
+    <Container>
+      <div class="max-w-3xl">
+        <div class="flex flex-wrap gap-4 text-sm text-text-muted mb-8 font-mono">
+          <span>{dateStr}</span>
+          {entry.data.location && (
+            <>
+              <span class="text-border-strong">/</span>
+              <span>{entry.data.location}</span>
+            </>
+          )}
+          {isPast && <span class="text-text-muted/50">(Avholdt)</span>}
+        </div>
+
+        <div class="prose">
+          <Content />
+        </div>
+      </div>
+
+      <div class="max-w-3xl mt-12 pt-8 border-t border-border">
+        <Button href="/arrangementer" variant="secondary" size="sm">&larr; Alle arrangementer</Button>
+      </div>
+    </Container>
+  </section>
+</Layout>

@@ -1,9 +1,9 @@
 ---
 const links = [
-  { href: "/", label: "Hjem" },
-  { href: "/om", label: "Om oss" },
   { href: "/tjenester", label: "Tjenester" },
-  { href: "/bli-med", label: "Bli med" },
+  { href: "/arrangementer", label: "Arrangementer" },
+  { href: "/om", label: "Om oss" },
+  { href: "/bli-med", label: "Bli med", cta: true },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -21,9 +21,11 @@ const currentPath = Astro.url.pathname;
           href={link.href}
           class:list={[
             "px-3 py-1.5 text-sm rounded transition-colors",
-            currentPath === link.href
-              ? "text-accent bg-surface"
-              : "text-text-muted hover:text-text hover:bg-surface",
+            link.cta
+              ? "bg-accent text-base hover:bg-accent-hover"
+              : currentPath === link.href
+                ? "text-accent bg-surface"
+                : "text-text-muted hover:text-text hover:bg-surface",
           ]}
         >
           {link.label}
@@ -50,9 +52,11 @@ const currentPath = Astro.url.pathname;
         href={link.href}
         class:list={[
           "block py-2 text-sm transition-colors",
-          currentPath === link.href
-            ? "text-accent"
-            : "text-text-muted hover:text-text",
+          link.cta
+            ? "text-accent font-medium"
+            : currentPath === link.href
+              ? "text-accent"
+              : "text-text-muted hover:text-text",
         ]}
       >
         {link.label}

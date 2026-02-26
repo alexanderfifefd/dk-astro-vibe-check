@@ -2,7 +2,9 @@
 
 ## About
 
-This is the website for **Datakollektivet** (The Data Collective), a Norwegian non-profit organization working for open data, digital literacy, and community-owned data infrastructure.
+This is the website for **Datakollektivet** (The Data Collective), a Norwegian non-profit organization that provides community-owned digital infrastructure and services to its members, with a focus on privacy, democratic governance, security and decentralization.
+
+For full organizational context — purpose, values, governance, strategic direction, and board composition — see **[Om Datakollektivet](./om-datakollektivet.md)**.
 
 The site is intentionally in a **wireframe / skeleton state** — functional and clean, but with placeholder styling meant to be refined by a designer. Dark mode with neutral colors and system fonts.
 
@@ -49,7 +51,7 @@ The site is intentionally in a **wireframe / skeleton state** — functional and
 ### Content
 
 - **Services:** `src/content/tjenester/*.md` — Markdown with frontmatter (`title`, `description`, `order`)
-- **Chronicle data:** `src/data/chronicle.json` — Array of `{ date, title, description }`
+- **Chronicle data:** `src/data/chronicle.json` — Array of `{ date, items[] }` where items are HTML strings (supports links)
 
 ## Key Files
 

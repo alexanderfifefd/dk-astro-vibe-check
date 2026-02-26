@@ -2,34 +2,91 @@
 import Layout from '../../layouts/Layout.astro';
 import HeroSecondary from '../../components/HeroSecondary.astro';
 import Container from '../../components/Container.astro';
+import Button from '../../components/Button.astro';
 import { getCollection } from 'astro:content';
 
 const services = await getCollection('tjenester');
 const sorted = services.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+const upcoming = [
+  {
+    title: "Fillagring",
+    description: "Sikker, selvhostet lagring av filer og dokumenter — et alternativ til Google Drive og Dropbox.",
+  },
+  {
+    title: "Dokumentbehandling",
+    description: "Samskriving og redigering av dokumenter — et alternativ til Google Docs og Office 365.",
+  },
+  {
+    title: "Desentraliserte sosiale medier",
+    description: "Fediverse-tilknyttet sosial plattform eid av fellesskapet — ikke av annonsører.",
+  },
+  {
+    title: "Arrangementstjenester",
+    description: "Verktøy for å organisere og publisere arrangementer uten avhengighet til Facebook Events.",
+  },
+  {
+    title: "E-post",
+    description: "Personvernvennlig e-post driftet av fellesskapet.",
+  },
+  {
+    title: "Videomøter",
+    description: "Selvhostet videokonferanse — et alternativ til Zoom og Google Meet.",
+  },
+];
 ---
 
 <Layout title="Tjenester" description="Tjenester fra Datakollektivet">
   <HeroSecondary>
     <span slot="title">Tjenester</span>
     <p slot="description">
-      Vi tilbyr rådgivning, workshops og fellesskapstjenester innen data og digitale rettigheter.
+      Datakollektivet drifter digitale tjenester for sine medlemmer. Alt er åpen kildekode, selvhostet, og styrt av fellesskapet.
     </p>
   </HeroSecondary>
 
   <section class="py-12">
     <Container>
-      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <h2 class="text-xl font-semibold mb-6">I drift</h2>
+      <div class="grid gap-4 md:grid-cols-2">
         {sorted.map((service) => (
           <a
             href={`/tjenester/${service.slug}`}
             class="block p-6 bg-surface border border-border rounded hover:border-accent/50 transition-colors group"
           >
-            <h2 class="font-semibold mb-2 group-hover:text-accent transition-colors">
-              {service.data.title}
-            </h2>
+            <div class="flex items-start justify-between gap-3 mb-2">
+              <h3 class="font-semibold group-hover:text-accent transition-colors">
+                {service.data.title}
+              </h3>
+              <span class="text-xs text-accent bg-accent/10 px-2 py-0.5 rounded shrink-0">Aktiv</span>
+            </div>
             <p class="text-sm text-text-muted">{service.data.description}</p>
           </a>
         ))}
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-12 border-t border-border">
+    <Container>
+      <h2 class="text-xl font-semibold mb-2">Hva er neste?</h2>
+      <p class="text-text-muted mb-6">
+        Hvilke tjenester Datakollektivet skal tilby bestemmes av medlemmene. Dette er de høyest rangerte forslagene fra en åpen avstemning blant medlemmene.
+      </p>
+
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {upcoming.map((item) => (
+          <div class="p-5 border border-dashed border-border-strong rounded">
+            <h3 class="font-semibold mb-1 text-text-muted">{item.title}</h3>
+            <p class="text-sm text-text-muted/70">{item.description}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-8 p-6 bg-surface border border-border rounded text-center">
+        <p class="text-text-muted mb-4">
+          Har du et forslag, eller vil du bidra til å bygge noe? Som medlem kan du fremme forslag og stemme over hva vi prioriterer.
+        </p>
+        <Button href="/bli-med" variant="primary" size="sm">Bli med og bestem</Button>
       </div>
     </Container>
   </section>

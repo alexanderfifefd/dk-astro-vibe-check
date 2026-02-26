@@ -6,7 +6,18 @@ const tjenester = defineCollection({
     title: z.string(),
     description: z.string(),
     order: z.number().optional(),
+    url: z.string().url().optional(),
   }),
 });
 
-export const collections = { tjenester };
+const arrangementer = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.coerce.date(),
+    location: z.string().optional(),
+  }),
+});
+
+export const collections = { tjenester, arrangementer };
