@@ -3,6 +3,10 @@ title: "Loomio"
 description: "Verktøy for medlemsdemokrati — diskusjoner, forslag og avstemninger."
 order: 1
 url: "https://loomio.datakollektivet.no"
+logo: "/logos/loomio.png"
+driftsmodell: "foreningsdriftet"
+systemansvarlig: "Max Brosnahan"
+administratorer: ["Alexander Fife"]
 ---
 
 ## Hva er Loomio?

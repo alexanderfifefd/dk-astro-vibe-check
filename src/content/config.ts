@@ -7,6 +7,12 @@ const tjenester = defineCollection({
     description: z.string(),
     order: z.number().optional(),
     url: z.string().url().optional(),
+    logo: z.string().optional(),
+    invertLogo: z.boolean().optional(),
+    driftsmodell: z.enum(['foreningsdriftet', 'medlemsinitiativ', 'samarbeid']),
+    driftsdetaljer: z.string().optional(),
+    systemansvarlig: z.string().optional(),
+    administratorer: z.array(z.string()).optional(),
   }),
 });
 

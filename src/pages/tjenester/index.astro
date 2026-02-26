@@ -54,9 +54,18 @@ const upcoming = [
             class="block p-6 bg-surface border border-border rounded hover:border-accent/50 transition-colors group"
           >
             <div class="flex items-start justify-between gap-3 mb-2">
-              <h3 class="font-semibold group-hover:text-accent transition-colors">
-                {service.data.title}
-              </h3>
+              <div class="flex items-center gap-3">
+                {service.data.logo && (
+                  <img
+                    src={service.data.logo}
+                    alt=""
+                    class:list={["h-6 w-6 shrink-0", { "invert": service.data.invertLogo }]}
+                  />
+                )}
+                <h3 class="font-semibold group-hover:text-accent transition-colors">
+                  {service.data.title}
+                </h3>
+              </div>
               <span class="text-xs text-accent bg-accent/10 px-2 py-0.5 rounded shrink-0">Aktiv</span>
             </div>
             <p class="text-sm text-text-muted">{service.data.description}</p>

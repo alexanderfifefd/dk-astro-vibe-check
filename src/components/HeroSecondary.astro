@@ -19,6 +19,8 @@ const { title, description } = Astro.props;
       <p class="text-lg text-text-muted">
         <slot name="description">{description}</slot>
       </p>
+
+      <slot name="cta" />
     </div>
   </Container>
 </section>

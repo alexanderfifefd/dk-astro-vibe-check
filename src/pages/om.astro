@@ -2,13 +2,26 @@
 import Layout from '../layouts/Layout.astro';
 import HeroSecondary from '../components/HeroSecondary.astro';
 import Container from '../components/Container.astro';
+import Chronicle from '../components/Chronicle.astro';
+
+const styret = [
+  { name: 'Alexander Fife', role: 'styreleder' },
+  { name: 'Hallvord Reiar Michaelsen Steen', role: 'nestleder' },
+  { name: 'Raymond Dowling', role: 'kasserer' },
+  { name: 'Daniel Clemeth Bjerkeland' },
+  { name: 'Kari Stamnes' },
+  { name: 'Max Brosnahan' },
+  { name: 'Jacob Ludvigsen', role: 'vara' },
+  { name: 'Julian Sivertsen', role: 'vara' },
+];
 ---
 
 <Layout title="Om oss" description="Om Datakollektivet — hvem vi er og hva vi gjør">
   <HeroSecondary>
     <span slot="title">Om Datakollektivet</span>
     <p slot="description">
-      Vi er en ideell forening som jobber for at data skal komme fellesskapet til gode.
+      En norsk ideell forening som stiller digital infrastruktur og tjenester til rådighet
+      for sine medlemmer — med personvern, medbestemmelse og sikkerhet i bunn.
     </p>
   </HeroSecondary>
 
@@ -17,44 +30,59 @@ import Container from '../components/Container.astro';
       <div class="max-w-3xl prose">
         <h2>Hva er Datakollektivet?</h2>
         <p>
-          Datakollektivet er en uavhengig, ideell forening som jobber for åpne data,
-          digital kompetanse og dataeierskap. Vi tror at data er en fellesressurs som
-          bør forvaltes demokratisk og transparent.
+          Datakollektivet er en ideell forening stiftet i oktober 2025. Vi drifter digitale
+          tjenester for medlemmene våre — selvhostet, basert på åpen kildekode, og styrt av
+          fellesskapet selv.
         </p>
         <p>
-          Vi tilbyr tjenester, arrangerer workshops og bygger verktøy som gjør det
-          enklere for folk og organisasjoner å forstå, bruke og beskytte data.
+          Foreningen er organisert som et kooperativ der medlemmene har reell innflytelse
+          gjennom generalforsamling, åpne styremøter og deltakende demokrati. Hvilke tjenester
+          vi tilbyr, hvordan vi styres, og hvordan midlene brukes — alt bestemmes av medlemmene.
         </p>
-
-        <h2>Hvorfor?</h2>
         <p>
-          I dag samles enorme mengder data av noen få store selskaper. Denne maktubalansen
-          påvirker personvern, demokrati og innovasjon. Vi mener det finnes et bedre alternativ —
-          et der fellesskapet har kontroll.
+          Vi mener digital infrastruktur er for viktig til å overlate til kommersielle aktører
+          alene. Datakollektivet er et alternativ der fellesskapet har kontroll.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-12 border-t border-border">
+    <Container>
+      <div class="max-w-3xl">
+        <h2 class="text-2xl font-semibold mb-6">Styret</h2>
+        <p class="text-text-muted mb-8">
+          Datakollektivet ledes av et styre valgt av generalforsamlingen.
         </p>
 
-        <h2>Våre verdier</h2>
-        <ul>
-          <li><strong>Åpenhet</strong> — Vi deler kunnskap og kode fritt.</li>
-          <li><strong>Fellesskap</strong> — Vi bygger sammen, på tvers av bakgrunn.</li>
-          <li><strong>Personvern</strong> — Vi respekterer folks rett til egne data.</li>
-          <li><strong>Tilgjengelighet</strong> — Alle skal kunne delta, uansett teknisk nivå.</li>
-        </ul>
+        <div class="space-y-3">
+          {styret.map((m) => (
+            <div class="flex items-baseline justify-between gap-4 py-2 border-b border-border">
+              <span class="font-medium text-text">{m.name}</span>
+              {m.role && <span class="text-sm text-text-muted">{m.role}</span>}
+            </div>
+          ))}
+        </div>
 
-        <h2>Styret</h2>
-        <p>Datakollektivet ledes av et styre valgt av generalforsamlingen.</p>
-        <ul>
-          <li><strong>Alexander Fife</strong> — styreleder</li>
-          <li><strong>Hallvord Reiar Michaelsen Steen</strong> — nestleder</li>
-          <li><strong>Raymond Dowling</strong> — kasserer</li>
-          <li><strong>Daniel Clemeth Bjerkeland</strong></li>
-          <li><strong>Kari Stamnes</strong></li>
-          <li><strong>Max Brosnahan</strong></li>
-        </ul>
-        <p>Varamedlemmer: Jacob Ludvigsen og Julian Sivertsen.</p>
-        <p class="text-sm">Org.nr: 936 667 864</p>
-        <p>Les våre <a href="/vedtekter">vedtekter</a> for fullstendig informasjon om foreningens organisering.</p>
+        <p class="text-sm text-text-muted mt-6">Org.nr: 936 667 864</p>
+        <p class="text-sm text-text-muted mt-2">
+          Les våre <a href="/vedtekter" class="text-accent hover:underline">vedtekter</a> for
+          fullstendig informasjon om foreningens organisering.
+        </p>
+      </div>
+    </Container>
+  </section>
 
+  <section class="py-12 border-t border-border">
+    <Container>
+      <h2 class="text-2xl font-semibold mb-8">Krønike</h2>
+      <Chronicle />
+    </Container>
+  </section>
+
+  <section class="py-12 border-t border-border">
+    <Container>
+      <div class="max-w-3xl prose">
         <h2>Kontakt</h2>
         <p>
           Har du spørsmål eller vil samarbeide? Ta kontakt på

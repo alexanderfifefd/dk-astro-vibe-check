@@ -2,54 +2,21 @@
 import Layout from '../layouts/Layout.astro';
 import HeroSecondary from '../components/HeroSecondary.astro';
 import Container from '../components/Container.astro';
-import JoinForm from '../components/JoinForm';
+import JoinPage from '../components/JoinPage';
 ---
 
 <Layout title="Bli med" description="Bli med i Datakollektivet">
   <HeroSecondary>
     <span slot="title">Bli med</span>
     <p slot="description">
-      Vi ser etter folk med alle typer bakgrunn som vil bidra til et bedre datafellesskap.
+      Datakollektivet bygges av medlemmene. Enten du vil bidra med det du kan,
+      eller bruke tjenestene vi tilbyr — her finner du veien inn.
     </p>
   </HeroSecondary>
 
   <section class="py-12">
     <Container>
-      <div class="grid md:grid-cols-2 gap-12">
-        <div class="prose">
-          <h2>Hvorfor bli med?</h2>
-          <p>
-            Datakollektivet er et åpent fellesskap. Enten du er utvikler, designer,
-            forsker, journalist eller bare nysgjerrig — det er plass til deg.
-          </p>
-
-          <h3>Hva kan du bidra med?</h3>
-          <ul>
-            <li><strong>Prosjekter</strong> — Hjelp oss bygge verktøy og tjenester.</li>
-            <li><strong>Kunnskap</strong> — Del det du kan, lær noe nytt.</li>
-            <li><strong>Workshops</strong> — Hold eller delta på arrangementer.</li>
-            <li><strong>Nettverk</strong> — Koble folk og organisasjoner sammen.</li>
-          </ul>
-
-          <h3>Hva får du?</h3>
-          <ul>
-            <li>Tilgang til et engasjert fagmiljø</li>
-            <li>Mulighet til å påvirke hvordan data brukes i samfunnet</li>
-            <li>Praktisk erfaring med åpne data-prosjekter</li>
-            <li>Invitasjoner til workshops og arrangementer</li>
-          </ul>
-        </div>
-
-        <div>
-          <div class="bg-surface border border-border rounded p-6 md:p-8 sticky top-20">
-            <h2 class="text-xl font-semibold mb-1">Meld din interesse</h2>
-            <p class="text-sm text-text-muted mb-6">
-              Fyll ut skjemaet så tar vi kontakt.
-            </p>
-            <JoinForm client:load />
-          </div>
-        </div>
-      </div>
+      <JoinPage client:load />
     </Container>
   </section>
 </Layout>

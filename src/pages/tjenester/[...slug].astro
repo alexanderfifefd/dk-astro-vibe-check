@@ -15,24 +15,74 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+
+const driftsmodellLabels: Record<string, string> = {
+  foreningsdriftet: 'Foreningsdriftet',
+  medlemsinitiativ: 'Medlemsinitiativ',
+  samarbeid: 'Samarbeid',
+};
 ---
 
 <Layout title={entry.data.title} description={entry.data.description}>
-  <HeroSecondary title={entry.data.title} description={entry.data.description} />
+  <HeroSecondary description={entry.data.description}>
+    <span slot="title" class="inline-flex items-center gap-3">
+      {entry.data.logo && (
+        <img
+          src={entry.data.logo}
+          alt=""
+          class:list={["h-8 w-8", { "invert": entry.data.invertLogo }]}
+        />
+      )}
+      {entry.data.title}
+    </span>
+    {entry.data.url && (
+      <div slot="cta" class="mt-6">
+        <Button href={entry.data.url} variant="primary" size="sm">
+          Gå til {entry.data.title} &rarr;
+        </Button>
+      </div>
+    )}
+  </HeroSecondary>
 
   <section class="py-12">
     <Container>
-      <div class="max-w-3xl prose">
-        <Content />
-      </div>
+      <div class="grid md:grid-cols-[1fr_280px] gap-12">
+        <div class="prose">
+          <Content />
+        </div>
 
-      <div class="max-w-3xl mt-12 pt-8 border-t border-border flex flex-wrap gap-3">
-        <Button href="/tjenester" variant="secondary" size="sm">&larr; Alle tjenester</Button>
-        {entry.data.url && (
-          <Button href={entry.data.url} variant="primary" size="sm">
-            Gå til {entry.data.title} &rarr;
-          </Button>
-        )}
+        <aside class="md:sticky md:top-20 self-start bg-surface border border-border rounded p-5 space-y-4">
+          <h3 class="text-sm font-semibold text-text uppercase tracking-wide">Drift</h3>
+
+          <div>
+            <dt class="text-xs text-text-muted mb-0.5">Driftsmodell</dt>
+            <dd class="text-sm font-medium text-text">{driftsmodellLabels[entry.data.driftsmodell]}</dd>
+          </div>
+
+          {entry.data.systemansvarlig && (
+            <div>
+              <dt class="text-xs text-text-muted mb-0.5">Systemansvarlig</dt>
+              <dd class="text-sm text-text">{entry.data.systemansvarlig}</dd>
+            </div>
+          )}
+
+          {entry.data.administratorer && entry.data.administratorer.length > 0 && (
+            <div>
+              <dt class="text-xs text-text-muted mb-0.5">Administratorer</dt>
+              <dd class="text-sm text-text">
+                {entry.data.administratorer.map((name) => (
+                  <span class="block">{name}</span>
+                ))}
+              </dd>
+            </div>
+          )}
+
+          {entry.data.driftsdetaljer && (
+            <p class="text-xs text-text-muted leading-relaxed border-t border-border pt-3">
+              {entry.data.driftsdetaljer}
+            </p>
+          )}
+        </aside>
       </div>
     </Container>
   </section>

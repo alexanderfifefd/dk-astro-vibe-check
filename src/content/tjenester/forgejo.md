@@ -3,6 +3,10 @@ title: "Forgejo"
 description: "Selvhostet kodeplattform for foreningens prosjekter og samarbeid."
 order: 2
 url: "https://forge.hornwitser.no/datakollektivet"
+logo: "/logos/Forgejo.svg"
+driftsmodell: "medlemsinitiativ"
+driftsdetaljer: "Instansen driftes av Hornwitser på vegne av fellesskapet, men er ikke formelt en foreningstjeneste ennå."
+systemansvarlig: "Hornwitser"
 ---
 
 ## Hva er Forgejo?
