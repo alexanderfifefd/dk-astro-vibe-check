@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Container from '../components/Container.astro';
+import Button from '../components/Button.astro';
+import Chronicle from '../components/Chronicle.astro';
+---
+
+<Layout title="Hjem">
+  <Hero>
+    <span slot="title">Data i fellesskap</span>
+    <p slot="description">
+      Datakollektivet er en ideell forening som jobber for åpne data, digital kompetanse
+      og dataeierskap — for alle.
+    </p>
+    <div slot="cta" class="flex flex-wrap gap-3">
+      <Button href="/bli-med" variant="primary">Bli med</Button>
+      <Button href="/om" variant="secondary">Les mer om oss</Button>
+    </div>
+  </Hero>
+
+  <section class="py-16 border-t border-border">
+    <Container>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-6 bg-surface rounded border border-border">
+          <h3 class="font-semibold mb-2">Åpne data</h3>
+          <p class="text-sm text-text-muted">
+            Vi jobber for at offentlige data skal være tilgjengelige, forståelige og nyttige for alle.
+          </p>
+        </div>
+        <div class="p-6 bg-surface rounded border border-border">
+          <h3 class="font-semibold mb-2">Digital kompetanse</h3>
+          <p class="text-sm text-text-muted">
+            Workshops, kurs og ressurser som gjør folk tryggere i møte med data og teknologi.
+          </p>
+        </div>
+        <div class="p-6 bg-surface rounded border border-border">
+          <h3 class="font-semibold mb-2">Fellesskap</h3>
+          <p class="text-sm text-text-muted">
+            Et nettverk av folk som deler kunnskap, prosjekter og verktøy på tvers av bakgrunn.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-16 border-t border-border">
+    <Container>
+      <h2 class="text-2xl font-bold mb-8">Krønike</h2>
+      <Chronicle />
+    </Container>
+  </section>
+
+  <section class="py-16 border-t border-border">
+    <Container>
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="text-2xl font-bold mb-4">Bli en del av kollektivet</h2>
+        <p class="text-text-muted mb-6">
+          Vi ser etter folk med alle typer bakgrunn — utviklere, designere, journalister,
+          forskere, og alle andre som er nysgjerrige på data.
+        </p>
+        <Button href="/bli-med" variant="primary">Meld din interesse</Button>
+      </div>
+    </Container>
+  </section>
+</Layout>

@@ -1,0 +1,19 @@
+---
+import Container from './Container.astro';
+---
+
+<section class="py-20 md:py-32">
+  <Container>
+    <div class="max-w-3xl">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+        <slot name="title" />
+      </h1>
+
+      <div class="text-lg md:text-xl text-text-muted mb-8">
+        <slot name="description" />
+      </div>
+
+      <slot name="cta" />
+    </div>
+  </Container>
+</section>

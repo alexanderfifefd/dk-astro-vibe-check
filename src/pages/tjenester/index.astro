@@ -1,0 +1,36 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import HeroSecondary from '../../components/HeroSecondary.astro';
+import Container from '../../components/Container.astro';
+import { getCollection } from 'astro:content';
+
+const services = await getCollection('tjenester');
+const sorted = services.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+---
+
+<Layout title="Tjenester" description="Tjenester fra Datakollektivet">
+  <HeroSecondary>
+    <span slot="title">Tjenester</span>
+    <p slot="description">
+      Vi tilbyr rådgivning, workshops og fellesskapstjenester innen data og digitale rettigheter.
+    </p>
+  </HeroSecondary>
+
+  <section class="py-12">
+    <Container>
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {sorted.map((service) => (
+          <a
+            href={`/tjenester/${service.slug}`}
+            class="block p-6 bg-surface border border-border rounded hover:border-accent/50 transition-colors group"
+          >
+            <h2 class="font-semibold mb-2 group-hover:text-accent transition-colors">
+              {service.data.title}
+            </h2>
+            <p class="text-sm text-text-muted">{service.data.description}</p>
+          </a>
+        ))}
+      </div>
+    </Container>
+  </section>
+</Layout>

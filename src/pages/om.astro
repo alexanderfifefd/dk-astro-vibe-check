@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroSecondary from '../components/HeroSecondary.astro';
+import Container from '../components/Container.astro';
+---
+
+<Layout title="Om oss" description="Om Datakollektivet — hvem vi er og hva vi gjør">
+  <HeroSecondary>
+    <span slot="title">Om Datakollektivet</span>
+    <p slot="description">
+      Vi er en ideell forening som jobber for at data skal komme fellesskapet til gode.
+    </p>
+  </HeroSecondary>
+
+  <section class="py-12">
+    <Container>
+      <div class="max-w-3xl prose">
+        <h2>Hva er Datakollektivet?</h2>
+        <p>
+          Datakollektivet er en uavhengig, ideell forening som jobber for åpne data,
+          digital kompetanse og dataeierskap. Vi tror at data er en fellesressurs som
+          bør forvaltes demokratisk og transparent.
+        </p>
+        <p>
+          Vi tilbyr tjenester, arrangerer workshops og bygger verktøy som gjør det
+          enklere for folk og organisasjoner å forstå, bruke og beskytte data.
+        </p>
+
+        <h2>Hvorfor?</h2>
+        <p>
+          I dag samles enorme mengder data av noen få store selskaper. Denne maktubalansen
+          påvirker personvern, demokrati og innovasjon. Vi mener det finnes et bedre alternativ —
+          et der fellesskapet har kontroll.
+        </p>
+
+        <h2>Våre verdier</h2>
+        <ul>
+          <li><strong>Åpenhet</strong> — Vi deler kunnskap og kode fritt.</li>
+          <li><strong>Fellesskap</strong> — Vi bygger sammen, på tvers av bakgrunn.</li>
+          <li><strong>Personvern</strong> — Vi respekterer folks rett til egne data.</li>
+          <li><strong>Tilgjengelighet</strong> — Alle skal kunne delta, uansett teknisk nivå.</li>
+        </ul>
+
+        <h2>Kontakt</h2>
+        <p>
+          Har du spørsmål eller vil samarbeide? Ta kontakt på
+          <a href="mailto:hei@datakollektivet.no">hei@datakollektivet.no</a>.
+        </p>
+      </div>
+    </Container>
+  </section>
+</Layout>

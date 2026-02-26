@@ -1,0 +1,56 @@
+---
+import chronicle from '../data/chronicle.json';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const sorted = [...chronicle].sort((a, b) => b.date.localeCompare(a.date));
+
+function formatDate(dateStr: string): string {
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('nb-NO', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+---
+
+<div class:list={["relative", className]}>
+  <div class="absolute left-[7px] top-3 bottom-3 w-px bg-border" aria-hidden="true" />
+
+  <div class="space-y-6">
+    {sorted.map((entry, i) => (
+      <div class="relative pl-8">
+        <div
+          class:list={[
+            "absolute left-0 top-1.5 w-[15px] h-[15px] rounded-full border-2",
+            i === sorted.length - 1
+              ? "border-accent bg-accent/20"
+              : "border-border-strong bg-surface"
+          ]}
+          aria-hidden="true"
+        />
+
+        <time class="block text-xs font-mono text-text-muted mb-1.5">
+          {formatDate(entry.date)}
+        </time>
+
+        <ul class="space-y-1">
+          {entry.items.map((item) => (
+            <li class="text-sm text-text-muted leading-relaxed chronicle-item" set:html={item} />
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .chronicle-item :global(a) {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+  .chronicle-item :global(a:hover) {
+    text-decoration: underline;
+  }
+</style>

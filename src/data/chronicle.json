@@ -1,0 +1,132 @@
+[
+  {
+    "date": "2023-12-01",
+    "items": [
+      "papiris ytrer <a href=\"https://fribygda.no/@papiris/111507423240056358\">ønske om å starte et samvirke for våre digitale liv på Fribygda.no</a>."
+    ]
+  },
+  {
+    "date": "2025-02-24",
+    "items": [
+      "Roy Bøhmer spør på <a href=\"https://snabelen.no/@roybohmer/114060386799354521\">Snabelen.no om det finnes noe tilsvarende til data.coop i Norge?</a>"
+    ]
+  },
+  {
+    "date": "2025-02-28",
+    "items": [
+      "En <a href=\"https://cloud.data.coop/apps/polls/s/WNNJPZab\">åpen avstemmning for å måle interesse til bidrag og bruk av felles datatjenester</a> ble satt opp på data.coop"
+    ]
+  },
+  {
+    "date": "2025-03-17",
+    "items": [
+      "papiris starter en <a href=\"https://forum.fedi.dk/topic/154/datafellesskap-i-norge\">tråd på forum.fedi.dk for å diskutere oppstart av datafelleskap i Norge</a>",
+      "<a href=\"https://forum.fedi.dk/topic/154/datafellesskap-i-norge/12\">papiris foreslår å inkludere et forbud mot fascistiske grupper i vedtektene.</a>"
+    ]
+  },
+  {
+    "date": "2025-03-26",
+    "items": [
+      "<a href=\"https://forum.fedi.dk/topic/154/datafellesskap-i-norge/23\">Møte om å starte Datafelleskap i Norge</a>"
+    ]
+  },
+  {
+    "date": "2025-04-03",
+    "items": [
+      "En <a href=\"https://cloud.data.coop/apps/polls/s/Ej5eKUMf\">åpen avstemmning for å høre hvilke tjenester felleskapet bør drifte</a> ble satt opp på data.coop av papiris"
+    ]
+  },
+  {
+    "date": "2025-04-27",
+    "items": [
+      "<a href=\"https://forum.fedi.dk/topic/154/datafellesskap-i-norge/43\">tim_jay foreslår å ordføre forbud mot fascistiske grupper i vedtektene basert på adferd.</a>"
+    ]
+  },
+  {
+    "date": "2025-04-29",
+    "items": [
+      "<a href=\"https://forum.fedi.dk/topic/154/datafellesskap-i-norge/51\">Møte om å starte Datafellesskap i Norge med Balder fra data.coop</a>",
+      "Et skjult matrix chatterom ble satt opp, hovedsakelig for å diskutere ting som ikke bør foregå på det åpne internettet"
+    ]
+  },
+  {
+    "date": "2025-04-30",
+    "items": [
+      "<a href=\"https://forum.fedi.dk/topic/154/datafellesskap-i-norge/50\">rsolva tilbyr å gi plass til initativet på deres Forgejo instans forge.dmz.skyfritt.net</a>"
+    ]
+  },
+  {
+    "date": "2025-10-05",
+    "items": [
+      "papiris innkaller til Stiftelsemøte 19. Oktober på <a href=\"https://forum.fedi.dk/topic/154/datafellesskap-i-norge/70\">forum.fedi.dk</a>, <a href=\"https://gjer.no/events/f2e0a6d7-beb8-4a07-adbf-4efabbc531bd\">gjer.no</a>, m.m."
+    ]
+  },
+  {
+    "date": "2025-10-19",
+    "items": [
+      "Stiftelsemøte ble avholdt med vedtekter og styre bestemt.",
+      "En midlertidig signal chat ble opprettet for kommunikasjon innad i styret",
+      "En midlertidig signal chat ble opprettet for styrets annonsering til medlemmer.",
+      "Hornwitser registrerte domenene datakollektivet.no og datakollektiv.no for foreningen og satte opp en midlertidig webside på domenet, hosted via hans personlige Forgejo instans og Hetzner VPS."
+    ]
+  },
+  {
+    "date": "2025-10-27",
+    "items": [
+      "Første styremøte ble avholt.",
+      "Alexander ble valgt til styreleder.",
+      "Hallvord ble valgt til nestleder.",
+      "Raymond ble valgt til kasserer.",
+      "Arbeidsgruppe for Formidling ble opprettet",
+      "Arbeidsgruppe for Infrastruktur og Sikkerhet ble opprettet"
+    ]
+  },
+  {
+    "date": "2025-11-10",
+    "items": [
+      "Styremøte ble avholt.",
+      "Stiftelsesdokumentet for Datakollektivet ble underskrevet."
+    ]
+  },
+  {
+    "date": "2025-11-11",
+    "items": [
+      "Samordnet registermelding for Datakollektivet ble innsent."
+    ]
+  },
+  {
+    "date": "2025-11-28",
+    "items": [
+      "Samordnet registermelding for Datakollektivet ble godkjent og foreningen ble tildelt 936 667 864 som organisasjonsnummer."
+    ]
+  },
+  {
+    "date": "2025-12-01",
+    "items": [
+      "Styremøte ble avholt.",
+      "Prosess for opprettelse av bankkonto ble startet.",
+      "Arbeid for a opprette Discource og Loomio instans for foreningen ble startet."
+    ]
+  },
+  {
+    "date": "2026-01-05",
+    "items": [
+      "Styremøte ble avholt.",
+      "Det ble bestemt å droppe oppretelse av Discourse instans etter som at det var stor overlapp mellom dette og Loomio."
+    ]
+  },
+  {
+    "date": "2026-01-19",
+    "items": [
+      "Styremøte ble avholt.",
+      "Produksjonssetting av Loomio instans ble godkjent av styret."
+    ]
+  },
+  {
+    "date": "2026-02-08",
+    "items": [
+      "Egen Loomio instans for bruk til koordinering, diskusjon, og avstemninger blant Datakollektivet's medlemmer ble lansert og presentert for medlemmer.",
+      "Bankonto for foreningen ble opprettet."
+    ]
+  }
+]
