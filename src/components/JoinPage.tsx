@@ -12,7 +12,7 @@ const contributionAreas = [
 ];
 
 const tabs: { id: Track; label: string; desc: string }[] = [
-  { id: 'member', label: 'Bli medlem', desc: 'Demokratisk innflytelse og tilgang til tjenester.' },
+  { id: 'member', label: 'Bli medlem', desc: 'Innflytelse på retningen og tilgang til tjenester når de lanseres.' },
   { id: 'volunteer', label: 'Bygg med oss', desc: 'Bidra med kode, design, drift, innhold eller rådgivning.' },
   { id: 'follow', label: 'Følg oss', desc: 'Hold deg oppdatert med nyhetsbrev.' },
 ];

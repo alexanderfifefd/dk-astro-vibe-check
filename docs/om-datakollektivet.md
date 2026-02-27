@@ -53,17 +53,42 @@ To arbeidsgrupper ble opprettet på det første styremøtet:
 
 Foreningens tjenester driftes av en driftsgruppe med administratorer utnevnt av styret. Styret kunngjør hvem som er administratorer til enhver tid. Foreningen har egne vedtekter for moderering av sosiale tjenester, med moderatorer utnevnt av styret.
 
+I praksis opererer tjenestene per nå med ulike driftsmodeller. Dette er ikke ferdig avklart, men reflekterer hvor foreningen er i oppstartsfasen:
+
+- **Foreningsdriftet** — Tjenesten driftes direkte av foreningen, med utnevnt systemansvarlig og administratorer. Eksempel: Loomio (systemansvarlig: Max Brosnahan).
+- **Samarbeid** — Tjenesten tilbys gjennom samarbeid med en ekstern aktør. Eksempel: Matrix, som lånes fra Data.coop (et dansk kooperativ). Ikke direkte under foreningens kontroll.
+- **Medlemsinitiativ** — Tjenesten driftes av et enkeltmedlem på vegne av fellesskapet, men er ikke formelt en foreningstjeneste ennå. Eksempel: Forgejo (driftet av Hornwitser).
+
+Hvordan disse modellene formaliseres videre er et åpent spørsmål.
+
 ### Verktøy i bruk
 
-- **Loomio** — egen instans for medlemsdemokrati, diskusjoner og avstemninger
+- **Loomio** — egen instans for medlemsdemokrati, diskusjoner og avstemninger (foreningsdriftet)
+- **Matrix** — desentralisert, kryptert meldingstjeneste via samarbeid med Data.coop
+- **Forgejo** — kodelagring (medlemsinitiativ, hostet av Hornwitser)
 - **Signal** — midlertidig kommunikasjon for styre og medlemmer
-- **Forgejo** — kodelagring (hostet av Hornwitser)
 
 ## Strategisk retning
 
 Datakollektivet er i oppstartsfasen og flere sentrale spørsmål er under aktiv diskusjon. Disse handler ikke om tekniske valg, men om hva slags organisasjon Datakollektivet skal bli.
 
 Sentrale åpne spørsmål inkluderer organisasjonsmodell (grad av sentralisering vs. desentralisering), målgruppe (teknologer først, bredere publikum senere?), og hva som forventes av et medlem utover kontingent. Vedtektene skiller mellom **medlemskontingent** (for medlemskap og stemmerett) og **medlemsytelse** (for tilgang til tjenester), noe som gir fleksibilitet i hvordan dette løses.
+
+### Rekruttering
+
+Nettsiden opererer med tre inngangsporter for nye folk:
+
+1. **Bli medlem** — For folk som vil ha demokratisk innflytelse og tilgang til tjenester. Den primære veien inn.
+2. **Bygg med oss** — For folk som vil bidra til å bygge foreningen. Nettsiden identifiserer følgende bidragsområder, men dette er et utgangspunkt — ikke en lukket liste:
+   - Utvikling (kode, frontend, backend, DevOps)
+   - Design (UX, visuell design, tilgjengelighet)
+   - Drift og infrastruktur (sysadmin, nettverk, sikkerhet)
+   - Innhold og kommunikasjon (tekst, sosiale medier, oversettelse)
+   - Demokrati og organisasjon (vedtekter, moderering, prosesser)
+   - Rådgivning (erfaring og veiledning)
+3. **Følg oss** — For folk som bare vil holde seg oppdatert via nyhetsbrev, uten forpliktelse.
+
+Tanken er at foreningen trenger både folk som bruker tjenestene og folk som bygger dem. Det er rom for alt fra hands-on operativt arbeid til rådgivning fra erfarne folk som kan bidra med kunnskap uten fast forpliktelse.
 
 ## Finansiering
 
@@ -77,5 +102,7 @@ Datakollektivet er i oppstartsfasen. Per februar 2026:
 - Styre er valgt og konstituert
 - Bankkonto er opprettet
 - Loomio-instans er i drift for medlemskoordinering
+- Matrix er tilgjengelig via samarbeid med Data.coop
+- Forgejo er tilgjengelig som medlemsinitiativ
 - Nettside og offentlig kommunikasjon er under utvikling
-- Første tjenester til medlemmer er ennå ikke lansert
+- Rekruttering av medlemmer og frivillige er i gang
