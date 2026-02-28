@@ -9,10 +9,15 @@ const tjenester = defineCollection({
     url: z.string().url().optional(),
     logo: z.string().optional(),
     invertLogo: z.boolean().optional(),
-    driftsmodell: z.enum(['foreningsdriftet', 'medlemsinitiativ', 'samarbeid']),
+    driftsmodell: z.enum(['foreningsdriftet', 'medlemsinitiativ', 'samarbeid']).optional(),
     driftsdetaljer: z.string().optional(),
     systemansvarlig: z.string().optional(),
     administratorer: z.array(z.string()).optional(),
+    kategori: z.enum(['tjeneste', 'infrastruktur']).default('tjeneste'),
+    status: z.enum(['i-drift', 'forslag', 'ønskeliste', 'påkrevd']).default('i-drift'),
+    erstatter: z.array(z.string()).optional(),
+    alternativer: z.array(z.string()).optional(),
+    lanseringsdato: z.coerce.date().optional(),
   }),
 });
 

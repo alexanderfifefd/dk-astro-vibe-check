@@ -1,101 +1,169 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import HeroSecondary from '../../components/HeroSecondary.astro';
-import Container from '../../components/Container.astro';
+import SectionBlock from '../../components/SectionBlock.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import CollapsibleSection from '../../components/CollapsibleSection.astro';
 import Button from '../../components/Button.astro';
+import Container from '../../components/Container.astro';
 import { getCollection } from 'astro:content';
 
-const services = await getCollection('tjenester');
-const sorted = services.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+const allServices = await getCollection('tjenester');
+const sorted = allServices.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 
-const upcoming = [
-  {
-    title: "Fillagring",
-    description: "Sikker, selvhostet lagring av filer og dokumenter — et alternativ til Google Drive og Dropbox.",
-  },
-  {
-    title: "Dokumentbehandling",
-    description: "Samskriving og redigering av dokumenter — et alternativ til Google Docs og Office 365.",
-  },
-  {
-    title: "Desentraliserte sosiale medier",
-    description: "Fediverse-tilknyttet sosial plattform eid av fellesskapet — ikke av annonsører.",
-  },
-  {
-    title: "Arrangementstjenester",
-    description: "Verktøy for å organisere og publisere arrangementer uten avhengighet til Facebook Events.",
-  },
-  {
-    title: "E-post",
-    description: "Personvernvennlig e-post driftet av fellesskapet.",
-  },
-  {
-    title: "Videomøter",
-    description: "Selvhostet videokonferanse — et alternativ til Zoom og Google Meet.",
-  },
-];
+const active = sorted.filter(s => s.data.status === 'i-drift');
+const proposals = sorted.filter(s => s.data.status === 'forslag');
+const wishlistServices = sorted.filter(s => s.data.status === 'ønskeliste' && s.data.kategori === 'tjeneste');
+const infra = sorted.filter(s => s.data.kategori === 'infrastruktur');
 ---
 
 <Layout title="Tjenester" description="Tjenester fra Datakollektivet">
-  <HeroSecondary>
-    <span slot="title">Tjenester</span>
-    <p slot="description">
-      Datakollektivet drifter digitale tjenester for sine medlemmer. Alt er åpen kildekode, selvhostet, og styrt av fellesskapet.
-    </p>
-  </HeroSecondary>
+  <HeroSecondary
+    title="Tjenester"
+    description="Datakollektivet drifter digitale tjenester for sine medlemmer. Hvilke tjenester vi tilbyr bestemmes av medlemmene. Alt er åpen kildekode, selvhostet, og styrt av fellesskapet."
+  />
 
-  <section class="py-12">
-    <Container>
-      <h2 class="text-xl font-semibold mb-6">I drift</h2>
+  <!-- I DRIFT -->
+  <SectionBlock title="I drift">
+    <div class="grid gap-4 md:grid-cols-2">
+      {active.map((s) => (
+        <ServiceCard
+          title={s.data.title}
+          description={s.data.description}
+          logo={s.data.logo}
+          invertLogo={s.data.invertLogo}
+          status={s.data.status}
+          kategori={s.data.kategori}
+          driftsmodell={s.data.driftsmodell}
+          url={s.data.url}
+          slug={s.slug}
+        />
+      ))}
+    </div>
+  </SectionBlock>
+
+  <!-- FORSLAG -->
+  {proposals.length > 0 && (
+    <SectionBlock title="Forslag" variant="surface">
       <div class="grid gap-4 md:grid-cols-2">
-        {sorted.map((service) => (
-          <a
-            href={`/tjenester/${service.slug}`}
-            class="block p-6 bg-surface border border-border rounded hover:border-accent/50 transition-colors group"
-          >
-            <div class="flex items-start justify-between gap-3 mb-2">
-              <div class="flex items-center gap-3">
-                {service.data.logo && (
-                  <img
-                    src={service.data.logo}
-                    alt=""
-                    class:list={["h-6 w-6 shrink-0", { "invert": service.data.invertLogo }]}
-                  />
-                )}
-                <h3 class="font-semibold group-hover:text-accent transition-colors">
-                  {service.data.title}
-                </h3>
-              </div>
-              <span class="text-xs text-accent bg-accent/10 px-2 py-0.5 rounded shrink-0">Aktiv</span>
-            </div>
-            <p class="text-sm text-text-muted">{service.data.description}</p>
-          </a>
+        {proposals.map((s) => (
+          <ServiceCard
+            title={s.data.title}
+            description={s.data.description}
+            logo={s.data.logo}
+            invertLogo={s.data.invertLogo}
+            status={s.data.status}
+            kategori={s.data.kategori}
+            slug={s.slug}
+          />
         ))}
+      </div>
+    </SectionBlock>
+  )}
+
+  <!-- ØNSKELISTE -->
+  <SectionBlock
+    title="Ønskeliste"
+    ingress="Disse er ikke besluttet — men de er rangert av medlemmene og representerer retningen."
+    variant={proposals.length > 0 ? 'default' : 'surface'}
+  >
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {wishlistServices.map((s) => (
+        <ServiceCard
+          title={s.data.title}
+          description={s.data.description}
+          logo={s.data.logo}
+          invertLogo={s.data.invertLogo}
+          status={s.data.status}
+          kategori={s.data.kategori}
+          erstatter={s.data.erstatter}
+          alternativer={s.data.alternativer}
+        />
+      ))}
+    </div>
+  </SectionBlock>
+
+  <!-- INFRASTRUKTUR -->
+  <SectionBlock
+    title="Infrastruktur"
+    ingress="Ikke sluttbrukertjenester, men grunnlaget som gjør tjenestene mulig."
+    variant="surface"
+  >
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {infra.map((s) => (
+        <ServiceCard
+          title={s.data.title}
+          description={s.data.description}
+          status={s.data.status}
+          kategori={s.data.kategori}
+          slug={s.slug}
+        />
+      ))}
+    </div>
+  </SectionBlock>
+
+  <!-- KONTEKST -->
+  <section class="py-16">
+    <Container>
+      <p class="text-text-muted leading-relaxed max-w-2xl">
+        Vi kan ikke love at vi bygger alt dette. Vi trenger medlemmer som er villige til å bli
+        med og bygge. Og vi trenger å utvikle infrastrukturen mye — spesielt før vi begynner
+        å håndtere persondata som bilder og dokumenter. Det skal gjøres ordentlig, eller ikke
+        i det hele tatt.
+      </p>
+    </Container>
+  </section>
+
+  <!-- COLLAPSIBLE SEKSJONER -->
+  <section class="pb-20">
+    <Container>
+      <div class="space-y-4 max-w-2xl">
+        <CollapsibleSection title="Hvordan en tjeneste går fra idé til drift">
+          <ol class="space-y-3 mt-2">
+            <li><strong class="text-text">1. Forslag</strong> — Hvem som helst kan foreslå en tjeneste.</li>
+            <li><strong class="text-text">2. Diskusjon og votering</strong> — Forslaget diskuteres og stemmes over i Loomio.</li>
+            <li><strong class="text-text">3. Teknisk vurdering</strong> — Driftsgruppen vurderer gjennomførbarhet, sikkerhet og ressursbehov.</li>
+            <li><strong class="text-text">4. Godkjenning</strong> — Styret godkjenner formelt.</li>
+            <li><strong class="text-text">5. Utvikling</strong> — En systemansvarlig tar eierskap. Oppsett, konfigurasjon, testing.</li>
+            <li><strong class="text-text">6. Lansering</strong> — Administratorer og eventuelt moderatorer utnevnes. Tjenesten gjøres tilgjengelig.</li>
+          </ol>
+          <p class="mt-4 text-xs text-text-muted/60 italic">
+            Denne prosessen er ikke fullt formalisert ennå — men den reflekterer hvordan vi jobber i praksis.
+          </p>
+        </CollapsibleSection>
+
+        <CollapsibleSection title="Forskjellige driftsmodeller">
+          <div class="space-y-3 mt-2">
+            <div>
+              <strong class="text-text">Foreningsdriftet</strong>
+              <span> — Driftes direkte av foreningen med utnevnt systemansvarlig og administratorer.</span>
+            </div>
+            <div>
+              <strong class="text-text">Medlemsinitiativ</strong>
+              <span> — Driftes av et enkeltmedlem på vegne av fellesskapet. Kan formaliseres over tid.</span>
+            </div>
+            <div>
+              <strong class="text-text">Samarbeid</strong>
+              <span> — Tilbys gjennom samarbeid med en ekstern aktør.</span>
+            </div>
+          </div>
+        </CollapsibleSection>
       </div>
     </Container>
   </section>
 
-  <section class="py-12 border-t border-border">
+  <!-- CTA -->
+  <section class="py-16 bg-surface border-t border-border">
     <Container>
-      <h2 class="text-xl font-semibold mb-2">Hva er neste?</h2>
-      <p class="text-text-muted mb-6">
-        Hvilke tjenester Datakollektivet skal tilby bestemmes av medlemmene. Dette er de høyest rangerte forslagene fra en åpen avstemning blant medlemmene.
-      </p>
-
-      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {upcoming.map((item) => (
-          <div class="p-5 border border-dashed border-border-strong rounded">
-            <h3 class="font-semibold mb-1 text-text-muted">{item.title}</h3>
-            <p class="text-sm text-text-muted/70">{item.description}</p>
-          </div>
-        ))}
-      </div>
-
-      <div class="mt-8 p-6 bg-surface border border-border rounded text-center">
-        <p class="text-text-muted mb-4">
-          Har du et forslag, eller vil du bidra til å bygge noe? Som medlem kan du fremme forslag og stemme over hva vi prioriterer.
+      <div class="text-center max-w-xl mx-auto">
+        <p class="text-text-muted leading-relaxed mb-6">
+          Har du et forslag til en tjeneste, eller vil du bidra til å bygge noe?
+          Som medlem kan du fremme forslag og stemme over hva vi prioriterer.
         </p>
-        <Button href="/bli-med" variant="primary" size="sm">Bli med og bestem</Button>
+        <div class="flex flex-wrap justify-center gap-3">
+          <Button href="/bli-medlem" variant="primary">Bli medlem</Button>
+          <Button href="/bygg-med-oss" variant="secondary">Bygg med oss</Button>
+        </div>
       </div>
     </Container>
   </section>

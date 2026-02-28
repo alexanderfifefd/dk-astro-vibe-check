@@ -1,279 +1,229 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import Container from '../components/Container.astro';
-import Button from '../components/Button.astro';
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import SectionBlock from "../components/SectionBlock.astro";
+import ContentCard from "../components/ContentCard.astro";
+import Timeline from "../components/Timeline.astro";
+import PathCard from "../components/PathCard.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import NewsletterEmbed from "../components/NewsletterEmbed.astro";
+import Button from "../components/Button.astro";
+import Container from "../components/Container.astro";
+
+import roadmap from "../data/roadmap.json";
+
+const allServices = await getCollection("tjenester");
+const activeServices = allServices
+  .filter((s) => s.data.status === "i-drift")
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 ---
 
 <Layout title="Hjem">
+  <!-- 1. HERO -->
   <Hero>
     <span slot="title">Teknologi for folket.</span>
     <p slot="description">
-      Datakollektivet er en norsk ideell forening som drifter digital infrastruktur og tjenester
-      for medlemmene sine. Ingen aksjonærer, bare folk som mener det må da være mulig å bygge noe bedre.</p>
+      Datakollektivet er en nyoppstartet norsk ideell forening som bygger
+      digital infrastruktur og tjenester for medlemmene sine. Kollektivt eid.
+      Demokratisk styrt. Åpen kildekode.
+    </p>
     <div slot="cta" class="flex flex-wrap gap-3">
-      <Button href="/bli-med" variant="primary">Bli med</Button>
-      <Button href="/om" variant="secondary">Les mer om oss</Button>
+      <Button href="/bli-medlem" variant="primary">Bli med</Button>
+      <Button href="#vi-tror" variant="secondary">Hva er dette?</Button>
     </div>
   </Hero>
 
-  <section class="py-16 border-t border-border">
+  <!-- 2. VI TROR -->
+  <SectionBlock
+    title="Vi tror"
+    id="vi-tror"
+    ingress="Datakollektivet er enda ikke enige om alle løsningene. Men samtlige medlemmer er enige om problemene. Og det er helt sikkert du og."
+  >
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <ContentCard title="Teknologi gjør reell skade.">
+        På samfunnet vårt. På individer. På barna våre. På demokratiet. På
+        friheten vår.
+      </ContentCard>
+      <ContentCard title="Folk er lei.">
+        Av teknologi som bedrifitifiseres. Av selskaper som ikke har noe respekt
+        for menneskene som bruker tjenestene deres. At vi kontinuerlig kastes
+        inn i nye og dårligere avtaler.
+      </ContentCard>
+      <ContentCard title="Folk ønsker tjenester som ikke brukes mot oss.">
+        Forretningsmodellen til de store er å selge oppmerksomheten din. Vi vil
+        ha tjenester der du er brukeren, ikke produktet.
+      </ContentCard>
+    </div>
+  </SectionBlock>
+
+  <!-- 3. VI MÅ BYGGE -->
+  <SectionBlock
+    title="Tiden er inne"
+    ingress="Det har aldri vært større muligheter for å bygge det vi ønsker selv enn det er nå."
+  >
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <ContentCard title="Prisen på å utvikle software har stupt.">
+        Og det kommer til å komme mye spennende de neste årene. Vi vil lage et
+        sted som kan tilrettelegge bedre for det.
+      </ContentCard>
+      <ContentCard title="Det har aldri vært billigere å drifte.">
+        Hardware koster mindre enn noensinne*. En håndfull servere skalerer til
+        hele den norske befolkningen. Grunnleggende tjenester trenger ikke koste
+        deg alt.
+      </ContentCard>
+      <ContentCard title="Vi må bygge det vi ønsker selv.">
+        Løsningen ligger i å lage alternativer — ikke i å vente på at de store
+        selskapene oppfører seg. De har hatt mange sjanser.
+      </ContentCard>
+    </div>
+  </SectionBlock>
+
+  <!-- 4. TEKNOLOGIEN FINNES -->
+  <SectionBlock
+    title="Teknologien finnes"
+    ingress="Det finnes noe modne og åpne alternativer, og det kommer mer. Problemet er at det er at forbeholdt de som har teknisk kompetanse å sette opp og drifte det selv. Vi ønsker å tilgjengeliggjøre det for alle."
+  >
+    <div class="grid md:grid-cols-3 gap-6">
+      <ContentCard title="Åpen kildekode.">
+        Tjenestene vi bygger på er open source. Koden kan granskes, forbedres og
+        utvikles av fellesskap verden over. Ingen hemmelig proprietær kode.
+      </ContentCard>
+      <ContentCard title="Åpne protokoller.">
+        Vi velger løsninger basert på åpne standarder. Ingen innlåsing. Du eier
+        dataene dine og kan ta dem med deg.
+      </ContentCard>
+      <ContentCard title="Tilgjengelig for alle.">
+        Du skal ikke trenge å være utvikler for å bruke åpen teknologi. Vi gjør
+        oppsett, drift og vedlikehold — du bruker tjenestene.
+      </ContentCard>
+    </div>
+  </SectionBlock>
+
+  <!-- 5. ORGANISERT AV OSS -->
+  <SectionBlock
+    title="Organisasjonen formes"
+    ingress="God teknologi er ikke nok. Det trengs en organisasjon som setter fellesskapet først — ikke aksjonærer."
+  >
+    <div class="grid md:grid-cols-3 gap-6">
+      <ContentCard title="Kollektivt eid.">
+        Infrastrukturen tilhører medlemmene, ikke en bedrift. Du er del av
+        fellesskapet, ikke kunde.
+      </ContentCard>
+      <ContentCard title="Demokratisk styrt.">
+        En demokratisk kontrakt mellom de som utvikler og drifter, og de som
+        bruker tjenestene. Generalforsamling, åpne styremøter, deltakende
+        demokrati.
+      </ContentCard>
+      <ContentCard title="Rettferdig.">
+        Ingen aksjonærer som krever avkastning. Pengene går tilbake til
+        tjenestene. Det vi bygger, bygger vi for hverandre.
+      </ContentCard>
+    </div>
+  </SectionBlock>
+
+  <!-- 6. HVOR VI ER -->
+  <SectionBlock
+    title="Hvor vi er nå"
+    ingress="Datakollektivet ble stiftet i oktober 2025. Vi bygger stein for stein."
+  >
+    <div class="max-w-xl">
+      <Timeline variant="roadmap" steps={roadmap} />
+    </div>
+    <p class="mt-10 text-text-muted leading-relaxed max-w-2xl">
+      Det er enormt mye som gjenstår. Enormt mange spørsmål — tekniske,
+      organisatoriske, demokratiske — som ikke har fått svar ennå. Det er ikke
+      en svakhet. Det er hele poenget. Vi bygger dette sammen.
+    </p>
+  </SectionBlock>
+
+  <!-- 7. TRE VEIER INN -->
+  <SectionBlock
+    title="Tre veier inn"
+    ingress="Uansett om du vil forme retningen, hjelpe til å bygge, eller bare følge med — det finnes en plass for deg."
+  >
+    <div class="grid md:grid-cols-3 gap-6">
+      <PathCard
+        title="Bli medlem"
+        tagline="Form retningen."
+        items={[
+          "Stemmerett i generalforsamlingen",
+          "Innflytelse over tjenester og prioriteringer",
+          "Tilgang til Loomio, Matrix og tjenester etter hvert",
+          "Vær med å finne ut av hva dette skal bli",
+        ]}
+        href="/bli-medlem"
+        ctaLabel="Les mer"
+      />
+      <PathCard
+        title="Bygg med oss"
+        tagline="Vi trenger folk som bygger."
+        highlighted
+        items={[
+          "Konkrete tekniske utfordringer: SSO, infrastruktur, drift",
+          "Åpen kildekode hele veien",
+          "Kode, design, drift, innhold, juss — eller rådgivning",
+          "Alle nivåer, alle mengder tid",
+        ]}
+        href="/bygg-med-oss"
+        ctaLabel="Se hva vi trenger"
+      />
+      <PathCard title="Følg oss" tagline="Ikke klar ennå? Følg reisen.">
+        <div class="mb-4 flex-1">
+          <p class="text-sm text-text-muted mb-4">
+            Nyhetsbrev og tilgang til Matrix-kanalen vår. Følg diskusjonene uten
+            forpliktelser.
+          </p>
+        </div>
+        <NewsletterEmbed compact />
+      </PathCard>
+    </div>
+  </SectionBlock>
+
+  <!-- 8. TJENESTER PREVIEW -->
+  <SectionBlock
+    title="Hva vi bygger"
+    ingress="Åpen kildekode-teknologi burde ikke være forbeholdt de med teknologikompetanse. Vi drifter tjenester som gjør den tilgjengelig for alle."
+  >
+    <div class="grid sm:grid-cols-3 gap-4 mb-8">
+      {
+        activeServices.map((service) => (
+          <ServiceCard
+            title={service.data.title}
+            description={service.data.description}
+            logo={service.data.logo}
+            invertLogo={service.data.invertLogo}
+            status={service.data.status}
+            kategori={service.data.kategori}
+            variant="compact"
+          />
+        ))
+      }
+    </div>
+    <p class="text-sm text-text-muted mb-6">
+      Fillagring, fotolagring, dokumentbehandling, e-post, sosiale medier,
+      videomøter — alt styrt av hva medlemmene ønsker.
+    </p>
+    <a
+      href="/tjenester"
+      class="text-sm text-accent hover:text-accent-hover font-medium transition-colors"
+    >
+      Se alle tjenester og roadmap &rarr;
+    </a>
+  </SectionBlock>
+
+  <!-- 9. SISTE CTA -->
+  <section class="py-20 md:py-28">
     <Container>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="p-6 bg-surface rounded border border-border">
-          <h3 class="font-semibold mb-2">Demokratisk</h3>
-          <p class="text-sm text-text-muted">
-            Medlemmene bestemmer. Hvilke tjenester vi drifter, hvordan vi styres, og hvor pengene går — alt bestemmes demokratisk.
-          </p>
-        </div>
-        <div class="p-6 bg-surface rounded border border-border">
-          <h3 class="font-semibold mb-2">Åpent</h3>
-          <p class="text-sm text-text-muted">
-            Åpen kildekode, åpne standarder. Du er aldri låst inn — dataene dine er dine, og du kan ta dem med deg.
-          </p>
-        </div>
-        <div class="p-6 bg-surface rounded border border-border">
-          <h3 class="font-semibold mb-2">Felles</h3>
-          <p class="text-sm text-text-muted">
-            Infrastrukturen tilhører medlemmene, ikke en bedrift. Du er medeier, ikke kunde.
-          </p>
-        </div>
-      </div>
-    </Container>
-  </section>
-
-  <!-- HVORFOR -->
-  <section id="hvorfor" class="py-20 md:py-24 bg-surface border-t border-border">
-    <Container>
-      <p class="text-sm font-mono uppercase tracking-widest text-accent mb-4">Hvorfor</p>
-      <h2 class="text-3xl md:text-4xl font-bold mb-12 max-w-2xl">
-        Det har aldri vært mer nødvendig
-      </h2>
-
-      <div class="grid md:grid-cols-3 gap-8 md:gap-12">
-        <div class="border-l-2 border-accent pl-6">
-          <h3 class="font-semibold mb-3 text-lg">Noen få selskaper kontrollerer alt.</h3>
-          <p class="text-text-muted leading-relaxed">
-            Google, Microsoft, Apple, Meta og Amazon leverer verktøyene milliarder av
-            mennesker bruker daglig. De setter vilkårene. De eier dataene. De kan endre
-            spillereglene når de vil.
-          </p>
-        </div>
-        <div class="border-l-2 border-accent pl-6">
-          <h3 class="font-semibold mb-3 text-lg">Personvernet ditt er en funksjon — ikke en rettighet.</h3>
-          <p class="text-text-muted leading-relaxed">
-            Når forretningsmodellen er å selge oppmerksomheten din, er personvern noe som
-            tilbys så lenge det lønner seg. Ikke fordi du har krav på det.
-          </p>
-        </div>
-        <div class="border-l-2 border-accent pl-6">
-          <h3 class="font-semibold mb-3 text-lg">Infrastrukturen din styres fra utlandet.</h3>
-          <p class="text-text-muted leading-relaxed">
-            Tjenestene vi er avhengige av er amerikanske — underlagt amerikansk lovgivning,
-            amerikanske forretningsinteresser og amerikansk politikk. Når forholdene endrer
-            seg der, merker vi det her.
-          </p>
-        </div>
-      </div>
-    </Container>
-  </section>
-
-  <!-- HVORDAN -->
-  <section class="py-20 md:py-24 border-t border-border">
-    <Container>
-      <p class="text-sm font-mono uppercase tracking-widest text-accent mb-4">Hvordan</p>
-      <h2 class="text-3xl md:text-4xl font-bold mb-4 max-w-2xl">
-        Et kollektiv, ikke et selskap
-      </h2>
-      <p class="text-text-muted text-lg mb-8 max-w-2xl leading-relaxed">
-        Det er ikke et teknisk problem. Det finnes modne, åpne alternativer — og det kommer
-        flere. Det som mangler er noen som organiserer oss.
-      </p>
-
-      <blockquote class="border-l-2 border-accent pl-6 mb-12 max-w-2xl">
-        <p class="text-lg leading-relaxed font-medium">
-          Selvhostbar, åpen teknologi burde ikke være forbeholdt teknologer.
+      <div class="max-w-2xl">
+        <p class="text-xl md:text-2xl font-medium leading-relaxed mb-8">
+          Datakollektivet er et forsøk på å bygge digital infrastruktur som
+          tilhører folka som bruker den. Vi er i starten. Og vi trenger deg.
         </p>
-        <p class="text-text-muted mt-2 leading-relaxed">
-          Å ha kontroll over egne data og tjenester burde være noe alle har tilgang til.
-          Det er derfor vi bygger dette som en forening — kollektivt eid, demokratisk styrt,
-          åpent for alle.
-        </p>
-      </blockquote>
-
-      <div class="grid sm:grid-cols-2 gap-6">
-        <div class="p-6 bg-surface rounded border border-border">
-          <h3 class="font-semibold mb-2">Kollektivt eid</h3>
-          <p class="text-sm text-text-muted leading-relaxed">
-            Infrastrukturen tilhører medlemmene, ikke en bedrift.
-            Du er medeier, ikke kunde.
-          </p>
+        <div class="flex flex-wrap gap-3">
+          <Button href="/bli-medlem" variant="primary">Bli medlem</Button>
+          <Button href="/bygg-med-oss" variant="secondary">Bygg med oss</Button>
         </div>
-        <div class="p-6 bg-surface rounded border border-border">
-          <h3 class="font-semibold mb-2">Demokratisk styrt</h3>
-          <p class="text-sm text-text-muted leading-relaxed">
-            Generalforsamling, åpne styremøter, deltakende demokrati.
-            Medlemmene bestemmer hvilke tjenester vi drifter og hvordan pengene brukes.
-          </p>
-        </div>
-        <div class="p-6 bg-surface rounded border border-border">
-          <h3 class="font-semibold mb-2">Åpen kildekode</h3>
-          <p class="text-sm text-text-muted leading-relaxed">
-            Ingen innlåsing. Dataene dine er dine, og du kan alltid ta dem med deg.
-          </p>
-        </div>
-        <div class="p-6 bg-surface rounded border border-border">
-          <h3 class="font-semibold mb-2">Billigere enn noensinne</h3>
-          <p class="text-sm text-text-muted leading-relaxed">
-            Det har aldri kostet mindre å drifte programvare. Vi trenger ikke bygge
-            alt fra bunnen av — modne alternativer finnes allerede.
-          </p>
-        </div>
-      </div>
-
-      <div class="mt-14 max-w-2xl">
-        <h3 class="text-lg font-semibold mb-2">Veikart</h3>
-        <p class="text-sm text-text-muted mb-8">Vi bygger stein for stein. Her er vi nå.</p>
-
-        <div class="flex flex-col">
-          <!-- 1. Organisasjon — Ferdig -->
-          <div class="flex gap-4">
-            <div class="flex flex-col items-center">
-              <div class="w-3.5 h-3.5 rounded-full bg-accent mt-1 shrink-0"></div>
-              <div class="w-px flex-1 bg-border-strong"></div>
-            </div>
-            <div class="pb-8">
-              <div class="flex items-center gap-3">
-                <span class="font-medium">Organisasjon</span>
-                <span class="text-xs bg-accent/15 text-accent px-2 py-0.5 rounded-full font-medium">Ferdig</span>
-              </div>
-              <p class="text-sm text-text-muted mt-1">Forening stiftet, styre valgt, vedtekter på plass.</p>
-            </div>
-          </div>
-
-          <!-- 2. Økonomi — Ferdig -->
-          <div class="flex gap-4">
-            <div class="flex flex-col items-center">
-              <div class="w-3.5 h-3.5 rounded-full bg-accent mt-1 shrink-0"></div>
-              <div class="w-px flex-1 bg-border-strong"></div>
-            </div>
-            <div class="pb-8">
-              <div class="flex items-center gap-3">
-                <span class="font-medium">Økonomi</span>
-                <span class="text-xs bg-accent/15 text-accent px-2 py-0.5 rounded-full font-medium">Ferdig</span>
-              </div>
-              <p class="text-sm text-text-muted mt-1">Bankkonto opprettet, kontingent og betalingsløsning på plass.</p>
-            </div>
-          </div>
-
-          <!-- 3. Første tjenester — Ferdig -->
-          <div class="flex gap-4">
-            <div class="flex flex-col items-center">
-              <div class="w-3.5 h-3.5 rounded-full bg-accent mt-1 shrink-0"></div>
-              <div class="w-px flex-1 bg-border-strong"></div>
-            </div>
-            <div class="pb-8">
-              <div class="flex items-center gap-3">
-                <span class="font-medium">Første tjenester</span>
-                <span class="text-xs bg-accent/15 text-accent px-2 py-0.5 rounded-full font-medium">Ferdig</span>
-              </div>
-              <p class="text-sm text-text-muted mt-1">Loomio, Matrix og Forgejo er i drift.</p>
-            </div>
-          </div>
-
-          <!-- 4. Rekruttering -->
-          <div class="flex gap-4">
-            <div class="flex flex-col items-center">
-              <div class="w-3.5 h-3.5 rounded-full border-2 border-border-strong mt-1 shrink-0"></div>
-              <div class="w-px flex-1 bg-border"></div>
-            </div>
-            <div class="pb-8">
-              <span class="text-text-muted font-medium">Rekruttering</span>
-              <p class="text-sm text-text-muted/70 mt-1">Få flere medlemmer og frivillige inn i fellesskapet.</p>
-            </div>
-          </div>
-
-          <!-- 5. Generalforsamling — Pågår -->
-          <div class="flex gap-4">
-            <div class="flex flex-col items-center">
-              <div class="w-3.5 h-3.5 rounded-full border-2 border-accent mt-1 shrink-0 relative">
-                <div class="absolute inset-0.5 rounded-full bg-accent animate-pulse"></div>
-              </div>
-              <div class="w-px flex-1 bg-border"></div>
-            </div>
-            <div class="pb-8">
-              <div class="flex items-center gap-3">
-                <span class="font-medium">Generalforsamling</span>
-                <span class="text-xs bg-accent/10 text-accent/80 px-2 py-0.5 rounded-full font-medium">Pågår</span>
-              </div>
-              <p class="text-sm text-text-muted mt-1">Gjennomføre første ordinære generalforsamling.</p>
-            </div>
-          </div>
-
-          <!-- 6. Etablere driftsgruppe -->
-          <div class="flex gap-4">
-            <div class="flex flex-col items-center">
-              <div class="w-3.5 h-3.5 rounded-full border-2 border-border-strong mt-1 shrink-0"></div>
-              <div class="w-px flex-1 bg-border"></div>
-            </div>
-            <div class="pb-8">
-              <span class="text-text-muted font-medium">Etablere driftsgruppe</span>
-              <p class="text-sm text-text-muted/70 mt-1">Formalisere drift, sikkerhet og ansvarsfordeling.</p>
-            </div>
-          </div>
-
-          <!-- 7. Lansere tjenester -->
-          <div class="flex gap-4">
-            <div class="flex flex-col items-center">
-              <div class="w-3.5 h-3.5 rounded-full border-2 border-border-strong mt-1 shrink-0"></div>
-            </div>
-            <div>
-              <span class="text-text-muted font-medium">Lansere tjenester</span>
-              <p class="text-sm text-text-muted/70 mt-1">Begynne å tilby tjenester til medlemmene.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Container>
-  </section>
-
-  <!-- TRE VEIER INN -->
-  <section class="py-20 md:py-24 bg-surface border-t border-border">
-    <Container>
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Tre veier inn</h2>
-        <p class="text-text-muted text-lg max-w-xl mx-auto leading-relaxed">
-          Uansett om du vil bruke tjenestene, bli med i fellesskapet, eller
-          hjelpe til å bygge — det finnes en plass for deg.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        <a href="/tjenester" class="block p-8 bg-base rounded border border-border hover:border-border-strong transition-colors group">
-          <h3 class="text-xl font-semibold mb-3 group-hover:text-accent transition-colors">Våre tjenester</h3>
-          <p class="text-sm text-text-muted mb-6 leading-relaxed">
-            Se hva vi allerede drifter for medlemmene — og hva som er på vei.
-          </p>
-          <span class="text-sm text-accent font-medium">Se tjenester &rarr;</span>
-        </a>
-
-        <a href="/bli-med" class="block p-8 bg-base rounded border border-accent/40 hover:border-accent transition-colors group">
-          <h3 class="text-xl font-semibold mb-3 group-hover:text-accent transition-colors">Bli medlem</h3>
-          <p class="text-sm text-text-muted mb-6 leading-relaxed">
-            Bli medeier i infrastrukturen. Få tilgang til tjenester, og vær med
-            og bestemme retningen.
-          </p>
-          <span class="text-sm text-accent font-medium">Meld deg inn &rarr;</span>
-        </a>
-
-        <a href="/bli-med" class="block p-8 bg-base rounded border border-border hover:border-border-strong transition-colors group">
-          <h3 class="text-xl font-semibold mb-3 group-hover:text-accent transition-colors">Bygg med oss</h3>
-          <p class="text-sm text-text-muted mb-6 leading-relaxed">
-            Vi trenger utviklere, designere, skribenter, driftsfolk — og alle andre
-            som vil bidra til å bygge noe felles.
-          </p>
-          <span class="text-sm text-accent font-medium">Se hvordan &rarr;</span>
-        </a>
       </div>
     </Container>
   </section>

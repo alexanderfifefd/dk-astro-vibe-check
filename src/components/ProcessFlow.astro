@@ -1,0 +1,38 @@
+---
+const steps = [
+  'Forslag',
+  'Diskusjon',
+  'Votering',
+  'Teknisk vurdering',
+  'Godkjenning',
+  'Utvikling',
+  'Lansering',
+];
+---
+
+<div class="hidden md:flex items-center gap-0 overflow-x-auto">
+  {steps.map((step, i) => (
+    <div class="flex items-center shrink-0">
+      <div class="px-4 py-2 bg-surface border border-border rounded-lg text-sm font-medium text-text whitespace-nowrap">
+        {step}
+      </div>
+      {i < steps.length - 1 && (
+        <div class="w-6 h-px bg-border-strong mx-1 shrink-0" />
+      )}
+    </div>
+  ))}
+</div>
+
+<div class="flex flex-col md:hidden">
+  {steps.map((step, i) => (
+    <div class="flex items-start gap-3">
+      <div class="flex flex-col items-center">
+        <div class="w-2.5 h-2.5 rounded-full bg-accent/40 mt-2 shrink-0" />
+        {i < steps.length - 1 && <div class="w-px flex-1 bg-border min-h-6" />}
+      </div>
+      <div class="pb-4">
+        <span class="text-sm font-medium">{step}</span>
+      </div>
+    </div>
+  ))}
+</div>

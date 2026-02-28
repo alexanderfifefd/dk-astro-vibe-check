@@ -1,0 +1,211 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HeroSecondary from "../components/HeroSecondary.astro";
+import SectionBlock from "../components/SectionBlock.astro";
+import ContentCard from "../components/ContentCard.astro";
+import PathCard from "../components/PathCard.astro";
+import NewsletterEmbed from "../components/NewsletterEmbed.astro";
+import FormBlock from "../components/FormBlock.astro";
+import Button from "../components/Button.astro";
+---
+
+<Layout title="Bygg med oss">
+  <HeroSecondary
+    title="Vi trenger folk som bygger."
+    description="Datakollektivet bygger digital infrastruktur og tjenester — kollektivt eid, demokratisk styrt, åpen kildekode. Vi har kommet et stykke. Men vi er langt fra ferdig, og vi trenger flere folk."
+  />
+
+  <!-- HITTIL -->
+  <SectionBlock title="Hittil">
+    <p class="text-text-muted leading-relaxed max-w-2xl">
+      Datakollektivet ble stiftet i oktober 2025. Per nå har et sted mellom 10
+      og 20 folk bidratt. Vi har Loomio i drift for medlemsdemokrati, Matrix for
+      kommunikasjon, og Forgejo for kode. Vi har styre, vedtekter, bankkonto og
+      en nettside.
+    </p>
+    <p class="text-text-muted leading-relaxed max-w-2xl mt-4">
+      Men vi er langt unna der vi vil. Vi trenger flere hoder og flere hender.
+    </p>
+  </SectionBlock>
+  <!-- IKKE BARE KODE -->
+  <SectionBlock
+    title="Det er ikke bare kode vi trenger"
+    ingress="Datakollektivet trenger mer enn utviklere. Det er enormt mye som må avklares — tekniske spørsmål, organisatoriske spørsmål, juridiske spørsmål, spørsmål om hva demokratisk teknologi faktisk betyr i praksis."
+  >
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      {
+        [
+          {
+            title: "Utvikling",
+            desc: "Frontend, backend, DevOps, integrasjoner",
+          },
+          { title: "Design", desc: "UX, visuell design, tilgjengelighet" },
+          {
+            title: "Drift og infrastruktur",
+            desc: "Sysadmin, nettverk, sikkerhet, bare-metal",
+          },
+          {
+            title: "Innhold og kommunikasjon",
+            desc: "Tekst, nettside, sosiale medier",
+          },
+          {
+            title: "Demokrati og organisasjon",
+            desc: "Prosesser, vedtekter, moderering",
+          },
+          {
+            title: "Juss og personvern",
+            desc: "Juridisk rådgivning, GDPR, organisasjonsrett",
+          },
+          {
+            title: "Rådgivning",
+            desc: "Erfaring og veiledning, uten fast forpliktelse",
+          },
+        ].map(({ title, desc }) => (
+          <div class="p-4 bg-surface rounded-lg border border-border">
+            <h3 class="font-medium text-sm mb-1">{title}</h3>
+            <p class="text-xs text-text-muted">{desc}</p>
+          </div>
+        ))
+      }
+    </div>
+  </SectionBlock>
+
+  <!-- HVA VI JOBBER MED -->
+  <SectionBlock
+    title="Men det er mye utvikling"
+    ingress="Vi står foran en serie konkrete problemer. Her er de viktigste."
+    variant="surface"
+  >
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <ContentCard title="SSO / Single Sign-On">
+        Medlemmer må logge inn én gang og få tilgang til alle tjenestene sine.
+        Kritisk — og det første som må på plass om vi ønsker litt medlemmer.
+      </ContentCard>
+      <ContentCard title="Medlemsstyring">
+        Et system der folk kan bli medlem på nett uten mye manuelt arbeid.
+        Registrering, kontingent, tilgangsstyring — helst integrert med SSO.
+      </ContentCard>
+      <ContentCard title="Infrastruktur og drift">
+        Orkestrering, IaC, sikkerhet. Vi drifter på bare-metal og trenger folk
+        som er komfortable med det. Ansible, Docker, og sannsynligvis mer etter
+        hvert.
+      </ContentCard>
+      <ContentCard title="Multi-tenancy">
+        De fleste tjenester er bygget for individer eller familier, ikke for
+        multi-tenancy. Vi må bygge isolerte tjenestemiljøer med egne
+        instanser/containere og storage. Ikke trivielt å gjøre sikkert og
+        billig.
+      </ContentCard>
+      <ContentCard title="Distribuert storage">
+        Lagring som fungerer på tvers av tjenester. Spesielt viktig når vi
+        begynner å tilby fil- og fotolagring — men vi er ikke der ennå, og vi
+        vet det.
+      </ContentCard>
+      <ContentCard title="Sikkerhet og persondata">
+        Infrastrukturen må utvikles mye før vi kan ta vare på persondata som
+        bilder og dokumenter. Det skal gjøres ordentlig, eller ikke i det hele
+        tatt.
+      </ContentCard>
+    </div>
+  </SectionBlock>
+
+  <!-- HVEM VI SER ETTER -->
+  <section class="py-20 md:py-28 bg-surface border-t border-b border-border">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-8">
+          Hvem vi ser etter
+        </h2>
+        <div class="space-y-4 text-text-muted leading-relaxed">
+          <p>
+            Folk som har kompetanse på slike systemer. Folk som vil lære. Folk
+            som tar slikt på strak arm.
+          </p>
+          <p>
+            Folk som vil ha noen å gjøre dette sammen med. Eller som allerede
+            jobber med slikt og savner et fellesskap rundt det.
+          </p>
+          <p>
+            Folk som har litt tid, og folk som har mye. Folk som vil ta på seg
+            et større ansvar, og folk som bare vil plukke en oppgave her og der.
+          </p>
+        </div>
+        <p
+          class="mt-8 text-lg font-medium text-text border-l-2 border-accent pl-6"
+        >
+          Folk som har sett seg lei av å vente på at andre skal gjøre noe.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIK KOMMER DU I GANG -->
+  <SectionBlock title="Slik kommer du i gang">
+    <ol class="space-y-6 max-w-xl">
+      {
+        [
+          {
+            step: "Ta kontakt",
+            desc: "Fyll ut skjemaet under, eller si hei på Matrix.",
+          },
+          {
+            step: "Vi snakker sammen",
+            desc: "Vi finner ut hva som er interessant for deg.",
+          },
+          {
+            step: "Få tilgang",
+            desc: "Forgejo, Matrix, Zulip og de verktøyene vi bruker internt.",
+          },
+          {
+            step: "Begynn å bidra",
+            desc: "Plukk en oppgave, jobb på et prosjekt, delta i driftsmøter, eller bare vær med i diskusjonene.",
+          },
+        ].map(({ step, desc }, i) => (
+          <li class="flex gap-4">
+            <span class="shrink-0 w-7 h-7 rounded-full bg-accent/10 text-accent text-sm font-medium flex items-center justify-center">
+              {i + 1}
+            </span>
+            <div>
+              <span class="font-medium">{step}</span>
+              <p class="text-sm text-text-muted mt-0.5">{desc}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="mt-6 text-sm text-text-muted max-w-xl">
+      Ingen bindinger. Ingen minimumsforpliktelse. Bidra med det du kan, når du
+      kan.
+    </p>
+  </SectionBlock>
+
+  <!-- SKJEMA -->
+  <SectionBlock title="Ta kontakt" variant="surface">
+    <FormBlock
+      submitLabel="Send inn"
+      showContributionAreas
+      messagePlaceholder="Fortell oss gjerne litt om bakgrunnen din og hva du har lyst til å jobbe med"
+      footnote="Vi tar kontakt innen noen dager."
+    />
+  </SectionBlock>
+
+  <!-- ANDRE VEIER INN -->
+  <SectionBlock title="Andre veier inn">
+    <div class="grid md:grid-cols-2 gap-6">
+      <PathCard
+        title="Bli medlem"
+        tagline="Mer interessert i å bruke tjenestene og være med å bestemme retningen?"
+        href="/bli-medlem"
+        ctaLabel="Bli medlem"
+      />
+      <PathCard
+        title="Følg oss"
+        tagline="Ikke klar ennå? Meld deg på nyhetsbrevet og bli med på Matrix."
+      >
+        <div class="mt-2">
+          <NewsletterEmbed compact />
+        </div>
+      </PathCard>
+    </div>
+  </SectionBlock>
+</Layout>

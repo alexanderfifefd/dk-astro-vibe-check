@@ -1,0 +1,49 @@
+---
+interface Props {
+  title: string;
+  tagline?: string;
+  items?: string[];
+  href?: string;
+  ctaLabel?: string;
+  highlighted?: boolean;
+}
+
+const { title, tagline, items = [], href, ctaLabel, highlighted = false } = Astro.props;
+---
+
+<div class:list={[
+  "flex flex-col p-8 rounded-lg transition-colors",
+  highlighted
+    ? "bg-surface border-2 border-accent/30"
+    : "bg-surface border border-border hover:border-border-strong",
+]}>
+  <h3 class="text-xl font-semibold mb-1">{title}</h3>
+  {tagline && (
+    <p class="text-text-muted text-sm italic mb-4">{tagline}</p>
+  )}
+
+  {items.length > 0 && (
+    <ul class="space-y-2 mb-6 flex-1">
+      {items.map((item) => (
+        <li class="flex items-start gap-2 text-sm text-text-muted">
+          <span class="text-accent mt-0.5 shrink-0">—</span>
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  )}
+
+  <slot />
+
+  {href && ctaLabel && (
+    <a
+      href={href}
+      class:list={[
+        "mt-auto inline-flex items-center gap-1 text-sm font-medium transition-colors",
+        highlighted ? "text-accent hover:text-accent-hover" : "text-text-muted hover:text-accent",
+      ]}
+    >
+      {ctaLabel} <span aria-hidden="true">&rarr;</span>
+    </a>
+  )}
+</div>

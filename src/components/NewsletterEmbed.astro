@@ -1,0 +1,35 @@
+---
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<div class:list={[!compact && "space-y-4"]}>
+  <form class="flex gap-2" onsubmit="return false;">
+    <input
+      type="email"
+      placeholder="din@epost.no"
+      class:list={[
+        "flex-1 bg-base border border-border rounded px-3 text-sm text-text placeholder:text-text-muted/50 focus:outline-none focus:border-accent transition-colors",
+        compact ? "py-2" : "py-2.5",
+      ]}
+    />
+    <button
+      type="submit"
+      class:list={[
+        "bg-accent text-base font-medium rounded hover:bg-accent-hover transition-colors shrink-0 text-sm",
+        compact ? "px-3 py-2" : "px-4 py-2.5",
+      ]}
+    >
+      Meld meg på
+    </button>
+  </form>
+  <a
+    href="https://matrix.datakollektivet.no"
+    class="inline-flex items-center gap-1 text-sm text-text-muted hover:text-accent transition-colors"
+  >
+    Bli med på Matrix <span aria-hidden="true">&rarr;</span>
+  </a>
+</div>

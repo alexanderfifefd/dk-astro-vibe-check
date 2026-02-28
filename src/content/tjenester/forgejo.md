@@ -7,6 +7,8 @@ logo: "/logos/Forgejo.svg"
 driftsmodell: "medlemsinitiativ"
 driftsdetaljer: "Instansen driftes av Hornwitser på vegne av fellesskapet, men er ikke formelt en foreningstjeneste ennå."
 systemansvarlig: "Hornwitser"
+kategori: "tjeneste"
+status: "i-drift"
 ---
 
 ## Hva er Forgejo?

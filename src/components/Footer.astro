@@ -1,23 +1,69 @@
 ---
+import NewsletterEmbed from './NewsletterEmbed.astro';
+
 const currentYear = new Date().getFullYear();
+
+const navLinks = [
+  { href: '/tjenester', label: 'Tjenester' },
+  { href: '/om', label: 'Om oss' },
+  { href: '/bygg-med-oss', label: 'Bygg med oss' },
+  { href: '/bli-medlem', label: 'Bli medlem' },
+  { href: '/vedtekter', label: 'Vedtekter' },
+  { href: '/arrangementer', label: 'Arrangementer' },
+];
 ---
 
-<footer class="border-t border-border bg-base">
-  <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-text-muted">
-    <div class="flex flex-col md:flex-row items-center gap-2 md:gap-4">
-      <span class="font-semibold text-text">Datakollektivet</span>
-      <span class="hidden md:inline text-border-strong">/</span>
-      <span>Et datafellesskap for alle</span>
+<footer class="border-t border-border bg-surface/50">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="grid md:grid-cols-3 gap-12 mb-12">
+      <!-- Venstre: Sider -->
+      <div>
+        <span class="text-sm font-medium text-text block mb-3">Sider</span>
+        <nav class="flex flex-col gap-2">
+          {navLinks.map(({ href, label }) => (
+            <a href={href} class="text-sm text-text-muted hover:text-accent transition-colors">
+              {label}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      <!-- Midten: Datakollektivet -->
+      <div class="order-first md:order-none text-center">
+        <span class="font-semibold text-text block mb-3">Datakollektivet</span>
+        <p class="text-sm text-text-muted leading-relaxed">
+          En norsk ideell forening som bygger digital infrastruktur og tjenester.
+          Kollektivt eid. Demokratisk styrt. Åpen kildekode.
+        </p>
+      </div>
+
+      <!-- Høyre: Nyhetsbrev -->
+      <div class="flex flex-col justify-end">
+        <span class="text-sm font-medium text-text block mb-3">Følg oss</span>
+        <NewsletterEmbed compact />
+      </div>
     </div>
 
-    <div class="flex items-center gap-4">
-      <a href="mailto:hei@datakollektivet.no" class="hover:text-accent transition-colors">
-        hei@datakollektivet.no
-      </a>
-      <span class="text-border-strong">/</span>
-      <span>Org.nr: 936 667 864</span>
-      <span class="text-border-strong">/</span>
-      <span>&copy; {currentYear}</span>
+    <!-- Bunn -->
+    <div class="border-t border-border pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-text-muted">
+      <div class="flex items-center gap-3">
+        <a href="mailto:hei@datakollektivet.no" class="hover:text-accent transition-colors">
+          hei@datakollektivet.no
+        </a>
+        <span class="text-border-strong">·</span>
+        <a href="https://matrix.datakollektivet.no" class="hover:text-accent transition-colors">
+          Matrix
+        </a>
+        <span class="text-border-strong">·</span>
+        <a href="https://forge.hornwitser.no/datakollektivet" class="hover:text-accent transition-colors">
+          Forgejo
+        </a>
+      </div>
+      <div class="flex items-center gap-3">
+        <span>Org.nr: 936 667 864</span>
+        <span class="text-border-strong">·</span>
+        <span>&copy; {currentYear} Datakollektivet</span>
+      </div>
     </div>
   </div>
 </footer>

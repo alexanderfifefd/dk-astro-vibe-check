@@ -1,0 +1,92 @@
+---
+interface CheckboxOption {
+  id: string;
+  label: string;
+}
+
+interface Props {
+  submitLabel?: string;
+  footnote?: string;
+  showContributionAreas?: boolean;
+  messagePlaceholder?: string;
+}
+
+const {
+  submitLabel = 'Send inn',
+  footnote,
+  showContributionAreas = false,
+  messagePlaceholder = 'Fortell oss gjerne hva du er interessert i',
+} = Astro.props;
+
+const contributionAreas: CheckboxOption[] = [
+  { id: 'utvikling', label: 'Utvikling' },
+  { id: 'design', label: 'Design' },
+  { id: 'drift', label: 'Drift og infrastruktur' },
+  { id: 'innhold', label: 'Innhold og kommunikasjon' },
+  { id: 'demokrati', label: 'Demokrati og organisasjon' },
+  { id: 'juss', label: 'Juss og personvern' },
+  { id: 'radgivning', label: 'Rådgivning' },
+];
+---
+
+<form class="space-y-5 max-w-lg" onsubmit="return false;">
+  <div>
+    <label for="name" class="block text-sm font-medium mb-1.5">Navn</label>
+    <input
+      type="text"
+      id="name"
+      required
+      class="w-full bg-base border border-border rounded px-3 py-2.5 text-sm text-text placeholder:text-text-muted/50 focus:outline-none focus:border-accent transition-colors"
+    />
+  </div>
+
+  <div>
+    <label for="email" class="block text-sm font-medium mb-1.5">E-post</label>
+    <input
+      type="email"
+      id="email"
+      required
+      class="w-full bg-base border border-border rounded px-3 py-2.5 text-sm text-text placeholder:text-text-muted/50 focus:outline-none focus:border-accent transition-colors"
+    />
+  </div>
+
+  {showContributionAreas && (
+    <fieldset>
+      <legend class="text-sm font-medium mb-2">Hva er du interessert i?</legend>
+      <div class="grid grid-cols-2 gap-2">
+        {contributionAreas.map((area) => (
+          <label class="flex items-center gap-2 text-sm text-text-muted cursor-pointer hover:text-text transition-colors">
+            <input
+              type="checkbox"
+              name="areas"
+              value={area.id}
+              class="rounded border-border-strong bg-base text-accent focus:ring-accent"
+            />
+            {area.label}
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  )}
+
+  <div>
+    <label for="message" class="block text-sm font-medium mb-1.5">Melding <span class="text-text-muted font-normal">(valgfritt)</span></label>
+    <textarea
+      id="message"
+      rows={4}
+      placeholder={messagePlaceholder}
+      class="w-full bg-base border border-border rounded px-3 py-2.5 text-sm text-text placeholder:text-text-muted/50 focus:outline-none focus:border-accent transition-colors resize-y"
+    />
+  </div>
+
+  <button
+    type="submit"
+    class="bg-accent text-base font-medium rounded px-6 py-2.5 text-sm hover:bg-accent-hover transition-colors"
+  >
+    {submitLabel}
+  </button>
+
+  {footnote && (
+    <p class="text-xs text-text-muted/60 italic">{footnote}</p>
+  )}
+</form>

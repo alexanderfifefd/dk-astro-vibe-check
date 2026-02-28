@@ -152,11 +152,11 @@ Merk: Varianten kan utledes fra dataen (`status` + `kategori`), eller settes eks
 
 E-postfelt + knapp + Matrix-lenke. Enkel, gjenbrukbar. Prototype uten backend i første omgang — som nåværende JoinPage.
 
-### 2.5 BeliefCard / ValueCard
+### 2.5 ContentCard
 
 **Prioritet:** Medium — brukes på forsiden ("Vi tror", "Hvordan") og om oss ("Roller").
 
-Enkel komponent: bold overskrift + tekst. Kan ha venstre border-accent. Ren `.astro`-komponent.
+Generisk kort-komponent: bold overskrift + tekst. Kan ha venstre border-accent. Ren `.astro`-komponent.
 
 **Props:**
 - `title`, `description`
@@ -202,33 +202,14 @@ Horisontalt på desktop, vertikalt på mobil. Relativt enkel `.astro`-komponent.
 
 `<details>` / `<summary>` med styling. Ren HTML/CSS, ingen JS nødvendig.
 
-### 2.10 PersonList
+### Inlines (ikke egne komponenter)
 
-**Prioritet:** Lav — kun om oss-siden.
+Følgende er enkle nok til å bygges direkte på sidene de brukes:
 
-Leser fra `board.json`. Viser navn og rolle, gruppert (faste + vara).
-
-### 2.11 RoleCard
-
-Gjenbruker `BeliefCard`-komponenten med rollenavn + beskrivelse. Ingen egen komponent nødvendig.
-
-### 2.12 ContactBlock
-
-**Prioritet:** Lav — om oss + footer.
-
-E-post, Matrix-lenke, Forgejo-lenke. Kan være en enkel `.astro`-komponent, gjenbrukt i footer.
-
-### 2.13 TableOfContents
-
-**Prioritet:** Lav — kun om oss.
-
-Kan være en enkel inline-liste på mobil, sticky sidebar på desktop. Rendres fra en liste med `{ label, href }`.
-
-### 2.14 StatBlock
-
-**Prioritet:** Lav — kun om oss hero.
-
-Tall + tekst. Svært enkel — kan inline'es i hero-varianten.
+- **PersonList** — Styreliste på om oss. Leser fra `board.json`. Enkel tabell/liste.
+- **ContactBlock** — E-post, Matrix, Forgejo. Inline på om oss og i footer.
+- **TableOfContents** — Inline-liste / sticky sidebar på om oss.
+- **StatBlock** — Medlemstall + org.nr under om oss-hero. Inline.
 
 ---
 
@@ -238,15 +219,15 @@ Tall + tekst. Svært enkel — kan inline'es i hero-varianten.
 
 ### 3.1 Forside (`/`)
 
-**Avhenger av:** SectionBlock, BeliefCard, Timeline (roadmap), PathCard, ServiceCard (compact), NewsletterEmbed
+**Avhenger av:** SectionBlock, ContentCard, Timeline (roadmap), PathCard, ServiceCard (compact), NewsletterEmbed
 
 **Seksjoner (jf. kladd/forside.md):**
 
 | # | Seksjon | Komponent(er) |
 |---|---------|---------------|
 | 1 | Hero | Hero (eksisterende, oppdatert tekst) |
-| 2 | Vi tror | SectionBlock + BeliefCard × 5 |
-| 3 | Hvordan | SectionBlock + BeliefCard × 3 |
+| 2 | Vi tror | SectionBlock + ContentCard × 5 |
+| 3 | Hvordan | SectionBlock + ContentCard × 3 |
 | 4 | Hvor vi er nå | SectionBlock + Timeline (roadmap) |
 | 5 | Tre veier inn | SectionBlock + PathCard × 3 (inkl. NewsletterEmbed) |
 | 6 | Hva vi bygger | SectionBlock + ServiceCard (compact) × 3 + teaser |
@@ -311,26 +292,26 @@ Tjenestene hentes fra content collection (utvidet schema). Gruppering etter stat
 
 ### 3.5 Om oss (`/om`)
 
-**Avhenger av:** SectionBlock, StatBlock, PersonList, BeliefCard (roller), ProcessFlow, Timeline (krønike), ContactBlock, TableOfContents
+**Avhenger av:** SectionBlock, ContentCard (roller), ProcessFlow, Timeline (krønike)
 
 Lengste og mest sammensatte siden.
 
 | # | Seksjon | Komponent(er) |
 |---|---------|---------------|
-| — | ToC | TableOfContents |
-| 1 | Hero | HeroSecondary + StatBlock |
+| — | ToC | Inline navigasjonsliste |
+| 1 | Hero | HeroSecondary + inline stat-linje |
 | 2 | Om Datakollektivet | SectionBlock + tekst + finansiering |
-| 3 | Styret | SectionBlock + PersonList |
-| 4 | Organisasjon | SectionBlock + tekst + BeliefCard (roller) |
+| 3 | Styret | SectionBlock + inline tabell |
+| 4 | Organisasjon | SectionBlock + tekst + ContentCard (roller) |
 | 5 | Fra idé til drift | SectionBlock + ProcessFlow |
 | 6 | Vedtekter | SectionBlock + nøkkelpunkter + CTA |
 | 7 | Krønike | SectionBlock + Timeline (krønike) |
-| 8 | Kontakt | ContactBlock |
+| 8 | Kontakt | Inline kontaktinfo |
 | 9 | CTA | Tekst + to knapper |
 
 ### 3.6 Footer
 
-**Oppdateres med:** ContactBlock (gjenbrukt) + NewsletterEmbed + oppdaterte lenker som matcher ny navigasjon.
+**Oppdateres med:** NewsletterEmbed + inline kontaktinfo + oppdaterte lenker som matcher ny navigasjon.
 
 ---
 
@@ -374,42 +355,37 @@ Fase 2 (komponenter) — kan delvis parallelliseres
 ├── 2.2 PathCard              ← brukes av forside, bli-medlem, bygg-med-oss
 ├── 2.3 ServiceCard           ← brukes av tjenester, forside
 ├── 2.4 NewsletterEmbed       ← brukes av forside, bli-medlem, bygg-med-oss, footer
-├── 2.5 BeliefCard            ← brukes av forside, om oss
+├── 2.5 ContentCard            ← brukes av forside, om oss
 ├── 2.6 Timeline              ← brukes av forside, om oss
 ├── 2.7 FormBlock             ← brukes av bli-medlem, bygg-med-oss
 ├── 2.8 ProcessFlow           ← brukes av om oss
-├── 2.9 CollapsibleSection    ← brukes av tjenester
-├── 2.10 PersonList           ← brukes av om oss
-├── 2.12 ContactBlock         ← brukes av om oss, footer
-└── 2.13 TableOfContents      ← brukes av om oss
+└── 2.9 CollapsibleSection    ← brukes av tjenester
 
 Fase 3 (sider) — avhenger av relevante komponenter
-├── 3.1 Forside       ← SectionBlock, BeliefCard, Timeline, PathCard, ServiceCard, NewsletterEmbed
+├── 3.1 Forside       ← SectionBlock, ContentCard, Timeline, PathCard, ServiceCard, NewsletterEmbed
 ├── 3.2 Bygg med oss  ← SectionBlock, FormBlock, PathCard, NewsletterEmbed
 ├── 3.3 Bli medlem    ← SectionBlock, FormBlock, PathCard, NewsletterEmbed
 ├── 3.4 Tjenester     ← SectionBlock, ServiceCard, CollapsibleSection
-├── 3.5 Om oss        ← SectionBlock, PersonList, BeliefCard, ProcessFlow, Timeline, ContactBlock, ToC
-└── 3.6 Footer        ← ContactBlock, NewsletterEmbed
+├── 3.5 Om oss        ← SectionBlock, ContentCard, ProcessFlow, Timeline
+└── 3.6 Footer        ← NewsletterEmbed
 
 Fase 4 (polering) ← alt over
 ```
 
 ---
 
-## Ting som må avklares
+## Avklarte beslutninger
 
-Disse spørsmålene påvirker implementasjonen, men trenger ikke svar nå:
-
-| Spørsmål | Påvirker | Standardvalg |
-|----------|----------|--------------|
-| Backend for skjemaer? | FormBlock, NewsletterEmbed | Prototype uten submit, som i dag |
-| Konkrete priser/kontingent? | Bli-medlem | Placeholder-tekst som i kladden |
-| Nyhetsbrev-tjeneste? | NewsletterEmbed | Enkel e-postfelt uten faktisk integrasjon |
-| Beholder vi `/arrangementer`? | Navigasjon, sidestruktur | Ja, men uten plass i toppmenyen |
-| Beholder vi `/vedtekter` som egen side? | Om oss (vedtekter-seksjon) | Ja, med lenke fra om oss |
-| Tjeneste-detaljsider (`/tjenester/[slug]`)? | ServiceCard, tjenester-indeks | Beholdes for tjenester i drift, de andre lenker ut |
-| Skal "Bygg med oss" ha en dropdown i nav? | Header | Nei — flat meny som i kladden |
-| Visuell design / farger? | Alt | Beholder nåværende wireframe/dark theme |
+| Spørsmål | Beslutning |
+|----------|------------|
+| Backend for skjemaer? | Nei. Prototype uten backend. |
+| Konkrete priser/kontingent? | 300,- |
+| Nyhetsbrev-tjeneste? | Prototype uten integrasjon |
+| Beholder vi `/arrangementer`? | Ja, beholdes som den er. Ikke i toppmenyen. |
+| Beholder vi `/vedtekter` som egen side? | Ja, med lenke fra om oss. |
+| Tjeneste-detaljsider (`/tjenester/[slug]`)? | Ja. Tjenester med status `i-drift` eller `forslag` får detaljside. |
+| Skal "Bygg med oss" ha en dropdown i nav? | Nei — flat meny. |
+| Visuell design / farger? | Dark wireframe. Stilig, minimalistisk, apple-esque. |
 
 ---
 
@@ -419,7 +395,7 @@ For praktisk gjennomføring kan arbeidet deles i omtrent slike økter:
 
 | Økt | Innhold | Estimat |
 |-----|---------|---------|
-| **A** | Fase 1 + SectionBlock + BeliefCard + Timeline | Grunnmur + de mest gjenbrukte komponentene |
+| **A** | Fase 1 + SectionBlock + ContentCard + Timeline | Grunnmur + mest gjenbrukte komponenter |
 | **B** | PathCard + NewsletterEmbed + ServiceCard | De tre neste komponentene med høy gjenbruk |
 | **C** | Forside (sett sammen alt) | Hovedsiden med alle nye seksjoner |
 | **D** | FormBlock + Bygg med oss + Bli medlem | Konverteringssidene |

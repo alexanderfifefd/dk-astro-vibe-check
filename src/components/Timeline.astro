@@ -1,0 +1,98 @@
+---
+interface RoadmapStep {
+  title: string;
+  description: string;
+  status: 'ferdig' | 'pågår' | 'kommende';
+}
+
+interface ChronicleStep {
+  date: string;
+  items: string[];
+}
+
+interface Props {
+  variant: 'roadmap' | 'chronicle';
+  steps?: RoadmapStep[];
+  entries?: ChronicleStep[];
+}
+
+const { variant, steps = [], entries = [] } = Astro.props;
+
+const formatDate = (dateStr: string) => {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('nb-NO', { year: 'numeric', month: 'long', day: 'numeric' });
+};
+
+const sortedEntries = variant === 'chronicle'
+  ? [...entries].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  : [];
+---
+
+<div class="flex flex-col">
+  {variant === 'roadmap' && steps.map((step, i) => {
+    const isLast = i === steps.length - 1;
+    return (
+      <div class="flex gap-4">
+        <div class="flex flex-col items-center">
+          {step.status === 'ferdig' ? (
+            <div class="w-3 h-3 rounded-full bg-accent mt-1.5 shrink-0" />
+          ) : step.status === 'pågår' ? (
+            <div class="w-3 h-3 rounded-full border-2 border-accent mt-1.5 shrink-0 relative">
+              <div class="absolute inset-0 rounded-full bg-accent/40 animate-pulse" />
+            </div>
+          ) : (
+            <div class="w-3 h-3 rounded-full border-2 border-border-strong mt-1.5 shrink-0" />
+          )}
+          {!isLast && (
+            <div class:list={[
+              "w-px flex-1",
+              step.status === 'ferdig' ? 'bg-accent/30' : 'bg-border',
+            ]} />
+          )}
+        </div>
+        <div class:list={["pb-8", isLast && "pb-0"]}>
+          <div class="flex items-center gap-3">
+            <span class:list={[
+              "font-medium",
+              step.status === 'kommende' && "text-text-muted",
+            ]}>
+              {step.title}
+            </span>
+            {step.status === 'ferdig' && (
+              <span class="text-xs bg-accent/10 text-accent px-2 py-0.5 rounded-full font-medium">Ferdig</span>
+            )}
+            {step.status === 'pågår' && (
+              <span class="text-xs bg-accent/10 text-accent/80 px-2 py-0.5 rounded-full font-medium">Pågår</span>
+            )}
+          </div>
+          <p class:list={[
+            "text-sm mt-1",
+            step.status === 'kommende' ? 'text-text-muted/60' : 'text-text-muted',
+          ]}>
+            {step.description}
+          </p>
+        </div>
+      </div>
+    );
+  })}
+
+  {variant === 'chronicle' && sortedEntries.map((entry, i) => {
+    const isLast = i === sortedEntries.length - 1;
+    return (
+      <div class="flex gap-4">
+        <div class="flex flex-col items-center">
+          <div class="w-3 h-3 rounded-full bg-accent/40 mt-1.5 shrink-0" />
+          {!isLast && <div class="w-px flex-1 bg-border" />}
+        </div>
+        <div class:list={["pb-8", isLast && "pb-0"]}>
+          <span class="text-sm font-medium text-accent">{formatDate(entry.date)}</span>
+          <ul class="mt-1 space-y-1">
+            {entry.items.map((item) => (
+              <li class="text-sm text-text-muted leading-relaxed [&_a]:text-accent [&_a]:hover:underline" set:html={item} />
+            ))}
+          </ul>
+        </div>
+      </div>
+    );
+  })}
+</div>

@@ -1,0 +1,14 @@
+{
+  "styremedlemmer": [
+    { "navn": "Alexander Fife", "rolle": "Styreleder" },
+    { "navn": "Hallvord Reiar Michaelsen Steen", "rolle": "Nestleder" },
+    { "navn": "Raymond Dowling", "rolle": "Kasserer" },
+    { "navn": "Daniel Clemeth Bjerkeland", "rolle": "Styremedlem" },
+    { "navn": "Kari Stamnes", "rolle": "Styremedlem" },
+    { "navn": "Max Brosnahan", "rolle": "Styremedlem" }
+  ],
+  "varamedlemmer": [
+    { "navn": "Jacob Ludvigsen" },
+    { "navn": "Julian Sivertsen" }
+  ]
+}

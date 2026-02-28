@@ -7,7 +7,10 @@ import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const services = await getCollection('tjenester');
-  return services.map((entry) => ({
+  const withPages = services.filter(s =>
+    s.data.status === 'i-drift' || s.data.status === 'forslag'
+  );
+  return withPages.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
   }));
@@ -20,6 +23,11 @@ const driftsmodellLabels: Record<string, string> = {
   foreningsdriftet: 'Foreningsdriftet',
   medlemsinitiativ: 'Medlemsinitiativ',
   samarbeid: 'Samarbeid',
+};
+
+const statusLabels: Record<string, string> = {
+  'i-drift': 'I drift',
+  'forslag': 'Forslag',
 };
 ---
 
@@ -55,9 +63,16 @@ const driftsmodellLabels: Record<string, string> = {
           <h3 class="text-sm font-semibold text-text uppercase tracking-wide">Drift</h3>
 
           <div>
-            <dt class="text-xs text-text-muted mb-0.5">Driftsmodell</dt>
-            <dd class="text-sm font-medium text-text">{driftsmodellLabels[entry.data.driftsmodell]}</dd>
+            <dt class="text-xs text-text-muted mb-0.5">Status</dt>
+            <dd class="text-sm font-medium text-text">{statusLabels[entry.data.status] ?? entry.data.status}</dd>
           </div>
+
+          {entry.data.driftsmodell && (
+            <div>
+              <dt class="text-xs text-text-muted mb-0.5">Driftsmodell</dt>
+              <dd class="text-sm font-medium text-text">{driftsmodellLabels[entry.data.driftsmodell]}</dd>
+            </div>
+          )}
 
           {entry.data.systemansvarlig && (
             <div>

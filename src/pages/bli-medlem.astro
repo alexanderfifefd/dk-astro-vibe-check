@@ -1,0 +1,183 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HeroSecondary from "../components/HeroSecondary.astro";
+import SectionBlock from "../components/SectionBlock.astro";
+import ContentCard from "../components/ContentCard.astro";
+import PathCard from "../components/PathCard.astro";
+import NewsletterEmbed from "../components/NewsletterEmbed.astro";
+import FormBlock from "../components/FormBlock.astro";
+import Button from "../components/Button.astro";
+---
+
+<Layout title="Bli medlem">
+  <HeroSecondary
+    title="Bli med og form retningen."
+    description="Som medlem i Datakollektivet er du ikke kunde — du er del av fellesskapet som bestemmer. Du får stemmerett, innflytelse over hva vi bygger, og tilgang til tjenester. Men viktigst: du er med på å forme noe som akkurat har begynt."
+  />
+
+  <!-- HVA BETYR MEDLEMSKAP -->
+  <SectionBlock title="Hva betyr medlemskap?">
+    <div class="grid md:grid-cols-2 gap-6 max-w-3xl">
+      <div>
+        <h3 class="font-semibold mb-2">Stemmerett</h3>
+        <p class="text-sm text-text-muted leading-relaxed">
+          Generalforsamlingen er foreningens øverste organ. Som medlem har du
+          tale-, forslags- og stemmerett. Du bestemmer hvem som sitter i styret,
+          hvilke tjenester vi prioriterer, og hvordan pengene brukes.
+        </p>
+      </div>
+      <div>
+        <h3 class="font-semibold mb-2">
+          Innflytelse mellom generalforsamlinger
+        </h3>
+        <p class="text-sm text-text-muted leading-relaxed">
+          Gjennom Loomio — vårt verktøy for medlemsdemokrati — kan du diskutere,
+          fremme forslag og stemme over saker løpende. Ikke bare én gang i året.
+        </p>
+      </div>
+      <div>
+        <h3 class="font-semibold mb-2">Tilgang til tjenester</h3>
+        <div class="text-sm text-text-muted leading-relaxed">
+          <p class="mb-2">Du får tilgang med en gang:</p>
+          <ul class="space-y-1">
+            <li class="flex items-start gap-2">
+              <span class="text-accent shrink-0">—</span>
+              <strong class="text-text">Loomio</strong> — Diskusjoner, forslag og
+              avstemninger
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-accent shrink-0">—</span>
+              <strong class="text-text">Matrix</strong> — Kryptert meldingstjeneste
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-accent shrink-0">—</span>
+              <strong class="text-text">Forgejo</strong> — Kodelagring og samarbeid
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-accent shrink-0">—</span>
+              <strong class="text-text">Zulip</strong> — Kommunikasjon <em
+                class="text-text-muted/60">(kommer)</em>
+            </li>
+          </ul>
+          <p class="mt-2">
+            Mer er på vei — og hva vi bygger neste bestemmer du.
+          </p>
+        </div>
+      </div>
+      <div>
+        <h3 class="font-semibold mb-2">Delta i arbeidsgrupper</h3>
+        <p class="text-sm text-text-muted leading-relaxed">
+          Bli med i driftsgrupper, rådgi, følg diskusjoner. Det er rom for alt
+          fra operativt arbeid til å komme med innspill og erfaringer.
+        </p>
+      </div>
+      <div class="md:col-span-2">
+        <h3 class="font-semibold mb-2">Åpen kildekode, ingen innlåsing</h3>
+        <p class="text-sm text-text-muted leading-relaxed">
+          Alle tjenester er basert på åpen kildekode. Dataene dine er dine. Du
+          kan alltid ta dem med deg.
+        </p>
+      </div>
+    </div>
+  </SectionBlock>
+
+  <!-- VI ER I STARTEN -->
+  <SectionBlock title="Vi er i starten. Det er poenget." variant="surface">
+    <div class="max-w-2xl space-y-4 text-text-muted leading-relaxed">
+      <p>
+        Datakollektivet ble stiftet i oktober 2025. Vi har styre, vedtekter,
+        bankkonto, og noen få tjenester i drift. Men det meste gjenstår.
+      </p>
+      <p>
+        Hvordan vi organiserer oss. Hvilke tjenester vi skal tilby. Hvordan vi
+        balanserer personvern og brukervennlighet. Hva slags driftsmodell vi
+        lander på. Alt dette er åpent.
+      </p>
+      <p>
+        Det betyr at du ikke bare melder deg inn i noe som er ferdig. Du melder
+        deg inn i noe du kan forme. Det er enormt mange spørsmål som trenger
+        svar — tekniske, organisatoriske, demokratiske. Vi trenger folk som
+        tenker, diskuterer og foreslår.
+      </p>
+      <p>Og vi trenger folk som validerer at dette er noe vi ønsker.</p>
+    </div>
+  </SectionBlock>
+
+  <!-- KONTINGENT -->
+  <SectionBlock title="Kontingent">
+    <div class="max-w-2xl space-y-4 text-text-muted leading-relaxed">
+      <p>
+        Medlemskontingenten er <strong class="text-text">300,–</strong> per kalenderår.
+        Den gir deg medlemskap og stemmerett.
+      </p>
+      <p>
+        Tilgang til tjenester dekkes av en separat medlemsytelse, fastsatt av
+        styret. Detaljene her er fortsatt under utvikling og det pågår en
+        diskusjon om dette på Loomio nå.
+      </p>
+      <p>Pengene går til drift av tjenester og infrastruktur.</p>
+    </div>
+  </SectionBlock>
+
+  <!-- SLIK MELDER DU DEG INN -->
+  <SectionBlock title="Slik melder du deg inn" variant="surface">
+    <ol class="space-y-6 max-w-xl">
+      {
+        [
+          {
+            step: "Fyll ut skjemaet",
+            desc: "Navn og e-post. Det er alt vi trenger.",
+          },
+          { step: "Betal kontingent", desc: "Du får en betalingslenke." },
+          {
+            step: "Få tilgang",
+            desc: "Når betalingen er registrert, får du tilgang til Loomio, Matrix og våre andre tjenester.",
+          },
+          {
+            step: "Delta",
+            desc: "Stem, diskuter, foreslå. Bli med i arbeidsgrupper. Eller bare bruk tjenestene.",
+          },
+        ].map(({ step, desc }, i) => (
+          <li class="flex gap-4">
+            <span class="shrink-0 w-7 h-7 rounded-full bg-accent/10 text-accent text-sm font-medium flex items-center justify-center">
+              {i + 1}
+            </span>
+            <div>
+              <span class="font-medium">{step}</span>
+              <p class="text-sm text-text-muted mt-0.5">{desc}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </SectionBlock>
+
+  <!-- SKJEMA -->
+  <SectionBlock title="Meld deg inn">
+    <FormBlock
+      submitLabel="Meld meg inn"
+      messagePlaceholder="Fortell oss gjerne hva du er interessert i"
+      footnote="Prototype — vi tar kontakt manuelt inntil vi har automatisert dette."
+    />
+  </SectionBlock>
+
+  <!-- ANDRE VEIER INN -->
+  <SectionBlock title="Andre veier inn" variant="surface">
+    <div class="grid md:grid-cols-2 gap-6">
+      <PathCard
+        title="Bygg med oss"
+        tagline="Mer interessert i å bygge enn å bruke? Vi trenger utviklere, designere, driftsfolk, jurister og alle andre som vil bidra."
+        href="/bygg-med-oss"
+        ctaLabel="Se hva vi trenger"
+      />
+      <PathCard
+        title="Følg oss"
+        tagline="Ikke klar ennå? Meld deg på nyhetsbrevet og bli med på Matrix. Følg diskusjonene uten forpliktelser."
+      >
+        <div class="mt-2">
+          <NewsletterEmbed compact />
+        </div>
+      </PathCard>
+    </div>
+  </SectionBlock>
+</Layout>

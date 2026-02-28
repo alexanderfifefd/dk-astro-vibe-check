@@ -1,0 +1,20 @@
+---
+interface Props {
+  title: string;
+  accent?: boolean;
+}
+
+const { title, accent = false } = Astro.props;
+---
+
+<div class:list={[
+  "p-6 rounded-lg",
+  accent
+    ? "border-l-2 border-accent pl-6"
+    : "bg-surface border border-border",
+]}>
+  <h3 class="font-semibold text-lg mb-2">{title}</h3>
+  <p class="text-text-muted leading-relaxed text-[0.9375rem]">
+    <slot />
+  </p>
+</div>

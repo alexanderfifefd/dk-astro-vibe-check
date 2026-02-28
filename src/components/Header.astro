@@ -3,34 +3,42 @@ const links = [
   { href: "/tjenester", label: "Tjenester" },
   { href: "/arrangementer", label: "Arrangementer" },
   { href: "/om", label: "Om oss" },
-  { href: "/bli-med", label: "Bli med", cta: true },
+  { href: "/bygg-med-oss", label: "Bygg med oss" },
+  { href: "/bli-medlem", label: "Bli medlem", cta: true },
 ];
 
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-50 bg-base/95 backdrop-blur-sm border-b border-border">
+<header
+  class="sticky top-0 z-50 bg-base/95 backdrop-blur-sm border-b border-border"
+>
   <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-    <a href="/" class="text-text font-semibold tracking-tight hover:text-accent transition-colors">
+    <a
+      href="/"
+      class="text-text font-semibold tracking-tight hover:text-accent transition-colors"
+    >
       Datakollektivet
     </a>
 
     <nav class="hidden md:flex items-center gap-1">
-      {links.map((link) => (
-        <a
-          href={link.href}
-          class:list={[
-            "px-3 py-1.5 text-sm rounded transition-colors",
-            link.cta
-              ? "bg-accent text-base hover:bg-accent-hover"
-              : currentPath === link.href
-                ? "text-accent bg-surface"
-                : "text-text-muted hover:text-text hover:bg-surface",
-          ]}
-        >
-          {link.label}
-        </a>
-      ))}
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              "px-3 py-1.5 text-sm rounded transition-colors",
+              link.cta
+                ? "bg-accent text-base hover:bg-accent-hover"
+                : currentPath === link.href
+                  ? "text-accent bg-surface"
+                  : "text-text-muted hover:text-text hover:bg-surface",
+            ]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
     </nav>
 
     <button
@@ -38,35 +46,50 @@ const currentPath = Astro.url.pathname;
       class="md:hidden p-2 text-text-muted hover:text-text transition-colors"
       aria-label="Toggle menu"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="3" y1="6" x2="21" y2="6"/>
-        <line x1="3" y1="12" x2="21" y2="12"/>
-        <line x1="3" y1="18" x2="21" y2="18"/>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
       </svg>
     </button>
   </div>
 
-  <nav id="mobile-menu" class="hidden md:hidden border-t border-border bg-base px-6 py-3">
-    {links.map((link) => (
-      <a
-        href={link.href}
-        class:list={[
-          "block py-2 text-sm transition-colors",
-          link.cta
-            ? "text-accent font-medium"
-            : currentPath === link.href
-              ? "text-accent"
-              : "text-text-muted hover:text-text",
-        ]}
-      >
-        {link.label}
-      </a>
-    ))}
+  <nav
+    id="mobile-menu"
+    class="hidden md:hidden border-t border-border bg-base px-6 py-3"
+  >
+    {
+      links.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            "block py-2 text-sm transition-colors",
+            link.cta
+              ? "text-accent font-medium"
+              : currentPath === link.href
+                ? "text-accent"
+                : "text-text-muted hover:text-text",
+          ]}
+        >
+          {link.label}
+        </a>
+      ))
+    }
   </nav>
 </header>
 
 <script>
-  const toggle = document.getElementById('mobile-menu-toggle');
-  const menu = document.getElementById('mobile-menu');
-  toggle?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+  const toggle = document.getElementById("mobile-menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+  toggle?.addEventListener("click", () => menu?.classList.toggle("hidden"));
 </script>

@@ -1,0 +1,32 @@
+---
+import Container from './Container.astro';
+
+interface Props {
+  title?: string;
+  ingress?: string;
+  id?: string;
+  variant?: 'default' | 'surface' | 'accent';
+}
+
+const { title, ingress, id, variant = 'default' } = Astro.props;
+
+const bgClasses = {
+  default: '',
+  surface: 'bg-surface',
+  accent: 'bg-surface border-t border-b border-border',
+};
+---
+
+<section id={id} class:list={["py-20 md:py-28", bgClasses[variant]]}>
+  <Container>
+    {title && (
+      <div class="mb-12 max-w-2xl">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight">{title}</h2>
+        {ingress && (
+          <p class="mt-4 text-lg text-text-muted leading-relaxed">{ingress}</p>
+        )}
+      </div>
+    )}
+    <slot />
+  </Container>
+</section>

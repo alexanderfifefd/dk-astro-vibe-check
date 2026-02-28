@@ -7,6 +7,8 @@ logo: "/logos/matrix.svg"
 invertLogo: true
 driftsmodell: "samarbeid"
 driftsdetaljer: "Datakollektivet bruker en Matrix-server driftet av Data.coop, et dansk kooperativ. Tjenesten er ikke direkte under foreningens kontroll."
+kategori: "tjeneste"
+status: "i-drift"
 ---
 
 ## Hva er Matrix?

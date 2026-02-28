@@ -7,6 +7,8 @@ logo: "/logos/loomio.png"
 driftsmodell: "foreningsdriftet"
 systemansvarlig: "Max Brosnahan"
 administratorer: ["Alexander Fife"]
+kategori: "tjeneste"
+status: "i-drift"
 ---
 
 ## Hva er Loomio?

@@ -1,93 +1,257 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import HeroSecondary from '../components/HeroSecondary.astro';
+import SectionBlock from '../components/SectionBlock.astro';
+import ContentCard from '../components/ContentCard.astro';
+import ProcessFlow from '../components/ProcessFlow.astro';
+import Timeline from '../components/Timeline.astro';
+import Button from '../components/Button.astro';
 import Container from '../components/Container.astro';
-import Chronicle from '../components/Chronicle.astro';
 
-const styret = [
-  { name: 'Alexander Fife', role: 'styreleder' },
-  { name: 'Hallvord Reiar Michaelsen Steen', role: 'nestleder' },
-  { name: 'Raymond Dowling', role: 'kasserer' },
-  { name: 'Daniel Clemeth Bjerkeland' },
-  { name: 'Kari Stamnes' },
-  { name: 'Max Brosnahan' },
-  { name: 'Jacob Ludvigsen', role: 'vara' },
-  { name: 'Julian Sivertsen', role: 'vara' },
+import board from '../data/board.json';
+import chronicle from '../data/chronicle.json';
+
+const tocItems = [
+  { label: 'Om Datakollektivet', href: '#om-datakollektivet' },
+  { label: 'Styret', href: '#styret' },
+  { label: 'Organisasjon', href: '#organisasjon' },
+  { label: 'Fra idé til drift', href: '#fra-ide-til-drift' },
+  { label: 'Vedtekter', href: '#vedtekter' },
+  { label: 'Krønike', href: '#kronike' },
+  { label: 'Kontakt', href: '#kontakt' },
 ];
 ---
 
-<Layout title="Om oss" description="Om Datakollektivet — hvem vi er og hva vi gjør">
-  <HeroSecondary>
-    <span slot="title">Om Datakollektivet</span>
-    <p slot="description">
-      En norsk ideell forening som stiller digital infrastruktur og tjenester til rådighet
-      for sine medlemmer — med personvern, medbestemmelse og sikkerhet i bunn.
-    </p>
+<Layout title="Om oss">
+  <HeroSecondary
+    title="Om Datakollektivet"
+    description="En norsk ideell forening som bygger digital infrastruktur og tjenester for sine medlemmer — med personvern, medbestemmelse og sikkerhet i bunn. Stiftet oktober 2025."
+  >
+    <div slot="cta" class="mt-4">
+      <p class="text-sm text-text-muted">
+        <strong class="text-text">~20 medlemmer</strong> · Org.nr: 936 667 864
+      </p>
+    </div>
   </HeroSecondary>
 
-  <section class="py-12">
+  <!-- TABLE OF CONTENTS -->
+  <section class="py-6 border-b border-border">
     <Container>
-      <div class="max-w-3xl prose">
-        <h2>Hva er Datakollektivet?</h2>
-        <p>
-          Datakollektivet er en ideell forening stiftet i oktober 2025. Vi drifter digitale
-          tjenester for medlemmene våre — selvhostet, basert på åpen kildekode, og styrt av
-          fellesskapet selv.
-        </p>
-        <p>
-          Foreningen er organisert som et kooperativ der medlemmene har reell innflytelse
-          gjennom generalforsamling, åpne styremøter og deltakende demokrati. Hvilke tjenester
-          vi tilbyr, hvordan vi styres, og hvordan midlene brukes — alt bestemmes av medlemmene.
-        </p>
-        <p>
-          Vi mener digital infrastruktur er for viktig til å overlate til kommersielle aktører
-          alene. Datakollektivet er et alternativ der fellesskapet har kontroll.
-        </p>
-      </div>
-    </Container>
-  </section>
-
-  <section class="py-12 border-t border-border">
-    <Container>
-      <div class="max-w-3xl">
-        <h2 class="text-2xl font-semibold mb-6">Styret</h2>
-        <p class="text-text-muted mb-8">
-          Datakollektivet ledes av et styre valgt av generalforsamlingen.
-        </p>
-
-        <div class="space-y-3">
-          {styret.map((m) => (
-            <div class="flex items-baseline justify-between gap-4 py-2 border-b border-border">
-              <span class="font-medium text-text">{m.name}</span>
-              {m.role && <span class="text-sm text-text-muted">{m.role}</span>}
-            </div>
+      <nav aria-label="Innhold på siden">
+        <ul class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          {tocItems.map(({ label, href }) => (
+            <li>
+              <a href={href} class="text-text-muted hover:text-accent transition-colors">{label}</a>
+            </li>
           ))}
-        </div>
+        </ul>
+      </nav>
+    </Container>
+  </section>
 
-        <p class="text-sm text-text-muted mt-6">Org.nr: 936 667 864</p>
-        <p class="text-sm text-text-muted mt-2">
-          Les våre <a href="/vedtekter" class="text-accent hover:underline">vedtekter</a> for
-          fullstendig informasjon om foreningens organisering.
+  <!-- OM DATAKOLLEKTIVET -->
+  <SectionBlock title="Om Datakollektivet" id="om-datakollektivet">
+    <div class="max-w-2xl space-y-4 text-text-muted leading-relaxed">
+      <p>
+        Datakollektivet er en ideell forening organisert som et kooperativ.
+        Medlemmene har reell innflytelse gjennom generalforsamling, åpne
+        styremøter og deltakende demokrati.
+      </p>
+      <p>
+        Vi drifter digitale tjenester for medlemmene våre — selvhostet, basert
+        på åpen kildekode, og styrt av fellesskapet selv. Hvilke tjenester vi
+        tilbyr, hvordan vi styres, og hvordan midlene brukes — alt bestemmes
+        av medlemmene.
+      </p>
+      <p>
+        Vi mener digital infrastruktur er for viktig til å overlate til
+        kommersielle aktører alene. Datakollektivet er et alternativ der
+        fellesskapet har kontroll.
+      </p>
+    </div>
+    <div class="mt-8 max-w-2xl">
+      <h3 class="font-semibold mb-2">Finansiering</h3>
+      <p class="text-sm text-text-muted leading-relaxed">
+        Foreningen er hovedfinansiert gjennom medlemskontingent og medlemsytelser.
+        Vi kan motta støtte fra offentlige eller private aktører, men aldri på
+        vilkår som binder foreningens disposisjoner. Ingen aksjonærer. Ingen utbytte.
+      </p>
+    </div>
+  </SectionBlock>
+
+  <!-- STYRET -->
+  <SectionBlock title="Styret" id="styret" variant="surface"
+    ingress="Datakollektivet ledes av et styre valgt av generalforsamlingen."
+  >
+    <div class="max-w-xl">
+      <h3 class="text-sm font-medium text-text-muted mb-3 uppercase tracking-wide">Styremedlemmer</h3>
+      <div class="space-y-2 mb-8">
+        {board.styremedlemmer.map(({ navn, rolle }) => (
+          <div class="flex items-center justify-between py-2 border-b border-border last:border-0">
+            <span class="font-medium text-sm">{navn}</span>
+            <span class="text-xs text-text-muted">{rolle}</span>
+          </div>
+        ))}
+      </div>
+
+      <h3 class="text-sm font-medium text-text-muted mb-3 uppercase tracking-wide">Varamedlemmer</h3>
+      <div class="space-y-2">
+        {board.varamedlemmer.map(({ navn }) => (
+          <div class="py-2 border-b border-border last:border-0">
+            <span class="font-medium text-sm">{navn}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </SectionBlock>
+
+  <!-- ORGANISASJON -->
+  <SectionBlock title="Hvordan vi er organisert" id="organisasjon">
+    <div class="max-w-2xl space-y-6">
+      <div>
+        <h3 class="font-semibold mb-2">Arbeidsgrupper</h3>
+        <p class="text-sm text-text-muted leading-relaxed mb-4">
+          Styret oppretter arbeidsgrupper for å ivareta foreningens formål.
+          I oppstartsfasen har vi hatt to:
+        </p>
+        <div class="grid sm:grid-cols-2 gap-3">
+          <ContentCard title="Formidling">
+            Kommunikasjon, nettside og utadrettet arbeid.
+          </ContentCard>
+          <ContentCard title="Infrastruktur og Sikkerhet">
+            Drift, oppsett og sikring av foreningens tjenester.
+          </ContentCard>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="font-semibold mb-2">Driftsgruppen <span class="text-text-muted font-normal text-sm">(under formalisering)</span></h3>
+        <p class="text-sm text-text-muted leading-relaxed">
+          Arbeidsgruppene er i prosess med å formaliseres i en driftsgruppe.
+          Dette krever noen vedtektsendringer og er under aktiv diskusjon.
+          Driftsgruppen skal ha ansvar for den tekniske driften av foreningens tjenester.
+          Medlemmer av driftsgruppen trenger ikke nødvendigvis ha tekniske tilganger —
+          det er rom for rådgivende roller.
         </p>
       </div>
-    </Container>
-  </section>
 
-  <section class="py-12 border-t border-border">
-    <Container>
-      <h2 class="text-2xl font-semibold mb-8">Krønike</h2>
-      <Chronicle />
-    </Container>
-  </section>
+      <div>
+        <h3 class="font-semibold mb-3">Roller</h3>
+        <div class="grid sm:grid-cols-3 gap-3">
+          <ContentCard title="Systemansvarlig">
+            Ansvar for ett konkret system. Sørger for driftssikkerhet, sikkerhet og dokumentasjon.
+          </ContentCard>
+          <ContentCard title="Administratorer">
+            Praktiske tilganger til systemene. Utfører tekniske endringer innenfor rammene systemansvarlig og driftsgruppen har satt.
+          </ContentCard>
+          <ContentCard title="Moderatorer">
+            Håndterer innhold og brukeratferd i tjenester med diskusjoner. Trenger ikke tekniske tilganger.
+          </ContentCard>
+        </div>
+      </div>
 
-  <section class="py-12 border-t border-border">
-    <Container>
-      <div class="max-w-3xl prose">
-        <h2>Kontakt</h2>
-        <p>
-          Har du spørsmål eller vil samarbeide? Ta kontakt på
-          <a href="mailto:hei@datakollektivet.no">hei@datakollektivet.no</a>.
+      <div>
+        <h3 class="font-semibold mb-2">Driftsmodeller</h3>
+        <p class="text-sm text-text-muted leading-relaxed mb-3">
+          Ikke alle tjenester driftes likt:
         </p>
+        <ul class="space-y-2 text-sm text-text-muted">
+          <li><strong class="text-text">Foreningsdriftet</strong> — Driftes direkte av foreningen med utnevnt systemansvarlig og administratorer.</li>
+          <li><strong class="text-text">Medlemsinitiativ</strong> — Driftes av et enkeltmedlem på vegne av fellesskapet. Kan formaliseres over tid.</li>
+          <li><strong class="text-text">Samarbeid</strong> — Tilbys gjennom samarbeid med en ekstern aktør.</li>
+        </ul>
+      </div>
+    </div>
+  </SectionBlock>
+
+  <!-- FRA IDÉ TIL DRIFT -->
+  <SectionBlock
+    title="Fra idé til drift"
+    id="fra-ide-til-drift"
+    variant="surface"
+    ingress="Det er ikke tilfeldig hva vi drifter. Prosessen er åpen, og medlemmene har reell innflytelse i hvert steg."
+  >
+    <ProcessFlow />
+
+    <div class="mt-10 max-w-2xl">
+      <ol class="space-y-3 text-sm text-text-muted">
+        <li><strong class="text-text">1. Forslag</strong> — Hvem som helst kan foreslå en tjeneste. En systemansvarlig tar eierskap til forslaget.</li>
+        <li><strong class="text-text">2. Diskusjon og votering</strong> — Forslaget diskuteres og stemmes over av medlemmene i Loomio.</li>
+        <li><strong class="text-text">3. Teknisk vurdering</strong> — Driftsgruppen vurderer gjennomførbarhet, sikkerhet og ressursbehov.</li>
+        <li><strong class="text-text">4. Godkjenning</strong> — Styret godkjenner formelt.</li>
+        <li><strong class="text-text">5. Utvikling</strong> — Oppsett, konfigurasjon, testing. Systemansvarlig sørger for dokumentasjon.</li>
+        <li><strong class="text-text">6. Lansering</strong> — Administratorer og eventuelt moderatorer utnevnes. Tjenesten gjøres tilgjengelig for medlemmer.</li>
+      </ol>
+      <p class="mt-4 text-xs text-text-muted/60 italic">
+        Denne prosessen er ikke fullt formalisert ennå — den reflekterer hvordan vi jobber i praksis.
+        Detaljene bestemmes av generalforsamlingen.
+      </p>
+    </div>
+  </SectionBlock>
+
+  <!-- VEDTEKTER -->
+  <SectionBlock title="Vedtekter" id="vedtekter">
+    <div class="max-w-2xl">
+      <p class="text-text-muted leading-relaxed mb-6">
+        Vedtektene ble vedtatt på stiftelsesmøtet 19. oktober 2025. De beskriver foreningens
+        formål, organisering, medlemskap, kontingent, tjenester og demokratiske prosesser.
+      </p>
+      <ul class="space-y-2 text-sm text-text-muted mb-8">
+        <li class="flex items-start gap-2"><span class="text-accent shrink-0">—</span> Generalforsamlingen er foreningens øverste organ</li>
+        <li class="flex items-start gap-2"><span class="text-accent shrink-0">—</span> Styre med 4–6 faste medlemmer og 1–2 varamedlemmer</li>
+        <li class="flex items-start gap-2"><span class="text-accent shrink-0">—</span> Alle gyldige medlemmer har tale-, forslags- og stemmerett</li>
+        <li class="flex items-start gap-2"><span class="text-accent shrink-0">—</span> Skiller mellom <strong class="text-text">medlemskontingent</strong> og <strong class="text-text">medlemsytelse</strong></li>
+        <li class="flex items-start gap-2"><span class="text-accent shrink-0">—</span> 2/3 flertall for vedtektsendringer og oppløsning</li>
+        <li class="flex items-start gap-2"><span class="text-accent shrink-0">—</span> Åpne styremøter — referater tilgjengelig for alle medlemmer</li>
+        <li class="flex items-start gap-2"><span class="text-accent shrink-0">—</span> Ved oppløsning overføres midler til lignende forening</li>
+      </ul>
+      <Button href="/vedtekter" variant="secondary" size="sm">Les vedtektene i sin helhet</Button>
+    </div>
+  </SectionBlock>
+
+  <!-- KRØNIKE -->
+  <SectionBlock title="Krønike" id="kronike" variant="surface"
+    ingress="En kort historie om Datakollektivet — fra de første samtalene til der vi er nå."
+  >
+    <div class="max-w-xl">
+      <Timeline variant="chronicle" entries={chronicle} />
+    </div>
+  </SectionBlock>
+
+  <!-- KONTAKT -->
+  <SectionBlock title="Kontakt" id="kontakt">
+    <div class="max-w-md space-y-3">
+      <p class="text-text-muted leading-relaxed mb-4">
+        Har du spørsmål, vil samarbeide, eller bare si hei?
+      </p>
+      <div class="space-y-2 text-sm">
+        <p>
+          <strong class="text-text">E-post:</strong>
+          <a href="mailto:hei@datakollektivet.no" class="text-accent hover:text-accent-hover transition-colors ml-1">hei@datakollektivet.no</a>
+        </p>
+        <p>
+          <strong class="text-text">Matrix:</strong>
+          <a href="https://matrix.datakollektivet.no" class="text-accent hover:text-accent-hover transition-colors ml-1">Bli med i kanalen &rarr;</a>
+        </p>
+        <p>
+          <strong class="text-text">Forgejo:</strong>
+          <a href="https://forge.hornwitser.no/datakollektivet" class="text-accent hover:text-accent-hover transition-colors ml-1">forge.hornwitser.no/datakollektivet</a>
+        </p>
+      </div>
+    </div>
+  </SectionBlock>
+
+  <!-- SISTE CTA -->
+  <section class="py-20 md:py-28 bg-surface border-t border-border">
+    <Container>
+      <div class="max-w-2xl">
+        <p class="text-xl md:text-2xl font-medium leading-relaxed mb-8">
+          Nå vet du hvem vi er. Spørsmålet er om du vil være med.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <Button href="/bli-medlem" variant="primary">Bli medlem</Button>
+          <Button href="/bygg-med-oss" variant="secondary">Bygg med oss</Button>
+        </div>
       </div>
     </Container>
   </section>
