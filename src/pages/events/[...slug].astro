@@ -6,8 +6,8 @@ import Button from '../../components/Button.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
-  const events = await getCollection('arrangementer');
-  return events.map((entry) => ({
+  const eventsCollection = await getCollection('events');
+  return eventsCollection.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
   }));
@@ -75,7 +75,7 @@ const isPast = new Date(entry.data.date) < new Date();
       </div>
 
       <div class="max-w-3xl mt-12 pt-8 border-t border-border">
-        <Button href="/arrangementer" variant="secondary" size="sm">&larr; Alle arrangementer</Button>
+        <Button href="/events" variant="secondary" size="sm">&larr; Alle events</Button>
       </div>
     </Container>
   </section>

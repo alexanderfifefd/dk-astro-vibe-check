@@ -3,6 +3,8 @@ interface RoadmapStep {
   title: string;
   description: string;
   status: 'ferdig' | 'pågår' | 'kommende';
+  date?: string;
+  dateLabel?: string;
 }
 
 interface ChronicleStep {
@@ -21,6 +23,14 @@ const { variant, steps = [], entries = [] } = Astro.props;
 const formatDate = (dateStr: string) => {
   const date = new Date(dateStr);
   return date.toLocaleDateString('nb-NO', { year: 'numeric', month: 'long', day: 'numeric' });
+};
+
+const formatYearMonth = (dateStr: string) => {
+  const parsed = dateStr.includes('-') ? `${dateStr}-01` : `${dateStr}-01-01`;
+  const date = new Date(parsed);
+  const month = date.getMonth() + 1;
+  const year = String(date.getFullYear()).slice(-2);
+  return `${month}/${year}`;
 };
 
 const sortedEntries = variant === 'chronicle'
@@ -50,20 +60,14 @@ const sortedEntries = variant === 'chronicle'
             ]} />
           )}
         </div>
-        <div class:list={["pb-8", isLast && "pb-0"]}>
-          <div class="flex items-center gap-3">
+        <div class:list={["pb-6", isLast && "pb-0"]}>
+          <div class="flex items-center gap-3 flex-wrap">
             <span class:list={[
               "font-medium",
               step.status === 'kommende' && "text-text-muted",
             ]}>
               {step.title}
             </span>
-            {step.status === 'ferdig' && (
-              <span class="text-xs bg-accent/10 text-accent px-2 py-0.5 rounded-full font-medium">Ferdig</span>
-            )}
-            {step.status === 'pågår' && (
-              <span class="text-xs bg-accent/10 text-accent/80 px-2 py-0.5 rounded-full font-medium">Pågår</span>
-            )}
           </div>
           <p class:list={[
             "text-sm mt-1",
@@ -71,6 +75,11 @@ const sortedEntries = variant === 'chronicle'
           ]}>
             {step.description}
           </p>
+          {(step.dateLabel || step.date) && (
+            <p class="text-xs text-text-muted mt-1">
+              {step.dateLabel ?? formatYearMonth(step.date!)}
+            </p>
+          )}
         </div>
       </div>
     );
@@ -84,7 +93,7 @@ const sortedEntries = variant === 'chronicle'
           <div class="w-3 h-3 rounded-full bg-accent/40 mt-1.5 shrink-0" />
           {!isLast && <div class="w-px flex-1 bg-border" />}
         </div>
-        <div class:list={["pb-8", isLast && "pb-0"]}>
+        <div class:list={["pb-6", isLast && "pb-0"]}>
           <span class="text-sm font-medium text-accent">{formatDate(entry.date)}</span>
           <ul class="mt-1 space-y-1">
             {entry.items.map((item) => (

@@ -12,11 +12,14 @@ import Button from "../components/Button.astro";
 import Container from "../components/Container.astro";
 
 import roadmap from "../data/roadmap.json";
+import ideer from "../data/ideer.json";
 
 const allServices = await getCollection("tjenester");
 const activeServices = allServices
   .filter((s) => s.data.status === "i-drift")
   .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+const firstIdeer = [...ideer].sort((a, b) => (a.order ?? 99) - (b.order ?? 99)).slice(0, 3);
 ---
 
 <Layout title="Hjem">
@@ -100,44 +103,86 @@ const activeServices = allServices
     </div>
   </SectionBlock>
 
-  <!-- 5. ORGANISERT AV OSS -->
+  <!-- 5. ORGANISASJON OG HVOR VI ER -->
   <SectionBlock
     title="Organisasjonen formes"
-    ingress="God teknologi er ikke nok. Det trengs en organisasjon som setter fellesskapet først — ikke aksjonærer."
+    ingress="God teknologi er ikke nok. Det trengs en organisasjon som setter fellesskapet først — ikke aksjonærer. Datakollektivet ble stiftet i oktober 2025. Vi bygger stein for stein."
   >
-    <div class="grid md:grid-cols-3 gap-6">
-      <ContentCard title="Kollektivt eid.">
-        Infrastrukturen tilhører medlemmene, ikke en bedrift. Du er del av
-        fellesskapet, ikke kunde.
-      </ContentCard>
-      <ContentCard title="Demokratisk styrt.">
-        En demokratisk kontrakt mellom de som utvikler og drifter, og de som
-        bruker tjenestene. Generalforsamling, åpne styremøter, deltakende
-        demokrati.
-      </ContentCard>
-      <ContentCard title="Rettferdig.">
-        Ingen aksjonærer som krever avkastning. Pengene går tilbake til
-        tjenestene. Det vi bygger, bygger vi for hverandre.
-      </ContentCard>
+    <div class="grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
+      <div class="flex flex-col gap-6">
+        <ContentCard title="Kollektivt eid.">
+          Infrastrukturen tilhører medlemmene, ikke en bedrift. Du er del av
+          fellesskapet, ikke kunde.
+        </ContentCard>
+        <ContentCard title="Demokratisk styrt.">
+          En demokratisk kontrakt mellom de som utvikler og drifter, og de som
+          bruker tjenestene. Generalforsamling, åpne styremøter, deltakende
+          demokrati.
+        </ContentCard>
+        <ContentCard title="Rettferdig.">
+          Ingen aksjonærer som krever avkastning. Pengene går tilbake til
+          tjenestene. Det vi bygger, bygger vi for hverandre.
+        </ContentCard>
+        <p class="text-text-muted leading-relaxed">
+          Det er enormt mye som gjenstår. Enormt mange spørsmål — tekniske,
+          organisatoriske, demokratiske — som ikke har fått svar ennå. Det er ikke
+          en svakhet. Det er hele poenget. Vi bygger dette sammen.
+        </p>
+      </div>
+      <div class="md:sticky md:top-24">
+        <div class="max-w-sm md:mx-auto">
+          <Timeline variant="roadmap" steps={roadmap} />
+        </div>
+      </div>
     </div>
   </SectionBlock>
 
-  <!-- 6. HVOR VI ER -->
+  <!-- 7. TJENESTER PREVIEW -->
   <SectionBlock
-    title="Hvor vi er nå"
-    ingress="Datakollektivet ble stiftet i oktober 2025. Vi bygger stein for stein."
+    title="Hva vi bygger"
+    ingress="Åpen kildekode-teknologi burde ikke være forbeholdt de med teknologikompetanse. Vi drifter tjenester som gjør den tilgjengelig for alle."
   >
-    <div class="max-w-xl">
-      <Timeline variant="roadmap" steps={roadmap} />
+    <div class="grid sm:grid-cols-3 gap-4 mb-8">
+      {
+        activeServices.map((service) => (
+          <ServiceCard
+            title={service.data.title}
+            description={service.data.description}
+            logo={service.data.logo}
+            invertLogo={service.data.invertLogo}
+            status={service.data.status}
+            kategori={service.data.kategori}
+            variant="compact"
+          />
+        ))
+      }
     </div>
-    <p class="mt-10 text-text-muted leading-relaxed max-w-2xl">
-      Det er enormt mye som gjenstår. Enormt mange spørsmål — tekniske,
-      organisatoriske, demokratiske — som ikke har fått svar ennå. Det er ikke
-      en svakhet. Det er hele poenget. Vi bygger dette sammen.
+    <h3 class="text-sm font-medium uppercase tracking-wider text-text-muted mt-10 mb-4">
+      Hva vi kanskje bygger
+    </h3>
+    <div class="grid sm:grid-cols-3 gap-4 mb-6">
+      {firstIdeer.map((idee) => (
+        <ServiceCard
+          title={idee.title}
+          description={idee.description}
+          alternativerTil={idee.alternativerTil}
+          variant="minimal"
+        />
+      ))}
+    </div>
+    <p class="text-sm text-text-muted mb-6">
+      Fillagring, fotolagring, dokumentbehandling, e-post, sosiale medier,
+      videomøter — alt styrt av hva medlemmene ønsker.
     </p>
+    <a
+      href="/tjenester"
+      class="text-sm text-accent hover:text-accent-hover font-medium transition-colors"
+    >
+      Se alle tjenester og roadmap &rarr;
+    </a>
   </SectionBlock>
 
-  <!-- 7. TRE VEIER INN -->
+  <!-- 8. TRE VEIER INN -->
   <SectionBlock
     title="Tre veier inn"
     ingress="Uansett om du vil forme retningen, hjelpe til å bygge, eller bare følge med — det finnes en plass for deg."
@@ -178,38 +223,6 @@ const activeServices = allServices
         <NewsletterEmbed compact />
       </PathCard>
     </div>
-  </SectionBlock>
-
-  <!-- 8. TJENESTER PREVIEW -->
-  <SectionBlock
-    title="Hva vi bygger"
-    ingress="Åpen kildekode-teknologi burde ikke være forbeholdt de med teknologikompetanse. Vi drifter tjenester som gjør den tilgjengelig for alle."
-  >
-    <div class="grid sm:grid-cols-3 gap-4 mb-8">
-      {
-        activeServices.map((service) => (
-          <ServiceCard
-            title={service.data.title}
-            description={service.data.description}
-            logo={service.data.logo}
-            invertLogo={service.data.invertLogo}
-            status={service.data.status}
-            kategori={service.data.kategori}
-            variant="compact"
-          />
-        ))
-      }
-    </div>
-    <p class="text-sm text-text-muted mb-6">
-      Fillagring, fotolagring, dokumentbehandling, e-post, sosiale medier,
-      videomøter — alt styrt av hva medlemmene ønsker.
-    </p>
-    <a
-      href="/tjenester"
-      class="text-sm text-accent hover:text-accent-hover font-medium transition-colors"
-    >
-      Se alle tjenester og roadmap &rarr;
-    </a>
   </SectionBlock>
 
   <!-- 9. SISTE CTA -->

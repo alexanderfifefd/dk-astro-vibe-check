@@ -1,42 +1,9 @@
 [
-  {
-    "title": "Organisasjon",
-    "description": "Forening stiftet, styre valgt, vedtekter på plass.",
-    "status": "ferdig"
-  },
-  {
-    "title": "Økonomi",
-    "description": "Bankkonto, kontingent og betalingsløsning.",
-    "status": "ferdig"
-  },
-  {
-    "title": "Første tjenester",
-    "description": "Loomio, Matrix og Forgejo er i drift.",
-    "status": "ferdig"
-  },
-  {
-    "title": "Nettside",
-    "description": "Du ser på den nå.",
-    "status": "ferdig"
-  },
-  {
-    "title": "Generalforsamling",
-    "description": "Første ordinære generalforsamling.",
-    "status": "pågår"
-  },
-  {
-    "title": "Rekruttering",
-    "description": "Hente inn flere folk.",
-    "status": "kommende"
-  },
-  {
-    "title": "Driftsgruppe",
-    "description": "Formalisere drift, sikkerhet og ansvar.",
-    "status": "kommende"
-  },
-  {
-    "title": "Lansere tjenester",
-    "description": "Begynne å tilby tjenester til alle medlemmer.",
-    "status": "kommende"
-  }
+  {"title":"Stiftelse","description":"Forening stiftet, styre valgt, vedtekter på plass.","status":"ferdig","date":"2025-10"},
+  {"title":"Økonomi","description":"Bankkonto, kontingent og betalingsløsning.","status":"ferdig","date":"2025-10"},
+  {"title":"Første infrastruktur","description":"Loomio, Matrix og Forgejo er i drift.","status":"ferdig","date":"2025-11"},
+  {"title":"Driftsgruppe","description":"Formalisere drift, sikkerhet og ansvar.","status":"pågår","date":"2026-01"},
+  {"title":"Generalforsamling","description":"Første ordinære generalforsamling.","status":"pågår","date":"2026-02"},
+  {"title":"Bygging","description":"Hente inn flere folk.","status":"kommende","date":"2026-02"},
+  {"title":"Lansere tjenester","description":"Begynne å tilby tjenester til alle medlemmer.","status":"kommende","dateLabel":"høst 26"}
 ]

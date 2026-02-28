@@ -7,7 +7,7 @@ logo: "/logos/loomio.png"
 driftsmodell: "foreningsdriftet"
 systemansvarlig: "Max Brosnahan"
 administratorer: ["Alexander Fife"]
-kategori: "tjeneste"
+kategori: "infrastruktur"
 status: "i-drift"
 ---
 

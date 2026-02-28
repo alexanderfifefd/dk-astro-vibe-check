@@ -4,35 +4,68 @@ interface Props {
   description: string;
   logo?: string;
   invertLogo?: boolean;
-  status: 'i-drift' | 'forslag' | 'ønskeliste' | 'påkrevd';
-  kategori: 'tjeneste' | 'infrastruktur';
+  status?: 'i-drift' | 'forslag' | 'ønskeliste';
+  kategori?: 'tjeneste' | 'infrastruktur';
   driftsmodell?: string;
   url?: string;
   slug?: string;
   erstatter?: string[];
   alternativer?: string[];
-  variant?: 'full' | 'compact';
+  alternativerTil?: string[];
+  variant?: 'full' | 'compact' | 'minimal';
 }
 
 const {
   title, description, logo, invertLogo, status, kategori,
-  driftsmodell, url, slug, erstatter, alternativer, variant = 'full',
+  driftsmodell, url, slug, erstatter, alternativer, alternativerTil, variant = 'full',
 } = Astro.props;
 
-const statusLabels: Record<string, { label: string; class: string }> = {
-  'i-drift': { label: 'I drift', class: 'bg-green-500/10 text-green-400 border-green-500/20' },
-  'forslag': { label: 'Forslag', class: 'bg-amber-500/10 text-amber-400 border-amber-500/20' },
-  'ønskeliste': { label: 'Ønskeliste', class: 'bg-text-muted/10 text-text-muted border-border' },
-  'påkrevd': { label: 'Påkrevd', class: 'bg-red-500/10 text-red-400 border-red-500/20' },
-};
-
-const statusStyle = statusLabels[status];
 const isWishlist = status === 'ønskeliste';
 const isInfra = kategori === 'infrastruktur';
-const hasDetailPage = status === 'i-drift' || status === 'forslag';
+const hasDetailPage = status && (status === 'i-drift' || status === 'forslag');
+const altList = alternativerTil ?? erstatter ?? alternativer ?? [];
+
+const driftsmodellLabels: Record<string, string> = {
+  foreningsdriftet: 'Foreningsdriftet',
+  medlemsinitiativ: 'Medlemsinitiativ',
+  samarbeid: 'Samarbeid',
+};
+
+// Nøytrale farger for visuell differensiering — ingen positivitet/skala
+const kategoriColors: Record<string, string> = {
+  infrastruktur: 'bg-slate-500/10 text-slate-400 border-slate-500/20',
+  tjeneste: 'bg-violet-500/10 text-violet-400 border-violet-500/20',
+};
+
+const driftsmodellColors: Record<string, string> = {
+  foreningsdriftet: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
+  medlemsinitiativ: 'bg-stone-500/10 text-stone-400 border-stone-500/20',
+  samarbeid: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20',
+};
 ---
 
-{variant === 'compact' ? (
+{variant === 'minimal' ? (
+  <div class="p-4 rounded-lg border border-dashed border-border bg-surface/50 flex flex-col">
+    <div class="flex items-start gap-3 mb-2">
+      {logo && (
+        <img
+          src={logo}
+          alt=""
+          class:list={["w-6 h-6 object-contain shrink-0 mt-0.5", invertLogo && "invert"]}
+        />
+      )}
+      <div class="min-w-0 flex-1">
+        <h3 class="font-medium text-sm">{title}</h3>
+      </div>
+    </div>
+    <p class="text-xs text-text-muted/70 leading-relaxed mb-2">{description}</p>
+    {altList.length > 0 && (
+      <p class="text-xs text-text-muted/60">
+        <span class="italic">Alternativ til:</span> {altList.join(', ')}
+      </p>
+    )}
+  </div>
+) : variant === 'compact' ? (
   <div class="flex items-center gap-4 p-4 bg-surface rounded-lg border border-border">
     {logo && (
       <img
@@ -48,55 +81,45 @@ const hasDetailPage = status === 'i-drift' || status === 'forslag';
   </div>
 ) : (
   <div class:list={[
-    "p-6 rounded-lg flex flex-col",
+    "p-4 rounded-lg flex flex-col",
     isWishlist
       ? "border border-dashed border-border bg-surface/50"
       : isInfra
         ? "border border-border bg-surface/80"
         : "border border-border bg-surface",
   ]}>
-    <div class="flex items-start gap-3 mb-3">
+    <div class="flex items-start gap-3 mb-2">
       {logo && (
         <img
           src={logo}
           alt=""
-          class:list={["w-8 h-8 object-contain shrink-0 mt-0.5", invertLogo && "invert"]}
+          class:list={["w-7 h-7 object-contain shrink-0 mt-0.5", invertLogo && "invert"]}
         />
       )}
       <div class="min-w-0 flex-1">
         <div class="flex items-center gap-2 flex-wrap">
-          <h3 class="font-semibold">{title}</h3>
-          <span class:list={["text-xs px-2 py-0.5 rounded-full border font-medium", statusStyle.class]}>
-            {statusStyle.label}
-          </span>
-          {isInfra && (
-            <span class="text-xs px-2 py-0.5 rounded-full border border-border text-text-muted font-medium">
-              Infrastruktur
+          <h3 class="font-semibold text-sm">{title}</h3>
+          {kategori && (
+            <span class:list={["text-xs px-2 py-0.5 rounded-full border font-medium", kategoriColors[kategori] ?? "border-border text-text-muted"]} data-facet="kategori">
+              {isInfra ? 'Infrastruktur' : 'Tjeneste'}
+            </span>
+          )}
+          {driftsmodell && driftsmodellLabels[driftsmodell] && (
+            <span class:list={["text-xs px-2 py-0.5 rounded-full border font-medium", driftsmodellColors[driftsmodell] ?? "border-border text-text-muted"]} data-facet="driftsmodell" data-driftsmodell={driftsmodell}>
+              {driftsmodellLabels[driftsmodell]}
             </span>
           )}
         </div>
       </div>
     </div>
 
-    <p class:list={["text-sm leading-relaxed mb-4 flex-1", isWishlist ? "text-text-muted/70" : "text-text-muted"]}>
+    <p class:list={["text-sm leading-relaxed mb-3 flex-1", isWishlist ? "text-text-muted/70" : "text-text-muted"]}>
       {description}
     </p>
 
-    {erstatter && erstatter.length > 0 && (
+    {altList.length > 0 && (
       <p class="text-xs text-text-muted/60 mb-2">
-        <span class="italic">Erstatter:</span> {erstatter.join(', ')}
-      </p>
-    )}
-
-    {alternativer && alternativer.length > 0 && (
-      <p class="text-xs text-text-muted/60 mb-3">
-        <span class="italic">Alternativer:</span> {alternativer.join(' · ')}
-      </p>
-    )}
-
-    {driftsmodell && (
-      <p class="text-xs text-text-muted/60 mb-3">
-        Driftsform: {driftsmodell}
+        <span class="italic">Alternativ til:</span> {altList.join(', ')}
       </p>
     )}
 

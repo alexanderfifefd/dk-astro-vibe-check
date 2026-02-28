@@ -2,7 +2,7 @@
 title: "Zulip"
 description: "Kommunikasjonsverktøy for driftsgruppe og utvikling."
 order: 4
-kategori: "tjeneste"
+kategori: "infrastruktur"
 status: "forslag"
 ---
 

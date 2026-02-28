@@ -1,20 +1,20 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import HeroSecondary from '../../components/HeroSecondary.astro';
-import SectionBlock from '../../components/SectionBlock.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
 import CollapsibleSection from '../../components/CollapsibleSection.astro';
 import Button from '../../components/Button.astro';
 import Container from '../../components/Container.astro';
 import { getCollection } from 'astro:content';
 
+import ideer from '../../data/ideer.json';
+
 const allServices = await getCollection('tjenester');
 const sorted = allServices.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 
 const active = sorted.filter(s => s.data.status === 'i-drift');
 const proposals = sorted.filter(s => s.data.status === 'forslag');
-const wishlistServices = sorted.filter(s => s.data.status === 'ønskeliste' && s.data.kategori === 'tjeneste');
-const infra = sorted.filter(s => s.data.kategori === 'infrastruktur');
+const sortedIdeer = [...ideer].sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
 ---
 
 <Layout title="Tjenester" description="Tjenester fra Datakollektivet">
@@ -23,102 +23,26 @@ const infra = sorted.filter(s => s.data.kategori === 'infrastruktur');
     description="Datakollektivet drifter digitale tjenester for sine medlemmer. Hvilke tjenester vi tilbyr bestemmes av medlemmene. Alt er åpen kildekode, selvhostet, og styrt av fellesskapet."
   />
 
-  <!-- I DRIFT -->
-  <SectionBlock title="I drift">
-    <div class="grid gap-4 md:grid-cols-2">
-      {active.map((s) => (
-        <ServiceCard
-          title={s.data.title}
-          description={s.data.description}
-          logo={s.data.logo}
-          invertLogo={s.data.invertLogo}
-          status={s.data.status}
-          kategori={s.data.kategori}
-          driftsmodell={s.data.driftsmodell}
-          url={s.data.url}
-          slug={s.slug}
-        />
-      ))}
-    </div>
-  </SectionBlock>
-
-  <!-- FORSLAG -->
-  {proposals.length > 0 && (
-    <SectionBlock title="Forslag" variant="surface">
-      <div class="grid gap-4 md:grid-cols-2">
-        {proposals.map((s) => (
-          <ServiceCard
-            title={s.data.title}
-            description={s.data.description}
-            logo={s.data.logo}
-            invertLogo={s.data.invertLogo}
-            status={s.data.status}
-            kategori={s.data.kategori}
-            slug={s.slug}
-          />
-        ))}
-      </div>
-    </SectionBlock>
-  )}
-
-  <!-- ØNSKELISTE -->
-  <SectionBlock
-    title="Ønskeliste"
-    ingress="Disse er ikke besluttet — men de er rangert av medlemmene og representerer retningen."
-    variant={proposals.length > 0 ? 'default' : 'surface'}
-  >
-    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {wishlistServices.map((s) => (
-        <ServiceCard
-          title={s.data.title}
-          description={s.data.description}
-          logo={s.data.logo}
-          invertLogo={s.data.invertLogo}
-          status={s.data.status}
-          kategori={s.data.kategori}
-          erstatter={s.data.erstatter}
-          alternativer={s.data.alternativer}
-        />
-      ))}
-    </div>
-  </SectionBlock>
-
-  <!-- INFRASTRUKTUR -->
-  <SectionBlock
-    title="Infrastruktur"
-    ingress="Ikke sluttbrukertjenester, men grunnlaget som gjør tjenestene mulig."
-    variant="surface"
-  >
-    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {infra.map((s) => (
-        <ServiceCard
-          title={s.data.title}
-          description={s.data.description}
-          status={s.data.status}
-          kategori={s.data.kategori}
-          slug={s.slug}
-        />
-      ))}
-    </div>
-  </SectionBlock>
-
-  <!-- KONTEKST -->
-  <section class="py-16">
+  <!-- KONTEKST + FAQ -->
+  <section class="py-8 md:py-12">
     <Container>
-      <p class="text-text-muted leading-relaxed max-w-2xl">
+      <p class="text-text-muted leading-relaxed max-w-2xl mb-10">
         Vi kan ikke love at vi bygger alt dette. Vi trenger medlemmer som er villige til å bli
         med og bygge. Og vi trenger å utvikle infrastrukturen mye — spesielt før vi begynner
         å håndtere persondata som bilder og dokumenter. Det skal gjøres ordentlig, eller ikke
         i det hele tatt.
       </p>
-    </Container>
-  </section>
+      <div class="divide-y divide-border max-w-2xl">
+        <CollapsibleSection title="Infrastruktur vs. tjenester" variant="list">
+          <p class="mt-2">
+            <strong class="text-text">Infrastruktur</strong> driftes av Datakollektivet til egen drift — forarbeid, kode, koordinering. <strong class="text-text">Tjenester</strong> går ut mot medlemmene og er det de faktisk bruker.
+          </p>
+          <p class="mt-3 text-text-muted">
+            Det er naturlig at infrastruktur blir til tjenester over tid. Forgejo brukes i dag mye til kodelagring for utviklere — på sikt kan det bli en mer åpen tjeneste for alle medlemmer.
+          </p>
+        </CollapsibleSection>
 
-  <!-- COLLAPSIBLE SEKSJONER -->
-  <section class="pb-20">
-    <Container>
-      <div class="space-y-4 max-w-2xl">
-        <CollapsibleSection title="Hvordan en tjeneste går fra idé til drift">
+        <CollapsibleSection title="Hvordan en tjeneste går fra idé til drift" variant="list">
           <ol class="space-y-3 mt-2">
             <li><strong class="text-text">1. Forslag</strong> — Hvem som helst kan foreslå en tjeneste.</li>
             <li><strong class="text-text">2. Diskusjon og votering</strong> — Forslaget diskuteres og stemmes over i Loomio.</li>
@@ -132,7 +56,7 @@ const infra = sorted.filter(s => s.data.kategori === 'infrastruktur');
           </p>
         </CollapsibleSection>
 
-        <CollapsibleSection title="Forskjellige driftsmodeller">
+        <CollapsibleSection title="Forskjellige driftsmodeller" variant="list">
           <div class="space-y-3 mt-2">
             <div>
               <strong class="text-text">Foreningsdriftet</strong>
@@ -148,6 +72,118 @@ const infra = sorted.filter(s => s.data.kategori === 'infrastruktur');
             </div>
           </div>
         </CollapsibleSection>
+      </div>
+    </Container>
+  </section>
+
+  <!-- TJENESTER — faceted list -->
+  <section class="py-12 md:py-16 bg-base" aria-label="Tjenester og infrastruktur">
+    <Container>
+      <div
+        class="tjenester-liste"
+        data-faceted-list
+        data-filterable
+        role="list"
+      >
+        <!-- Driftes -->
+        <div class="mb-10 first:mt-0" data-facet-group="driftes">
+          <h3 class="text-xs font-medium uppercase tracking-wider text-text-muted mb-4">
+            Driftes
+          </h3>
+          <div
+            class="grid gap-3 md:grid-cols-2 lg:grid-cols-3"
+            data-facet="driftes"
+            role="list"
+          >
+            {active.map((s) => (
+              <article
+                key={s.slug}
+                data-status="i-drift"
+                data-kategori={s.data.kategori}
+                data-driftsmodell={s.data.driftsmodell}
+                role="listitem"
+              >
+                <ServiceCard
+                  title={s.data.title}
+                  description={s.data.description}
+                  logo={s.data.logo}
+                  invertLogo={s.data.invertLogo}
+                  status={s.data.status}
+                  kategori={s.data.kategori}
+                  driftsmodell={s.data.driftsmodell}
+                  url={s.data.url}
+                  slug={s.slug}
+                />
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <!-- Foreslått -->
+        {proposals.length > 0 && (
+          <div class="mb-10" data-facet-group="forslatt">
+            <h3 class="text-xs font-medium uppercase tracking-wider text-text-muted mb-4">
+              Foreslått
+            </h3>
+            <div
+              class="grid gap-3 md:grid-cols-2 lg:grid-cols-3"
+              data-facet="forslatt"
+              role="list"
+            >
+              {proposals.map((s) => (
+              <article
+                key={s.slug}
+                data-status="forslag"
+                data-kategori={s.data.kategori}
+                data-driftsmodell={s.data.driftsmodell}
+                role="listitem"
+              >
+                <ServiceCard
+                  title={s.data.title}
+                  description={s.data.description}
+                  logo={s.data.logo}
+                  invertLogo={s.data.invertLogo}
+                  status={s.data.status}
+                  kategori={s.data.kategori}
+                  driftsmodell={s.data.driftsmodell}
+                  slug={s.slug}
+                />
+                </article>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Ideer -->
+        <div data-facet-group="ideer">
+          <h3 class="text-xs font-medium uppercase tracking-wider text-text-muted mb-1">
+            Ideer
+          </h3>
+          <p class="text-sm text-text-muted mb-4">
+            Disse er ikke besluttet — men de er rangert av medlemmene og representerer retningen.
+          </p>
+          <div
+            class="grid gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+            data-facet="ideer"
+            role="list"
+          >
+            {sortedIdeer.map((idee, i) => (
+              <article
+                key={idee.title}
+                data-status="ide"
+                data-ide-index={i}
+                role="listitem"
+              >
+                <ServiceCard
+                  title={idee.title}
+                  description={idee.description}
+                  alternativerTil={idee.alternativerTil}
+                  variant="minimal"
+                />
+              </article>
+            ))}
+          </div>
+        </div>
       </div>
     </Container>
   </section>

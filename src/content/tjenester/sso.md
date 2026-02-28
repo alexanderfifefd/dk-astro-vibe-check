@@ -3,7 +3,7 @@ title: "SSO / Single Sign-On"
 description: "Én innlogging, tilgang til alle tjenester."
 order: 20
 kategori: "infrastruktur"
-status: "påkrevd"
+status: "forslag"
 ---
 
 ## Hvorfor SSO?

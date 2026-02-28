@@ -4,13 +4,13 @@ import HeroSecondary from '../../components/HeroSecondary.astro';
 import Container from '../../components/Container.astro';
 import { getCollection } from 'astro:content';
 
-const events = await getCollection('arrangementer');
+const events = await getCollection('events');
 const sorted = events.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 ---
 
-<Layout title="Arrangementer" description="Arrangementer fra Datakollektivet">
+<Layout title="Events" description="Events fra Datakollektivet">
   <HeroSecondary>
-    <span slot="title">Arrangementer</span>
+    <span slot="title">Events</span>
     <p slot="description">
       Møter, lanseringer og samlinger — åpne og for medlemmer.
     </p>
@@ -21,7 +21,7 @@ const sorted = events.sort((a, b) => new Date(b.data.date).getTime() - new Date(
       <div class="max-w-3xl divide-y divide-border">
         {sorted.map((event) => (
           <a
-            href={`/arrangementer/${event.slug}`}
+            href={`/events/${event.slug}`}
             data-date={event.data.date.toISOString()}
             class="event-item flex gap-6 py-4 group transition-opacity hover:opacity-80"
           >

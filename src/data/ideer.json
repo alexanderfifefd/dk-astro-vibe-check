@@ -1,0 +1,50 @@
+[
+  {
+    "title": "Fillagring",
+    "description": "Sikker, selvhostet lagring av filer og dokumenter.",
+    "order": 10,
+    "alternativerTil": ["Google Drive", "Dropbox", "Nextcloud"]
+  },
+  {
+    "title": "Fotolagring",
+    "description": "Selvhostet lagring og organisering av bilder.",
+    "order": 11,
+    "alternativerTil": ["Google Photos", "iCloud Photos", "Immich"]
+  },
+  {
+    "title": "Dokumentbehandling",
+    "description": "Samskriving og redigering av dokumenter.",
+    "order": 12,
+    "alternativerTil": ["Google Docs", "Office 365", "Nextcloud Office", "CryptPad"]
+  },
+  {
+    "title": "Desentraliserte sosiale medier",
+    "description": "Fediverse-tilknyttet plattform eid av fellesskapet.",
+    "order": 13,
+    "alternativerTil": ["Twitter/X", "Instagram", "Mastodon", "Pixelfed"]
+  },
+  {
+    "title": "Arrangementstjenester",
+    "description": "Verktøy for å organisere og publisere arrangementer.",
+    "order": 14,
+    "alternativerTil": ["Facebook Events", "Mobilizon"]
+  },
+  {
+    "title": "E-post",
+    "description": "Personvernvennlig e-post driftet av fellesskapet.",
+    "order": 15,
+    "alternativerTil": ["Gmail", "Outlook", "Mailcow", "Stalwart"]
+  },
+  {
+    "title": "Videomøter",
+    "description": "Selvhostet videokonferanse.",
+    "order": 16,
+    "alternativerTil": ["Zoom", "Google Meet", "Jitsi Meet"]
+  },
+  {
+    "title": "Distribuert storage",
+    "description": "Lagring på tvers av tjenester.",
+    "order": 22,
+    "alternativerTil": []
+  }
+]

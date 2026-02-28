@@ -14,14 +14,14 @@ const tjenester = defineCollection({
     systemansvarlig: z.string().optional(),
     administratorer: z.array(z.string()).optional(),
     kategori: z.enum(['tjeneste', 'infrastruktur']).default('tjeneste'),
-    status: z.enum(['i-drift', 'forslag', 'ønskeliste', 'påkrevd']).default('i-drift'),
+    status: z.enum(['i-drift', 'forslag', 'ønskeliste']).default('i-drift'),
     erstatter: z.array(z.string()).optional(),
     alternativer: z.array(z.string()).optional(),
     lanseringsdato: z.coerce.date().optional(),
   }),
 });
 
-const arrangementer = defineCollection({
+const events = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
@@ -31,4 +31,4 @@ const arrangementer = defineCollection({
   }),
 });
 
-export const collections = { tjenester, arrangementer };
+export const collections = { tjenester, events };

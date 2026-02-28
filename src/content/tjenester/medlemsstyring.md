@@ -3,7 +3,7 @@ title: "Medlemsstyring"
 description: "Registrering, kontingent, tilgangsstyring på nett."
 order: 21
 kategori: "infrastruktur"
-status: "påkrevd"
+status: "forslag"
 ---
 
 ## Hva trengs?
