@@ -3,7 +3,6 @@ import Layout from '../layouts/Layout.astro';
 import HeroSecondary from '../components/HeroSecondary.astro';
 import SectionBlock from '../components/SectionBlock.astro';
 import ContentCard from '../components/ContentCard.astro';
-import ProcessFlow from '../components/ProcessFlow.astro';
 import Timeline from '../components/Timeline.astro';
 import Button from '../components/Button.astro';
 import Container from '../components/Container.astro';
@@ -15,7 +14,6 @@ const tocItems = [
   { label: 'Om Datakollektivet', href: '#om-datakollektivet' },
   { label: 'Styret', href: '#styret' },
   { label: 'Organisasjon', href: '#organisasjon' },
-  { label: 'Fra idé til drift', href: '#fra-ide-til-drift' },
   { label: 'Vedtekter', href: '#vedtekter' },
   { label: 'Krønike', href: '#kronike' },
   { label: 'Kontakt', href: '#kontakt' },
@@ -80,7 +78,7 @@ const tocItems = [
   </SectionBlock>
 
   <!-- STYRET -->
-  <SectionBlock title="Styret" id="styret" variant="surface"
+  <SectionBlock title="Styret" id="styret"
     ingress="Datakollektivet ledes av et styre valgt av generalforsamlingen."
   >
     <div class="max-w-xl">
@@ -164,31 +162,6 @@ const tocItems = [
     </div>
   </SectionBlock>
 
-  <!-- FRA IDÉ TIL DRIFT -->
-  <SectionBlock
-    title="Fra idé til drift"
-    id="fra-ide-til-drift"
-    variant="surface"
-    ingress="Det er ikke tilfeldig hva vi drifter. Prosessen er åpen, og medlemmene har reell innflytelse i hvert steg."
-  >
-    <ProcessFlow />
-
-    <div class="mt-10 max-w-2xl">
-      <ol class="space-y-3 text-sm text-text-muted">
-        <li><strong class="text-text">1. Forslag</strong> — Hvem som helst kan foreslå en tjeneste. En systemansvarlig tar eierskap til forslaget.</li>
-        <li><strong class="text-text">2. Diskusjon og votering</strong> — Forslaget diskuteres og stemmes over av medlemmene i Loomio.</li>
-        <li><strong class="text-text">3. Teknisk vurdering</strong> — Driftsgruppen vurderer gjennomførbarhet, sikkerhet og ressursbehov.</li>
-        <li><strong class="text-text">4. Godkjenning</strong> — Styret godkjenner formelt.</li>
-        <li><strong class="text-text">5. Utvikling</strong> — Oppsett, konfigurasjon, testing. Systemansvarlig sørger for dokumentasjon.</li>
-        <li><strong class="text-text">6. Lansering</strong> — Administratorer og eventuelt moderatorer utnevnes. Tjenesten gjøres tilgjengelig for medlemmer.</li>
-      </ol>
-      <p class="mt-4 text-xs text-text-muted/60 italic">
-        Denne prosessen er ikke fullt formalisert ennå — den reflekterer hvordan vi jobber i praksis.
-        Detaljene bestemmes av generalforsamlingen.
-      </p>
-    </div>
-  </SectionBlock>
-
   <!-- VEDTEKTER -->
   <SectionBlock title="Vedtekter" id="vedtekter">
     <div class="max-w-2xl">
@@ -210,7 +183,7 @@ const tocItems = [
   </SectionBlock>
 
   <!-- KRØNIKE -->
-  <SectionBlock title="Krønike" id="kronike" variant="surface"
+  <SectionBlock title="Krønike" id="kronike"
     ingress="En kort historie om Datakollektivet — fra de første samtalene til der vi er nå."
   >
     <div class="max-w-xl">
@@ -242,7 +215,7 @@ const tocItems = [
   </SectionBlock>
 
   <!-- SISTE CTA -->
-  <section class="py-20 md:py-28 bg-surface border-t border-border">
+  <section class="py-20 md:py-28">
     <Container>
       <div class="max-w-2xl">
         <p class="text-xl md:text-2xl font-medium leading-relaxed mb-8">

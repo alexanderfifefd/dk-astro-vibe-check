@@ -1,10 +1,11 @@
 ---
-const links = [
+const navLinks = [
   { href: "/tjenester", label: "Tjenester" },
   { href: "/events", label: "Events" },
   { href: "/om", label: "Om oss" },
   { href: "/bygg-med-oss", label: "Bygg med oss" },
-  { href: "/bli-medlem", label: "Bli medlem", cta: true },
+  { href: "/bli-medlem", label: "Bli medlem" },
+  { href: "/bli-med", label: "Bli med", cta: true },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -23,7 +24,7 @@ const currentPath = Astro.url.pathname;
 
     <nav class="hidden md:flex items-center gap-1">
       {
-        links.map((link) => (
+        navLinks.map((link) => (
           <a
             href={link.href}
             class:list={[
@@ -69,16 +70,14 @@ const currentPath = Astro.url.pathname;
     class="hidden md:hidden border-t border-border bg-base px-6 py-3"
   >
     {
-      links.map((link) => (
+      navLinks.map((link) => (
         <a
           href={link.href}
           class:list={[
             "block py-2 text-sm transition-colors",
-            link.cta
-              ? "text-accent font-medium"
-              : currentPath === link.href
-                ? "text-accent"
-                : "text-text-muted hover:text-text",
+            currentPath === link.href
+              ? "text-accent"
+              : "text-text-muted hover:text-text",
           ]}
         >
           {link.label}
@@ -89,7 +88,7 @@ const currentPath = Astro.url.pathname;
 </header>
 
 <script>
-  const toggle = document.getElementById("mobile-menu-toggle");
-  const menu = document.getElementById("mobile-menu");
-  toggle?.addEventListener("click", () => menu?.classList.toggle("hidden"));
+  const mobileToggle = document.getElementById("mobile-menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+  mobileToggle?.addEventListener("click", () => mobileMenu?.classList.toggle("hidden"));
 </script>

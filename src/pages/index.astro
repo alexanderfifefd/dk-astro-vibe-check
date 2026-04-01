@@ -7,7 +7,6 @@ import ContentCard from "../components/ContentCard.astro";
 import Timeline from "../components/Timeline.astro";
 import PathCard from "../components/PathCard.astro";
 import ServiceCard from "../components/ServiceCard.astro";
-import NewsletterEmbed from "../components/NewsletterEmbed.astro";
 import Button from "../components/Button.astro";
 import Container from "../components/Container.astro";
 
@@ -19,7 +18,9 @@ const activeServices = allServices
   .filter((s) => s.data.status === "i-drift")
   .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 
-const firstIdeer = [...ideer].sort((a, b) => (a.order ?? 99) - (b.order ?? 99)).slice(0, 3);
+const firstIdeer = [...ideer]
+  .sort((a, b) => (a.order ?? 99) - (b.order ?? 99))
+  .slice(0, 3);
 ---
 
 <Layout title="Hjem">
@@ -37,30 +38,175 @@ const firstIdeer = [...ideer].sort((a, b) => (a.order ?? 99) - (b.order ?? 99)).
     </div>
   </Hero>
 
-  <!-- 2. VI TROR -->
+  <!-- 2. HVA VI BYGGER -->
   <SectionBlock
-    title="Vi tror"
-    id="vi-tror"
-    ingress="Datakollektivet er enda ikke enige om alle løsningene. Men samtlige medlemmer er enige om problemene. Og det er helt sikkert du og."
+    title="Hva vi bygger"
+    id="hva-vi-bygger"
+    ingress="Åpen kildekode-teknologi burde ikke være forbeholdt de med teknologikompetanse. Vi drifter tjenester som gjør den tilgjengelig for alle."
   >
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <ContentCard title="Teknologi gjør reell skade.">
-        På samfunnet vårt. På individer. På barna våre. På demokratiet. På
-        friheten vår.
-      </ContentCard>
-      <ContentCard title="Folk er lei.">
-        Av teknologi som bedrifitifiseres. Av selskaper som ikke har noe respekt
-        for menneskene som bruker tjenestene deres. At vi kontinuerlig kastes
-        inn i nye og dårligere avtaler.
-      </ContentCard>
-      <ContentCard title="Folk ønsker tjenester som ikke brukes mot oss.">
-        Forretningsmodellen til de store er å selge oppmerksomheten din. Vi vil
-        ha tjenester der du er brukeren, ikke produktet.
-      </ContentCard>
+    <div class="grid sm:grid-cols-3 gap-4 mb-8">
+      {
+        activeServices.map((service) => (
+          <ServiceCard
+            title={service.data.title}
+            description={service.data.description}
+            logo={service.data.logo}
+            invertLogo={service.data.invertLogo}
+            status={service.data.status}
+            kategori={service.data.kategori}
+            variant="compact"
+          />
+        ))
+      }
+    </div>
+    <h3
+      class="text-sm font-medium uppercase tracking-wider text-text-muted mt-10 mb-4"
+    >
+      Hva vi kanskje bygger
+    </h3>
+    <div class="grid sm:grid-cols-3 gap-4 mb-6">
+      {
+        firstIdeer.map((idee) => (
+          <ServiceCard
+            title={idee.title}
+            description={idee.description}
+            alternativerTil={idee.alternativerTil}
+            variant="minimal"
+          />
+        ))
+      }
+    </div>
+    <p class="text-sm text-text-muted mb-6">
+      Fillagring, fotolagring, dokumentbehandling, e-post, sosiale medier,
+      videomøter — alt styrt av hva medlemmene ønsker.
+    </p>
+    <a
+      href="/tjenester"
+      class="text-sm text-accent hover:text-accent-hover font-medium transition-colors"
+    >
+      Se alle tjenester og roadmap &rarr;
+    </a>
+  </SectionBlock>
+
+  <!-- 3. ORGANISASJONEN FORMES -->
+  <SectionBlock
+    title="Organisasjonen formes"
+    id="organisasjonen-formes"
+    ingress="God teknologi er ikke nok. Det trengs en organisasjon som setter fellesskapet først — ikke aksjonærer. Datakollektivet ble stiftet i oktober 2025. Vi bygger stein for stein."
+  >
+    <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
+      <div class="space-y-4 max-w-xl md:pr-6">
+        <div>
+          <span class="font-semibold text-text">Frivillig drevet.</span>
+          <p class="text-sm text-text-muted mt-0.5">
+            Ingen aksjonærer som krever avkastning. Pengene går tilbake til
+            tjenestene.
+          </p>
+        </div>
+        <div>
+          <span class="font-semibold text-text">Kollektivt eid.</span>
+          <p class="text-sm text-text-muted mt-0.5">
+            Infrastrukturen tilhører medlemmene, ikke en bedrift. Du er del av
+            fellesskapet, ikke kunde.
+          </p>
+        </div>
+        <div>
+          <span class="font-semibold text-text">Demokratisk styrt.</span>
+          <p class="text-sm text-text-muted mt-0.5">
+            Generalforsamling, åpne styremøter, deltakende demokrati. De som
+            bygger og drifter har en demokratisk kontrakt med de som bruker
+            tjenestene.
+          </p>
+        </div>
+        <div>
+          <span class="font-semibold text-text">Økonomisk rettferdig.</span>
+          <p class="text-sm text-text-muted mt-0.5">
+            Ingen aksjonærer som krever avkastning. Pengene går tilbake til
+            tjenestene.
+          </p>
+        </div>
+        <p class="text-sm text-text-muted leading-relaxed pt-2">
+          Det er enormt mye som gjenstår. Enormt mange spørsmål — tekniske,
+          organisatoriske, demokratiske — som ikke har fått svar ennå. Det er
+          ikke en svakhet. Det er hele poenget. Vi bygger dette sammen.
+        </p>
+      </div>
+      <div
+        class="md:sticky md:top-24 flex justify-center md:justify-start min-w-0"
+      >
+        <div class="max-w-sm w-full shrink-0">
+          <Timeline variant="roadmap" steps={roadmap} />
+        </div>
+      </div>
     </div>
   </SectionBlock>
 
-  <!-- 3. VI MÅ BYGGE -->
+  <!-- 4. VI TROR -->
+  <section id="vi-tror" class="py-16 md:py-20">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h2 class="text-4xl md:text-6xl font-bold tracking-tight text-text mb-6">
+        Vi tror
+      </h2>
+      <p
+        class="text-lg md:text-xl text-text-muted leading-relaxed max-w-2xl mx-auto mb-10"
+      >
+        Datakollektivet er enda ikke enige om alle løsningene. Men samtlige
+        medlemmer er enige om problemene. Og det er helt sikkert du og.
+      </p>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <ContentCard title="Teknologi gjør reell skade.">
+          På samfunnet vårt. På individer. På barna våre. På demokratiet. På
+          friheten vår.
+        </ContentCard>
+        <ContentCard title="Folk er lei.">
+          Av teknologi som bedrifitifiseres. Av selskaper som ikke har noe
+          respekt for menneskene som bruker tjenestene deres. At vi kontinuerlig
+          kastes inn i nye og dårligere avtaler.
+        </ContentCard>
+        <ContentCard title="Folk ønsker tjenester som ikke brukes mot oss.">
+          Forretningsmodellen til de store er å selge oppmerksomheten din. Vi
+          vil ha tjenester der du er brukeren, ikke produktet.
+        </ContentCard>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. TEKNOLOGIEN FINNES -->
+  <SectionBlock
+    title="Teknologien finnes"
+    ingress="Det finnes modne og åpne alternativer, og det kommer mer. Problemet er at de er forbeholdt de som har teknisk kompetanse å sette opp og drifte det selv. Vi ønsker å tilgjengeliggjøre det for alle."
+  >
+    <div class="grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
+      <div class="space-y-4 max-w-xl">
+        <div>
+          <span class="font-semibold text-text">Åpen kildekode.</span>
+          <p class="text-sm text-text-muted mt-0.5">
+            Tjenestene vi bygger på er open source. Koden kan granskes,
+            forbedres og utvikles av fellesskap verden over.
+          </p>
+        </div>
+        <div>
+          <span class="font-semibold text-text">Åpne protokoller.</span>
+          <p class="text-sm text-text-muted mt-0.5">
+            Vi velger løsninger basert på åpne standarder. Ingen innlåsing. Du
+            eier dataene dine og kan ta dem med deg.
+          </p>
+        </div>
+        <div>
+          <span class="font-semibold text-text">Tilgjengelig for alle.</span>
+          <p class="text-sm text-text-muted mt-0.5">
+            Du skal ikke trenge å være utvikler for å bruke åpen teknologi. Vi
+            gjør oppsett, drift og vedlikehold — du bruker tjenestene.
+          </p>
+        </div>
+      </div>
+      <div class="min-h-[200px] md:min-h-[240px]">
+        <!-- Plass for visuell -->
+      </div>
+    </div>
+  </SectionBlock>
+
+  <!-- 6. TIDEN ER INNE -->
   <SectionBlock
     title="Tiden er inne"
     ingress="Det har aldri vært større muligheter for å bygge det vi ønsker selv enn det er nå."
@@ -82,112 +228,24 @@ const firstIdeer = [...ideer].sort((a, b) => (a.order ?? 99) - (b.order ?? 99)).
     </div>
   </SectionBlock>
 
-  <!-- 4. TEKNOLOGIEN FINNES -->
-  <SectionBlock
-    title="Teknologien finnes"
-    ingress="Det finnes noe modne og åpne alternativer, og det kommer mer. Problemet er at det er at forbeholdt de som har teknisk kompetanse å sette opp og drifte det selv. Vi ønsker å tilgjengeliggjøre det for alle."
-  >
-    <div class="grid md:grid-cols-3 gap-6">
-      <ContentCard title="Åpen kildekode.">
-        Tjenestene vi bygger på er open source. Koden kan granskes, forbedres og
-        utvikles av fellesskap verden over. Ingen hemmelig proprietær kode.
-      </ContentCard>
-      <ContentCard title="Åpne protokoller.">
-        Vi velger løsninger basert på åpne standarder. Ingen innlåsing. Du eier
-        dataene dine og kan ta dem med deg.
-      </ContentCard>
-      <ContentCard title="Tilgjengelig for alle.">
-        Du skal ikke trenge å være utvikler for å bruke åpen teknologi. Vi gjør
-        oppsett, drift og vedlikehold — du bruker tjenestene.
-      </ContentCard>
-    </div>
-  </SectionBlock>
-
-  <!-- 5. ORGANISASJON OG HVOR VI ER -->
-  <SectionBlock
-    title="Organisasjonen formes"
-    ingress="God teknologi er ikke nok. Det trengs en organisasjon som setter fellesskapet først — ikke aksjonærer. Datakollektivet ble stiftet i oktober 2025. Vi bygger stein for stein."
-  >
-    <div class="grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
-      <div class="flex flex-col gap-6">
-        <ContentCard title="Kollektivt eid.">
-          Infrastrukturen tilhører medlemmene, ikke en bedrift. Du er del av
-          fellesskapet, ikke kunde.
-        </ContentCard>
-        <ContentCard title="Demokratisk styrt.">
-          En demokratisk kontrakt mellom de som utvikler og drifter, og de som
-          bruker tjenestene. Generalforsamling, åpne styremøter, deltakende
-          demokrati.
-        </ContentCard>
-        <ContentCard title="Rettferdig.">
-          Ingen aksjonærer som krever avkastning. Pengene går tilbake til
-          tjenestene. Det vi bygger, bygger vi for hverandre.
-        </ContentCard>
-        <p class="text-text-muted leading-relaxed">
-          Det er enormt mye som gjenstår. Enormt mange spørsmål — tekniske,
-          organisatoriske, demokratiske — som ikke har fått svar ennå. Det er ikke
-          en svakhet. Det er hele poenget. Vi bygger dette sammen.
-        </p>
-      </div>
-      <div class="md:sticky md:top-24">
-        <div class="max-w-sm md:mx-auto">
-          <Timeline variant="roadmap" steps={roadmap} />
-        </div>
-      </div>
-    </div>
-  </SectionBlock>
-
-  <!-- 7. TJENESTER PREVIEW -->
-  <SectionBlock
-    title="Hva vi bygger"
-    ingress="Åpen kildekode-teknologi burde ikke være forbeholdt de med teknologikompetanse. Vi drifter tjenester som gjør den tilgjengelig for alle."
-  >
-    <div class="grid sm:grid-cols-3 gap-4 mb-8">
-      {
-        activeServices.map((service) => (
-          <ServiceCard
-            title={service.data.title}
-            description={service.data.description}
-            logo={service.data.logo}
-            invertLogo={service.data.invertLogo}
-            status={service.data.status}
-            kategori={service.data.kategori}
-            variant="compact"
-          />
-        ))
-      }
-    </div>
-    <h3 class="text-sm font-medium uppercase tracking-wider text-text-muted mt-10 mb-4">
-      Hva vi kanskje bygger
-    </h3>
-    <div class="grid sm:grid-cols-3 gap-4 mb-6">
-      {firstIdeer.map((idee) => (
-        <ServiceCard
-          title={idee.title}
-          description={idee.description}
-          alternativerTil={idee.alternativerTil}
-          variant="minimal"
-        />
-      ))}
-    </div>
-    <p class="text-sm text-text-muted mb-6">
-      Fillagring, fotolagring, dokumentbehandling, e-post, sosiale medier,
-      videomøter — alt styrt av hva medlemmene ønsker.
-    </p>
-    <a
-      href="/tjenester"
-      class="text-sm text-accent hover:text-accent-hover font-medium transition-colors"
-    >
-      Se alle tjenester og roadmap &rarr;
-    </a>
-  </SectionBlock>
-
-  <!-- 8. TRE VEIER INN -->
+  <!-- 7. TRE VEIER INN -->
   <SectionBlock
     title="Tre veier inn"
-    ingress="Uansett om du vil forme retningen, hjelpe til å bygge, eller bare følge med — det finnes en plass for deg."
+    ingress="Uansett om du vil forme retningen, hjelpe til å bygge, eller følge med — det finnes en plass for deg."
+    centered
   >
     <div class="grid md:grid-cols-3 gap-6">
+      <PathCard
+        title="Bli med"
+        tagline="Registrer en konto og få lesetilgang til tjenester."
+        items={[
+          "Konto. Gratis.",
+          "Matrix. Loomio. Forgejo (Git)",
+          "Ingen forpliktelser",
+        ]}
+        href="/bli-med"
+        ctaLabel="Bli med"
+      />
       <PathCard
         title="Bli medlem"
         tagline="Form retningen."
@@ -211,33 +269,8 @@ const firstIdeer = [...ideer].sort((a, b) => (a.order ?? 99) - (b.order ?? 99)).
           "Alle nivåer, alle mengder tid",
         ]}
         href="/bygg-med-oss"
-        ctaLabel="Se hva vi trenger"
+        ctaLabel="Se hva vi bygger"
       />
-      <PathCard title="Følg oss" tagline="Ikke klar ennå? Følg reisen.">
-        <div class="mb-4 flex-1">
-          <p class="text-sm text-text-muted mb-4">
-            Nyhetsbrev og tilgang til Matrix-kanalen vår. Følg diskusjonene uten
-            forpliktelser.
-          </p>
-        </div>
-        <NewsletterEmbed compact />
-      </PathCard>
     </div>
   </SectionBlock>
-
-  <!-- 9. SISTE CTA -->
-  <section class="py-20 md:py-28">
-    <Container>
-      <div class="max-w-2xl">
-        <p class="text-xl md:text-2xl font-medium leading-relaxed mb-8">
-          Datakollektivet er et forsøk på å bygge digital infrastruktur som
-          tilhører folka som bruker den. Vi er i starten. Og vi trenger deg.
-        </p>
-        <div class="flex flex-wrap gap-3">
-          <Button href="/bli-medlem" variant="primary">Bli medlem</Button>
-          <Button href="/bygg-med-oss" variant="secondary">Bygg med oss</Button>
-        </div>
-      </div>
-    </Container>
-  </section>
 </Layout>

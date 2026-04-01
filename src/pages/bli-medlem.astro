@@ -4,8 +4,8 @@ import HeroSecondary from "../components/HeroSecondary.astro";
 import SectionBlock from "../components/SectionBlock.astro";
 import ContentCard from "../components/ContentCard.astro";
 import PathCard from "../components/PathCard.astro";
-import NewsletterEmbed from "../components/NewsletterEmbed.astro";
 import FormBlock from "../components/FormBlock.astro";
+import ProcessFlow from "../components/ProcessFlow.astro";
 import Button from "../components/Button.astro";
 ---
 
@@ -79,10 +79,31 @@ import Button from "../components/Button.astro";
         </p>
       </div>
     </div>
+
+    <!-- FRA IDÉ TIL DRIFT -->
+    <div class="mt-12 pt-12 border-t border-border">
+      <h3 class="font-semibold mb-2" id="fra-ide-til-drift">Fra idé til drift</h3>
+      <p class="text-sm text-text-muted leading-relaxed mb-6 max-w-2xl">
+        Det er ikke tilfeldig hva vi drifter. Prosessen er åpen, og medlemmene har reell innflytelse i hvert steg.
+      </p>
+      <ProcessFlow />
+      <ol class="mt-10 space-y-3 text-sm text-text-muted max-w-2xl">
+        <li><strong class="text-text">1. Forslag</strong> — Hvem som helst kan foreslå en tjeneste. En systemansvarlig tar eierskap til forslaget.</li>
+        <li><strong class="text-text">2. Diskusjon og votering</strong> — Forslaget diskuteres og stemmes over av medlemmene i Loomio.</li>
+        <li><strong class="text-text">3. Teknisk vurdering</strong> — Driftsgruppen vurderer gjennomførbarhet, sikkerhet og ressursbehov.</li>
+        <li><strong class="text-text">4. Godkjenning</strong> — Styret godkjenner formelt.</li>
+        <li><strong class="text-text">5. Utvikling</strong> — Oppsett, konfigurasjon, testing. Systemansvarlig sørger for dokumentasjon.</li>
+        <li><strong class="text-text">6. Lansering</strong> — Administratorer og eventuelt moderatorer utnevnes. Tjenesten gjøres tilgjengelig for medlemmer.</li>
+      </ol>
+      <p class="mt-4 text-xs text-text-muted/60 italic max-w-2xl">
+        Denne prosessen er ikke fullt formalisert ennå — den reflekterer hvordan vi jobber i praksis.
+        Detaljene bestemmes av generalforsamlingen.
+      </p>
+    </div>
   </SectionBlock>
 
   <!-- VI ER I STARTEN -->
-  <SectionBlock title="Vi er i starten. Det er poenget." variant="surface">
+  <SectionBlock title="Vi er i starten. Det er poenget.">
     <div class="max-w-2xl space-y-4 text-text-muted leading-relaxed">
       <p>
         Datakollektivet ble stiftet i oktober 2025. Vi har styre, vedtekter,
@@ -119,50 +140,53 @@ import Button from "../components/Button.astro";
     </div>
   </SectionBlock>
 
-  <!-- SLIK MELDER DU DEG INN -->
-  <SectionBlock title="Slik melder du deg inn" variant="surface">
-    <ol class="space-y-6 max-w-xl">
-      {
-        [
+  <!-- SLIK MELDER DU DEG INN + SKJEMA -->
+  <SectionBlock title="Slik melder du deg inn">
+    <div class="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
+      <div>
+        <ol class="space-y-6 max-w-xl">
           {
-            step: "Fyll ut skjemaet",
-            desc: "Navn og e-post. Det er alt vi trenger.",
-          },
-          { step: "Betal kontingent", desc: "Du får en betalingslenke." },
-          {
-            step: "Få tilgang",
-            desc: "Når betalingen er registrert, får du tilgang til Loomio, Matrix og våre andre tjenester.",
-          },
-          {
-            step: "Delta",
-            desc: "Stem, diskuter, foreslå. Bli med i arbeidsgrupper. Eller bare bruk tjenestene.",
-          },
-        ].map(({ step, desc }, i) => (
-          <li class="flex gap-4">
-            <span class="shrink-0 w-7 h-7 rounded-full bg-accent/10 text-accent text-sm font-medium flex items-center justify-center">
-              {i + 1}
-            </span>
-            <div>
-              <span class="font-medium">{step}</span>
-              <p class="text-sm text-text-muted mt-0.5">{desc}</p>
-            </div>
-          </li>
-        ))
-      }
-    </ol>
-  </SectionBlock>
-
-  <!-- SKJEMA -->
-  <SectionBlock title="Meld deg inn">
-    <FormBlock
-      submitLabel="Meld meg inn"
-      messagePlaceholder="Fortell oss gjerne hva du er interessert i"
-      footnote="Prototype — vi tar kontakt manuelt inntil vi har automatisert dette."
-    />
+            [
+              {
+                step: "Fyll ut skjemaet",
+                desc: "Navn og e-post. Det er alt vi trenger.",
+              },
+              { step: "Betal kontingent", desc: "Du får en betalingslenke." },
+              {
+                step: "Få tilgang",
+                desc: "Når betalingen er registrert, får du tilgang til Loomio, Matrix og våre andre tjenester.",
+              },
+              {
+                step: "Delta",
+                desc: "Stem, diskuter, foreslå. Bli med i arbeidsgrupper. Eller bare bruk tjenestene.",
+              },
+            ].map(({ step, desc }, i) => (
+              <li class="flex gap-4">
+                <span class="shrink-0 w-7 h-7 rounded-full bg-accent/10 text-accent text-sm font-medium flex items-center justify-center">
+                  {i + 1}
+                </span>
+                <div>
+                  <span class="font-medium">{step}</span>
+                  <p class="text-sm text-text-muted mt-0.5">{desc}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+      <div class="border border-border rounded-lg p-6 bg-surface">
+        <h3 class="font-semibold text-lg mb-4">Meld deg inn</h3>
+        <FormBlock
+          submitLabel="Meld meg inn"
+          messagePlaceholder="Fortell oss gjerne hva du er interessert i"
+          footnote="Prototype — vi tar kontakt manuelt inntil vi har automatisert dette."
+        />
+      </div>
+    </div>
   </SectionBlock>
 
   <!-- ANDRE VEIER INN -->
-  <SectionBlock title="Andre veier inn" variant="surface">
+  <SectionBlock title="Andre veier inn">
     <div class="grid md:grid-cols-2 gap-6">
       <PathCard
         title="Bygg med oss"
@@ -171,13 +195,11 @@ import Button from "../components/Button.astro";
         ctaLabel="Se hva vi trenger"
       />
       <PathCard
-        title="Følg oss"
-        tagline="Ikke klar ennå? Meld deg på nyhetsbrevet og bli med på Matrix. Følg diskusjonene uten forpliktelser."
-      >
-        <div class="mt-2">
-          <NewsletterEmbed compact />
-        </div>
-      </PathCard>
+        title="Bli med"
+        tagline="Registrer en konto og få tilgang til offentlige tjenester. Gratis."
+        href="/bli-med"
+        ctaLabel="Bli med"
+      />
     </div>
   </SectionBlock>
 </Layout>

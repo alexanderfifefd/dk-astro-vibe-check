@@ -1,4 +1,6 @@
 ---
+import Button from './Button.astro';
+
 interface Props {
   title: string;
   tagline?: string;
@@ -23,10 +25,10 @@ const { title, tagline, items = [], href, ctaLabel, highlighted = false } = Astr
   )}
 
   {items.length > 0 && (
-    <ul class="space-y-2 mb-6 flex-1">
+    <ul class="space-y-2 mb-6 flex-1 list-none">
       {items.map((item) => (
         <li class="flex items-start gap-2 text-sm text-text-muted">
-          <span class="text-accent mt-0.5 shrink-0">—</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 shrink-0" aria-hidden="true" />
           <span>{item}</span>
         </li>
       ))}
@@ -36,14 +38,14 @@ const { title, tagline, items = [], href, ctaLabel, highlighted = false } = Astr
   <slot />
 
   {href && ctaLabel && (
-    <a
-      href={href}
-      class:list={[
-        "mt-auto inline-flex items-center gap-1 text-sm font-medium transition-colors",
-        highlighted ? "text-accent hover:text-accent-hover" : "text-text-muted hover:text-accent",
-      ]}
-    >
-      {ctaLabel} <span aria-hidden="true">&rarr;</span>
-    </a>
+    <div class="mt-auto flex justify-end">
+      <Button
+        href={href}
+        variant={highlighted ? "primary" : "secondary"}
+        size="sm"
+      >
+        {ctaLabel}
+      </Button>
+    </div>
   )}
 </div>

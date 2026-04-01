@@ -4,7 +4,6 @@ import HeroSecondary from "../components/HeroSecondary.astro";
 import SectionBlock from "../components/SectionBlock.astro";
 import ContentCard from "../components/ContentCard.astro";
 import PathCard from "../components/PathCard.astro";
-import NewsletterEmbed from "../components/NewsletterEmbed.astro";
 import FormBlock from "../components/FormBlock.astro";
 import Button from "../components/Button.astro";
 ---
@@ -74,7 +73,6 @@ import Button from "../components/Button.astro";
   <SectionBlock
     title="Men det er mye utvikling"
     ingress="Vi står foran en serie konkrete problemer. Her er de viktigste."
-    variant="surface"
   >
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
       <ContentCard title="SSO / Single Sign-On">
@@ -110,7 +108,7 @@ import Button from "../components/Button.astro";
   </SectionBlock>
 
   <!-- HVEM VI SER ETTER -->
-  <section class="py-20 md:py-28 bg-surface border-t border-b border-border">
+  <section class="py-20 md:py-28">
     <div class="max-w-6xl mx-auto px-6">
       <div class="max-w-2xl">
         <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-8">
@@ -139,54 +137,56 @@ import Button from "../components/Button.astro";
     </div>
   </section>
 
-  <!-- SLIK KOMMER DU I GANG -->
+  <!-- SLIK KOMMER DU I GANG + SKJEMA -->
   <SectionBlock title="Slik kommer du i gang">
-    <ol class="space-y-6 max-w-xl">
-      {
-        [
+    <div class="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
+      <div>
+        <ol class="space-y-6 max-w-xl">
           {
-            step: "Ta kontakt",
-            desc: "Fyll ut skjemaet under, eller si hei på Matrix.",
-          },
-          {
-            step: "Vi snakker sammen",
-            desc: "Vi finner ut hva som er interessant for deg.",
-          },
-          {
-            step: "Få tilgang",
-            desc: "Forgejo, Matrix, Zulip og de verktøyene vi bruker internt.",
-          },
-          {
-            step: "Begynn å bidra",
-            desc: "Plukk en oppgave, jobb på et prosjekt, delta i driftsmøter, eller bare vær med i diskusjonene.",
-          },
-        ].map(({ step, desc }, i) => (
-          <li class="flex gap-4">
-            <span class="shrink-0 w-7 h-7 rounded-full bg-accent/10 text-accent text-sm font-medium flex items-center justify-center">
-              {i + 1}
-            </span>
-            <div>
-              <span class="font-medium">{step}</span>
-              <p class="text-sm text-text-muted mt-0.5">{desc}</p>
-            </div>
-          </li>
-        ))
-      }
-    </ol>
-    <p class="mt-6 text-sm text-text-muted max-w-xl">
-      Ingen bindinger. Ingen minimumsforpliktelse. Bidra med det du kan, når du
-      kan.
-    </p>
-  </SectionBlock>
-
-  <!-- SKJEMA -->
-  <SectionBlock title="Ta kontakt" variant="surface">
-    <FormBlock
-      submitLabel="Send inn"
-      showContributionAreas
-      messagePlaceholder="Fortell oss gjerne litt om bakgrunnen din og hva du har lyst til å jobbe med"
-      footnote="Vi tar kontakt innen noen dager."
-    />
+            [
+              {
+                step: "Ta kontakt",
+                desc: "Fyll ut skjemaet, eller si hei på Matrix.",
+              },
+              {
+                step: "Vi snakker sammen",
+                desc: "Vi finner ut hva som er interessant for deg.",
+              },
+              {
+                step: "Få tilgang",
+                desc: "Forgejo, Matrix, Zulip og de verktøyene vi bruker internt.",
+              },
+              {
+                step: "Begynn å bidra",
+                desc: "Plukk en oppgave, jobb på et prosjekt, delta i driftsmøter, eller bare vær med i diskusjonene.",
+              },
+            ].map(({ step, desc }, i) => (
+              <li class="flex gap-4">
+                <span class="shrink-0 w-7 h-7 rounded-full bg-accent/10 text-accent text-sm font-medium flex items-center justify-center">
+                  {i + 1}
+                </span>
+                <div>
+                  <span class="font-medium">{step}</span>
+                  <p class="text-sm text-text-muted mt-0.5">{desc}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+        <p class="mt-6 text-sm text-text-muted max-w-xl">
+          Ingen bindinger. Ingen minimumsforpliktelse. Bidra med det du kan, når du kan.
+        </p>
+      </div>
+      <div class="border border-border rounded-lg p-6 bg-surface">
+        <h3 class="font-semibold text-lg mb-4">Ta kontakt</h3>
+        <FormBlock
+          submitLabel="Send inn"
+          showContributionAreas
+          messagePlaceholder="Fortell oss gjerne litt om bakgrunnen din og hva du har lyst til å jobbe med"
+          footnote="Vi tar kontakt innen noen dager."
+        />
+      </div>
+    </div>
   </SectionBlock>
 
   <!-- ANDRE VEIER INN -->
@@ -199,13 +199,11 @@ import Button from "../components/Button.astro";
         ctaLabel="Bli medlem"
       />
       <PathCard
-        title="Følg oss"
-        tagline="Ikke klar ennå? Meld deg på nyhetsbrevet og bli med på Matrix."
-      >
-        <div class="mt-2">
-          <NewsletterEmbed compact />
-        </div>
-      </PathCard>
+        title="Bli med"
+        tagline="Registrer en konto og få tilgang til offentlige tjenester. Gratis."
+        href="/bli-med"
+        ctaLabel="Bli med"
+      />
     </div>
   </SectionBlock>
 </Layout>

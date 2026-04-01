@@ -1,3 +1,122 @@
 ---
-return Astro.redirect('/bli-medlem', 301);
+import Layout from "../layouts/Layout.astro";
+import HeroSecondary from "../components/HeroSecondary.astro";
+import SectionBlock from "../components/SectionBlock.astro";
+import ContentCard from "../components/ContentCard.astro";
+import Button from "../components/Button.astro";
 ---
+
+<Layout title="Bli med" description="Registrer en konto og få tilgang til offentlige tjenester. Gratis. Konto for Matrix, Loomio og Forgejo.">
+  <HeroSecondary
+    title="Bli med"
+    description="Registrer en konto og få tilgang til offentlige tjenester. Gratis. Du får konto på Matrix, Loomio og Forgejo — les diskusjoner, bli med i kanalene, og bruk kodelagringen."
+  />
+
+  <!-- HVA DU FÅR -->
+  <SectionBlock
+    title="Hva du får"
+    ingress="En konto. Gratis. Tilgang til åpne tjenester."
+  >
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl">
+      <ContentCard title="Konto">
+        Én konto gir deg tilgang til tjenestene vi tilbyr offentlig.
+      </ContentCard>
+      <ContentCard title="Gratis">
+        Ingen kontingent. Ingen forpliktelser. Du får ikke stemmerett — men du får tilgang.
+      </ContentCard>
+      <ContentCard title="Matrix">
+        Kryptert meldingstjeneste. Bli med i våre åpne kanaler og følg samtaler der.
+      </ContentCard>
+      <ContentCard title="Loomio">
+        Les diskusjonene og forslagene. Se hva medlemmene jobber med og prioriterer.
+      </ContentCard>
+      <ContentCard title="Forgejo (Git)">
+        Kodelagring og samarbeid. Alternativ til GitHub. Åpen kildekode.
+      </ContentCard>
+    </div>
+  </SectionBlock>
+
+  <!-- SKJEMA -->
+  <SectionBlock title="Registrer deg">
+    <div class="max-w-lg space-y-6">
+      <p class="text-text-muted">
+        Fyll ut skjemaet. Du får instruksjoner og tilgangsdetaljer på e-post.
+      </p>
+      <form class="space-y-5" onsubmit="return false;">
+        <div>
+          <label for="name" class="block text-sm font-medium mb-1.5">Navn</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            class="w-full bg-base border border-border rounded px-3 py-2.5 text-sm text-text placeholder:text-text-muted/50 focus:outline-none focus:border-accent transition-colors"
+            placeholder="Ditt fulle navn"
+          />
+        </div>
+        <div>
+          <label for="nick" class="block text-sm font-medium mb-1.5">
+            Nick / brukernavn <span class="text-text-muted font-normal">(valgfritt)</span>
+          </label>
+          <input
+            type="text"
+            id="nick"
+            name="nick"
+            class="w-full bg-base border border-border rounded px-3 py-2.5 text-sm text-text placeholder:text-text-muted/50 focus:outline-none focus:border-accent transition-colors"
+            placeholder="Det du vil kalles på Matrix/Loomio"
+          />
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium mb-1.5">E-post</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="w-full bg-base border border-border rounded px-3 py-2.5 text-sm text-text placeholder:text-text-muted/50 focus:outline-none focus:border-accent transition-colors"
+            placeholder="din@epost.no"
+          />
+        </div>
+        <div class="flex items-start gap-3">
+          <input
+            type="checkbox"
+            id="newsletter"
+            name="newsletter"
+            class="mt-1 rounded border-border-strong bg-base text-accent focus:ring-accent"
+          />
+          <label for="newsletter" class="text-sm text-text-muted cursor-pointer">
+            Meld meg også på nyhetsbrevet. Få oppdateringer om nye tjenester,
+            arrangementer og hva vi jobber med.
+          </label>
+        </div>
+        <button
+          type="submit"
+          class="bg-accent text-base font-medium rounded px-6 py-2.5 text-sm hover:bg-accent-hover transition-colors"
+        >
+          Send forespørsel
+        </button>
+      </form>
+      <p class="text-xs text-text-muted/60 italic">
+        Prototype — vi tar kontakt manuelt inntil vi har automatisert dette.
+      </p>
+    </div>
+  </SectionBlock>
+
+  <!-- BLI MEDLEM -->
+  <section class="py-20 md:py-28">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+          Vil du ha mer?
+        </h2>
+        <p class="text-lg text-text-muted leading-relaxed mb-6">
+          Som medlem får du stemmerett, kan fremme forslag, og får full tilgang til
+          tjenestene. Les mer om hva medlemskap innebærer.
+        </p>
+        <Button href="/bli-medlem" variant="primary">
+          Bli medlem
+        </Button>
+      </div>
+    </div>
+  </section>
+</Layout>

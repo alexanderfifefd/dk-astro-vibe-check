@@ -6,9 +6,10 @@ interface Props {
   ingress?: string;
   id?: string;
   variant?: 'default' | 'surface' | 'accent';
+  centered?: boolean;
 }
 
-const { title, ingress, id, variant = 'default' } = Astro.props;
+const { title, ingress, id, variant = 'default', centered = false } = Astro.props;
 
 const bgClasses = {
   default: '',
@@ -17,10 +18,10 @@ const bgClasses = {
 };
 ---
 
-<section id={id} class:list={["py-20 md:py-28", bgClasses[variant]]}>
+<section id={id} class:list={["py-12 md:py-16", bgClasses[variant]]}>
   <Container>
     {title && (
-      <div class="mb-12 max-w-2xl">
+      <div class:list={["mb-8 max-w-2xl", centered && "text-center mx-auto"]}>
         <h2 class="text-3xl md:text-4xl font-bold tracking-tight">{title}</h2>
         {ingress && (
           <p class="mt-4 text-lg text-text-muted leading-relaxed">{ingress}</p>

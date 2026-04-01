@@ -1,5 +1,5 @@
 ---
-import NewsletterEmbed from './NewsletterEmbed.astro';
+import NewsletterBlock from './NewsletterBlock.astro';
 
 const currentYear = new Date().getFullYear();
 
@@ -8,6 +8,7 @@ const navLinks = [
   { href: '/om', label: 'Om oss' },
   { href: '/bygg-med-oss', label: 'Bygg med oss' },
   { href: '/bli-medlem', label: 'Bli medlem' },
+  { href: '/bli-med', label: 'Bli med' },
   { href: '/vedtekter', label: 'Vedtekter' },
   { href: '/events', label: 'Events' },
 ];
@@ -15,7 +16,7 @@ const navLinks = [
 
 <footer class="border-t border-border bg-surface/50">
   <div class="max-w-6xl mx-auto px-6 py-16">
-    <div class="grid md:grid-cols-3 gap-12 mb-12">
+    <div class="grid md:grid-cols-3 gap-12 mb-12 items-start">
       <!-- Venstre: Sider -->
       <div>
         <span class="text-sm font-medium text-text block mb-3">Sider</span>
@@ -38,9 +39,11 @@ const navLinks = [
       </div>
 
       <!-- Høyre: Nyhetsbrev -->
-      <div class="pt-8">
-        <span class="sr-only">Følg oss</span>
-        <NewsletterEmbed compact />
+      <div class="border border-border rounded-lg p-5">
+        <NewsletterBlock compact heading="Følg oss på epost" />
+        <a href="mailto:hei@datakollektivet.no" class="mt-3 block text-xs text-text-muted hover:text-accent transition-colors">
+          hei@datakollektivet.no
+        </a>
       </div>
     </div>
 
